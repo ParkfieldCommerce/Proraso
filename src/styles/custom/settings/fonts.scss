@@ -1,0 +1,27 @@
+@font-face {
+  font-family:'garamond-bold';
+  src: url(' {{ 'Adobe-Garamond-Pro-Bold-Italic.ttf' | asset_url }} ') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family:'garamond-italic';
+  src: url(' {{ 'Adobe-Garamond-Pro-Italic.ttf' | asset_url }} ') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family:'garamond-regular';
+  src: url(' {{ 'Adobe-Garamond-Pro-Regular.ttf' | asset_url }} ') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'DINCondensed';
+  src: url(' {{ 'DINCondensedWeb.ttf' | asset_url }} ') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

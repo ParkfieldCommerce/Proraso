@@ -1,0 +1,66 @@
+<!-- sections/products.liquid -->
+{% if section.settings.enable_promobar %}
+<div class="Promobar Promobar--hidden js-promobar">
+  <p class="Promobar__text-content">
+    {{section.settings.text}}
+  </p>
+  <div class="Promobar__close js-closePromobar">
+    {% include 'custom-icon' with icon:'close' %}
+  </div>
+</div>
+<style>
+  .Promobar{
+    background: {{section.settings.bg_color}};
+  }
+  .Promobar p{
+    color: {{section.settings.text_color}};
+  }
+</style>
+<script>
+  if(Cookies.get('promobar-closed') === undefined){
+    $('.js-promobar').removeClass('Promobar--hidden');
+  }
+  $('.js-closePromobar').click(function(){
+    $('.js-promobar').addClass('Promobar--hidden');
+    Cookies.set('promobar-closed', true);
+  });
+</script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Promobar",
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"enable_promobar",
+        "label":"Enable Promobar",
+        "default":true
+      },
+      {
+        "type": "header",
+        "content": "Text Content"
+      },
+      {
+        "id":"text",
+        "type":"textarea",
+        "label":"Text"
+      },
+      {
+        "type":"header",
+        "content":"Styling"
+      },
+      {
+        "type":"color",
+        "id":"bg_color",
+        "label":"Background Color",
+        "default":"#A0DAE8"
+      },
+      {
+        "type":"color",
+        "id":"text_color",
+        "label":"Text Color",
+        "default":"#333E48"
+      }
+    ]
+  }
+{% endschema %}

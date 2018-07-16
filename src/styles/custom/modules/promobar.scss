@@ -1,0 +1,25 @@
+.Promobar{
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  @include flex-center();
+  .Promobar__text-content{
+    @include garI(1.6rem);
+    margin-bottom: 0;
+  }
+}
+.Promobar__close{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  display: inline-block;
+  @include prefix(transform, translateY(-50%));
+  @include flex-center();
+  cursor: pointer;
+}
+
+.Promobar--hidden{
+  display: none;
+}
