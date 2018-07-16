@@ -2,7 +2,6 @@
 
 {% for link in linklists.main-menu.links %}
   {% if link.links %}
-    {{link.levels}}
     <li class="dropdown" aria-haspopup="true">
       <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %}"{% if theme-nav == 'toggled' %} data-trigger="popup" data-target="{{ link.title | handleize | prepend: '#Nav_' }}"{% endif %}>
         {{ link.title }}
@@ -11,6 +10,11 @@
         {% for childlink in link.links %}
           <li>
             <a href="{{ childlink.url }}" class="nav-link{% if childlink.active %} active{% endif %}">{{ childlink.title }}</a>
+            {% if childlink.links %}
+              {% for grandchildlink in childlink.links %}
+                <a href="{{ grandchildlink.url }}" class="nav-link{% if grandchildlink.active %} active{% endif %}">{{ grandchildlink.title }}</a>
+              {% endfor %}
+            {% endif %}
           </li>
         {% endfor %}
       </ul>
