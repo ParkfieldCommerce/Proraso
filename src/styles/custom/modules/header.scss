@@ -1,0 +1,14 @@
+.Header{
+  height: 133px;
+}
+.Header__container{
+  width: 900px;
+}
+.Header__logo-container{
+  position: relative;
+}
+.Header__logo{
+  position: absolute;
+  left: 50%;
+  @include prefix(transform, translateX(-50%));
+}

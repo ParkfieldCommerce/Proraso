@@ -2,13 +2,7 @@
 
 // Main Nav
 .theme-nav-main {
-  .nav-link {
-    font-size: 1.1rem;
-    font-weight: $fontBold;
-    margin-right: $gutter/3;
-  }
   .dropdown {
-    position: relative;
     &:hover {
       .dropdown-menu {
         display: block;
@@ -16,20 +10,10 @@
     }
     .dropdown-menu {
       display: none;
-      padding: $gutter/3 0;
       position: absolute;
-      top: 1.5rem;
       z-index: 2;
       li {
         display: block;
-        padding: $gutter/4 $gutter/1.5;
-        background: lighten($colorBackground, 30%);
-        &:first-of-type {
-          padding-top: $gutter/2;
-        }
-        &:last-of-type {
-          padding-bottom: $gutter/2;
-        }
       }
     }
   }

@@ -1,0 +1,49 @@
+.Nav__row{
+  position: relative;
+}
+.Nav{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Nav__links{
+  @include flex();
+  @include justify-content(space-between);
+}
+.Nav__half{
+  @include flex();
+}
+.Nav__main-link{
+  width: 180px;
+  display: inline-block;
+  text-align: center;
+  @include din(2rem);
+}
+.Nav__main-link--1{
+  text-align: left;
+}
+.Nav__main-link--4{
+  text-align: right;
+}
+.Nav__parent{
+  position: relative;
+  &:after{
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    @include prefix(transform, translateY(-50%));
+  }
+}
+.Nav__dropdown{
+  background: $bg-light;
+}
+.Nav__dropdown-menu{
+  width: 80%;
+  left: 50%;
+  display: block !important;
+  @include prefix(transform, translateX(-50%));
+  top: 133px;
+}

@@ -29,7 +29,7 @@ $adjustAmount: 25%;
 // Space & Borders
 $columns: 12;
 $spacing: 10px;
-$gutter: $spacing*5;
+$gutter: $spacing*2;
 $borderRadius: 2px;
 $borderWeight: 2px;
 $borderStyle: solid;
@@ -964,6 +964,31 @@ button{
   @include din(2rem);
 }
 
+a{
+  color: $font-color;
+  text-decoration: none;
+}
+.Link--underline{
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  &:after{
+    display: inline-block;
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $font-color;
+    opacity: 0;
+    transition: opacity .4s;
+  }
+  &:hover{
+    &:after{opacity: 1;}
+  }
+}
+
 /* Templates ==================================================================*/
 /* Collection ================================================================*/
 
@@ -1053,13 +1078,7 @@ button{
 
 // Main Nav
 .theme-nav-main {
-  .nav-link {
-    font-size: 1.1rem;
-    font-weight: $fontBold;
-    margin-right: $gutter/3;
-  }
   .dropdown {
-    position: relative;
     &:hover {
       .dropdown-menu {
         display: block;
@@ -1067,20 +1086,10 @@ button{
     }
     .dropdown-menu {
       display: none;
-      padding: $gutter/3 0;
       position: absolute;
-      top: 1.5rem;
       z-index: 2;
       li {
         display: block;
-        padding: $gutter/4 $gutter/1.5;
-        background: lighten($colorBackground, 30%);
-        &:first-of-type {
-          padding-top: $gutter/2;
-        }
-        &:last-of-type {
-          padding-bottom: $gutter/2;
-        }
       }
     }
   }
@@ -1368,6 +1377,21 @@ button{
 }
 
 /* Custom Modules */
+/* Custom Modules */
+.Header{
+  height: 133px;
+}
+.Header__container{
+  width: 900px;
+}
+.Header__logo-container{
+  position: relative;
+}
+.Header__logo{
+  position: absolute;
+  left: 50%;
+  @include prefix(transform, translateX(-50%));
+}
 .Promobar{
   height: 30px;
   width: 100%;
@@ -1392,6 +1416,55 @@ button{
 
 .Promobar--hidden{
   display: none;
+}
+.Nav__row{
+  position: relative;
+}
+.Nav{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Nav__links{
+  @include flex();
+  @include justify-content(space-between);
+}
+.Nav__half{
+  @include flex();
+}
+.Nav__main-link{
+  width: 180px;
+  display: inline-block;
+  text-align: center;
+  @include din(2rem);
+}
+.Nav__main-link--1{
+  text-align: left;
+}
+.Nav__main-link--4{
+  text-align: right;
+}
+.Nav__parent{
+  position: relative;
+  &:after{
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    @include prefix(transform, translateY(-50%));
+  }
+}
+.Nav__dropdown{
+  background: $bg-light;
+}
+.Nav__dropdown-menu{
+  width: 80%;
+  left: 50%;
+  display: block !important;
+  @include prefix(transform, translateX(-50%));
+  top: 133px;
 }
 /* Helpers ===================================================================*/
 /* Helpers ===================================================================*/

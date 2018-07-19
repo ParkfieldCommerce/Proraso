@@ -2,12 +2,8 @@
 {% assign enable_search = section.settings.enable_search %}
 
 <header class="Header" role="banner">
-  <div class="container xl">
+  <div class="container Header__container">
     <div class="row collapse">
-      <div class="Header__logo">
-        {% include 'theme-logo' %}
-      </div>
-
       <div class="column s12 s-center">
         {% if customer %}
           <a href="/account" data-trigger="popup" data-target="#PopupAccount">
@@ -32,11 +28,14 @@
         </div>
       </div>
     </div>
-
-    <div class="row flex v-center h-space-between s-hide">
-      {% include 'theme-nav-main' %}
+    <div class="Header__logo-container">
+      <div class="Header__logo">
+        {% include 'theme-logo' %}
+      </div>
+      <div class="Nav__row row flex v-center h-space-between s-hide">
+        {% include 'theme-nav-main' %}
+      </div>
     </div>
-
     <hr>
 
   </div>
