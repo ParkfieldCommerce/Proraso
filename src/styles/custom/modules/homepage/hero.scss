@@ -1,0 +1,41 @@
+$hero-text: white;
+.Hero__slide{
+  position: relative;
+}
+.Hero__image{
+  img{ 
+    width: 100%; 
+    vertical-align: middle;
+  }
+}
+.Hero__image--mobile{
+  display: none;
+  @media screen and (max-width: 800px){
+    display: block;
+  }
+}
+.Hero__image--desktop{
+  display: block;
+  @media screen and (max-width: 800px){
+    display: none;
+  }
+}
+.Hero__text-container{
+  position: absolute;
+  top: 50%;
+  @include prefix(transform, translateY(-50%));
+  color: $hero-text;
+}
+.Hero__main{
+  @include din(4.8rem);
+}
+.Hero__sub{
+  @include garI(1.8rem);
+}
+.Hero__button{
+  border-color: $hero-text;
+  color: $hero-text;
+  background: transparent;
+  border-right: none;
+  border-left: none;
+}

@@ -26,6 +26,10 @@ button{
 a{
   color: $font-color;
   text-decoration: none;
+  &:hover,
+  &:focus{
+    color: $accent;
+  }
 }
 .Link--underline{
   position: relative;
@@ -38,12 +42,25 @@ a{
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 2px;
     background: $font-color;
     opacity: 0;
-    transition: opacity .4s;
+    transition: opacity .4s, background-color .4s;
   }
   &:hover{
-    &:after{opacity: 1;}
+    &:after{
+      opacity: 1;
+      background-color: $accent;
+    }
   }
+}
+.Text--border-style{
+  border-top: 1px solid $accent;
+  border-bottom: 1px solid $accent;
+  display: inline-block;
+  color: $accent;
+  text-transform: uppercase;
+  @include din(1.4rem);
+  padding-left: 10px;
+  padding-right: 10px;
 }

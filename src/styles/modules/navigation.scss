@@ -1,24 +1,5 @@
 /* Navigation =================================================================*/
 
-// Main Nav
-.theme-nav-main {
-  .dropdown {
-    &:hover {
-      .dropdown-menu {
-        display: block;
-      }
-    }
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      z-index: 2;
-      li {
-        display: block;
-      }
-    }
-  }
-}
-
 // Toggled Nav
 .theme-nav-toggled {
   .dropdown-menu {

@@ -2,7 +2,7 @@
 {% for link in linklists.main-menu.links %}
   {% assign index = forloop.index %}
   {% if index == 1 or index == 3 %}
-  <div class="Nav__half">
+  <div class="Nav__half Nav__half--{{index}}">
   {% endif %}
   {% if link.levels > 0 %}
     <li class="Nav__main-link Nav__dropdown dropdown Nav__main-link--{{forloop.index}}" aria-haspopup="true">
@@ -10,16 +10,18 @@
         {{ link.title }}
       </a>
       <ul{% if theme-nav == 'toggled' %} id="{{ link.title | handleize | prepend: 'Nav_' }}"{% endif %} class="Nav__dropdown-menu dropdown-menu">
+        <div class="Nav__dropdown-menu-links">
         {% for childlink in link.links %}
           <li>
-            <a href="{{ childlink.url }}" class="nav-link{% if childlink.active %} active{% endif %}">{{ childlink.title }}</a>
+            <a href="{{ childlink.url }}" class="Nav__headinglink nav-link{% if childlink.active %} active{% endif %}">{{ childlink.title }}</a>
             {% if childlink.links %}
               {% for grandchildlink in childlink.links %}
-                <a href="{{ grandchildlink.url }}" class="nav-link{% if grandchildlink.active %} active{% endif %}">{{ grandchildlink.title }}</a>
+                <a href="{{ grandchildlink.url }}" class="Nav__sublink nav-link{% if grandchildlink.active %} active{% endif %}">{{ grandchildlink.title }}</a>
               {% endfor %}
             {% endif %}
           </li>
         {% endfor %}
+        </div>
       </ul>
     </li>
   {% else %}

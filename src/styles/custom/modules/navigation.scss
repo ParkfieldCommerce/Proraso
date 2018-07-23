@@ -1,6 +1,3 @@
-.Nav__row{
-  position: relative;
-}
 .Nav{
   width: 100%;
   margin-left: auto;
@@ -13,11 +10,18 @@
 .Nav__half{
   @include flex();
 }
+.Nav__half--1 .Nav__main-link{
+  text-align: left;
+}
+.Nav__half--3 .Nav__main-link{
+  text-align: right;
+}
 .Nav__main-link{
   width: 180px;
   display: inline-block;
   text-align: center;
   @include din(2rem);
+  padding-bottom: 20px;
 }
 .Nav__main-link--1{
   text-align: left;
@@ -39,11 +43,45 @@
 }
 .Nav__dropdown{
   background: $bg-light;
+  &:hover{
+    .Nav__dropdown-menu{
+      display: block;
+    }
+  }
 }
 .Nav__dropdown-menu{
-  width: 80%;
+  position: absolute;
+  padding-top: 65px;
+  padding-bottom: 40px;
+  width: 1040px;
   left: 50%;
-  display: block !important;
+  max-width: 100%;
   @include prefix(transform, translateX(-50%));
-  top: 133px;
+  top: 110px;
+  background: white;
+  display: none;
+}
+.Nav__dropdown-menu-links{
+  @include flex();
+  @include justify-content(space-between);
+  flex-flow: row wrap;
+  width: 685px;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Nav__headinglink{
+  font-size: 2rem;
+  padding-bottom: 10px;
+  display: block;
+}
+.Nav__sublink{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+  width: 100%;
+  @include garI(1.6rem);
 }

@@ -31,6 +31,11 @@
 /*!
  * js.cookie.js
  */
+// =require vendor/slick.min.js
+
+/*!
+ * js.cookie.js
+ */
 // =require vendor/js.cookie.js
 
 

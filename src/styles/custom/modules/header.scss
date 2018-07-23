@@ -1,14 +1,19 @@
 .Header{
-  height: 133px;
+  position: relative;
 }
 .Header__container{
   width: 900px;
 }
-.Header__logo-container{
-  position: relative;
+.Header__user-row{
+  height: 80px;
+  @include flex();
+  @include align-items(center);
+  flex-flow: row wrap;
 }
 .Header__logo{
   position: absolute;
   left: 50%;
+  top: 20px;
+  z-index: 21;
   @include prefix(transform, translateX(-50%));
 }

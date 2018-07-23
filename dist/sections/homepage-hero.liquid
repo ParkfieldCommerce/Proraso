@@ -1,0 +1,120 @@
+<!-- Homepage Hero -->
+<div class="Hero">
+  <div class="Hero__slider js-heroSlider">
+    {% for block in section.blocks %}
+    {% if block.settings.hero_slide_enable %}
+    <div class="Hero__slide">
+      <a href="{{block.settings.hero_url}}">
+        <div class="Hero__image Hero__image--desktop">
+          <img src="{{block.settings.hero_image | img_url:'master'}}" alt="{{block.settings.hero_image.alt}}">
+        </div>
+        <div class="Hero__image Hero__image--mobile">
+          <img src="{{block.settings.hero_image_2 | img_url:'master'}}" alt="{{block.settings.hero_image_2.alt}}">
+        </div>
+        <div class="Hero__text-container">
+          <div class="Hero__text-block">
+            <h2 class="Hero__main">{{block.settings.hero_maintext}}</h2>
+            <div class="Hero__sub">{{block.settings.hero_subtext}}</div>
+            {% unless block.settings.hero_button_text == blank %}
+            <button type="button" class="Hero__button Text--border-style">{{block.settings.hero_button_text}}</button>
+            {% endunless %}
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="SliderDots js-heroDots"></div>
+</div>
+<script>
+$('.js-heroSlider').slick({
+  arrows: false,
+  dots: true,
+  appendDots:'.js-heroDots',
+  touch: true
+});
+</script>
+{% schema %}
+{
+  "name": "Main Hero Slider",
+  "class":"homepage-hero",
+  "blocks":[{
+    "type":"slide",
+    "name":"Slide",
+    "limit": 3,
+    "settings": [
+      {
+        "type":"header",
+        "content":"General Settings"
+      },
+      {
+        "id":"hero_slide_enable",
+        "type":"checkbox",
+        "label":"Enable Slide",
+        "default":true
+      },
+      {
+        "id": "hero_image",
+        "type": "image_picker",
+        "label": "Image 1"
+      },
+      {
+        "id": "hero_image_2",
+        "type": "image_picker",
+        "label": "Image 2"
+      },
+      {
+        "type":"header",
+        "content":"Text Settings"
+      },
+      {
+        "id": "hero_maintext",
+        "type": "text",
+        "label": "Main Text"
+      },
+      {
+        "id": "hero_subtext",
+        "type": "textarea",
+        "label": "Subtext"
+      },
+      {
+        "type":"header",
+        "content":"Button Settings"
+      },
+      {
+        "id":"hero_button_text",
+        "type":"text",
+        "label":"Button Text"
+      },
+      {
+        "id": "hero_url",
+        "type":"url",
+        "label":"Button Url"
+      }
+    ]
+  }],
+  "presets":[{
+      "name": "Main Hero Slider",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+//Initalize Hero Slider 
+  $('.hero-slideshow').slick({
+    arrows: true,
+    nextArrow: $('.hero .next'),
+    prevArrow: $('.hero .prev'),
+    autoplay: true,
+    infinite: true,
+    arrows: false,
+    dots: true,
+    appendDots: $('.hero .dots'),
+    autoplaySpeed: 3000,
+    fade: true,
+    adaptiveHeight: true
+  });
+</script>
