@@ -64,3 +64,24 @@ a{
   padding-left: 10px;
   padding-right: 10px;
 }
+
+/* Slider Defaults */
+.slick-dots{
+  @include inline-flex();
+  li button:before {
+   content:"";
+  }
+  li button {
+    font-size: 0px;
+    height: 10px;
+    width: 10px;
+    padding: 0px;
+    margin: 0px 2.5px;
+    border-radius: 10px;
+    background: transparent;
+    border-color: white;
+  }
+  li.slick-active button {
+    background: white;
+  }
+}

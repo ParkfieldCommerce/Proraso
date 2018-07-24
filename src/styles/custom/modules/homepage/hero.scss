@@ -1,4 +1,7 @@
 $hero-text: white;
+.Hero{
+  position: relative;
+}
 .Hero__slide{
   position: relative;
 }
@@ -23,8 +26,14 @@ $hero-text: white;
 .Hero__text-container{
   position: absolute;
   top: 50%;
+  width: 100%;
   @include prefix(transform, translateY(-50%));
   color: $hero-text;
+}
+.Hero__text-block{
+  width: 350px;
+  margin-left: auto;
+  max-width: 50%;
 }
 .Hero__main{
   @include din(4.8rem);
@@ -38,4 +47,15 @@ $hero-text: white;
   background: transparent;
   border-right: none;
   border-left: none;
+  &:hover{
+    background: transparent;
+    border-color: $accent;
+    color: $accent;
+  }
+}
+.Hero__slider-dots{
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  @include prefix(transform, translateX(-50%));
 }
