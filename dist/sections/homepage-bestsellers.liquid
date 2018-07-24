@@ -1,0 +1,43 @@
+<!-- Homepage About -->
+{% assign bestsellers = section.settings %}
+<div class="BestSellers__container container l">
+  <div class="row">
+    <div class="column l12 m12 s12">
+      <h2 class="Bestsellers__heading">{{bestsellers.heading}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column l12 m12 s12">
+      <div class="Bestsellers__products">
+      {% for product in collections[bestsellers.collection].products %}
+        {% include 'collection-product' with column_width:'none' %}
+      {% endfor %}
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bestsellers Section",
+  "class":"homepage-bestsellers",
+  "settings":[
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"Heading"
+    },
+    {
+      "type":"collection",
+      "id":"collection",
+      "label":"Collection"
+    }
+  ],
+  "presets":[{
+      "name": "Bestsellers Section",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}

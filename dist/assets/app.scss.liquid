@@ -1083,7 +1083,29 @@ button{
   @include din(2rem);
   border-radius: 0;
 }
-
+.Btn{
+  width: 180px;
+  padding: 0;
+  border: 1px solid black;
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: white;
+  text-transform: uppercase;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  &:hover{
+    background-color: $accent;
+    color: white;
+    border-color: $accent;
+  }
+}
+.Btn--added{
+  background-color: $accent2;
+  border-color: $accent2;
+  color: white;
+}
 a{
   color: $font-color;
   text-decoration: none;
@@ -1711,7 +1733,7 @@ $hero-text: white;
 }
 .Hero__main{
   @include din(4.8rem);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   line-height: 1.25;
   text-transform: uppercase;
 }
@@ -1767,6 +1789,27 @@ $hero-text: white;
     max-width: 57%;
   }
 }
+.Bestsellers__products{
+  @include flex();
+  flex-flow: row wrap;
+  @include justify-content(space-between);
+  .CollectionProduct__column{
+    width: 23%;
+    max-width: 275px; 
+    @include maxQuery(1200px){
+      width: 30%;
+    }
+    @include maxQuery(800px){
+      &:last-child,
+      &:nth-last-child(2){
+        display: none;
+      }
+    }
+  }
+  .CollectionProduct__image-container{
+    min-height: 268px;
+  }
+}
 .About__container{
   position: relative;
 }
@@ -1802,6 +1845,7 @@ $hero-text: white;
 .About__button{
   border-color: white;
   color: white;
+  font-size: 1.8rem;
   &:hover{
     border-color: white;
     color: white;
@@ -1822,9 +1866,6 @@ $hero-text: white;
 }
 .About__image--mobile{
   display: none;
-}
-body{
-  height: 2000px;
 }
 .About__parallax{
   @include din(8.7rem);
@@ -1889,10 +1930,33 @@ body{
   }
 }
 @include maxQuery(500px){
+  .About__button{
+    font-size: 1.6rem;
+  }
   .About__text-container--inner{
     width: auto;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+//Collection
+.CollectionProduct{
+  text-align: center;
+}
+.CollectionProduct__image-container{
+  min-height: 268px;
+  background: $bg-gray;
+  @include flex();
+  @include align-items(flex-end);
+}
+.CollectionProduct__button-text{
+  position: relative;
+  .fas{
+    position: absolute;
+    top: 50%;
+    @include prefix(transform, translateY(-50%));
+    font-size: 15px;
+    right: -20px;
   }
 }
 /* Helpers ===================================================================*/

@@ -35,7 +35,7 @@ $hero-text: white;
 }
 .Hero__main{
   @include din(4.8rem);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   line-height: 1.25;
   text-transform: uppercase;
 }

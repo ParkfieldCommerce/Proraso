@@ -169,7 +169,7 @@
     }
   },
   "product": {
-    "add_to_cart": "Add to cart",
+    "add_to_cart": "Buy",
     "regular_price": "Regular price",
     "quantity": "Quantity",
     "priced_from_html": "From {{ price }}",

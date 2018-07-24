@@ -1,0 +1,21 @@
+.Bestsellers__products{
+  @include flex();
+  flex-flow: row wrap;
+  @include justify-content(space-between);
+  .CollectionProduct__column{
+    width: 23%;
+    max-width: 275px; 
+    @include maxQuery(1200px){
+      width: 30%;
+    }
+    @include maxQuery(800px){
+      &:last-child,
+      &:nth-last-child(2){
+        display: none;
+      }
+    }
+  }
+  .CollectionProduct__image-container{
+    min-height: 268px;
+  }
+}

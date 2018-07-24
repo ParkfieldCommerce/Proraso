@@ -33,6 +33,7 @@
 .About__button{
   border-color: white;
   color: white;
+  font-size: 1.8rem;
   &:hover{
     border-color: white;
     color: white;
@@ -53,9 +54,6 @@
 }
 .About__image--mobile{
   display: none;
-}
-body{
-  height: 2000px;
 }
 .About__parallax{
   @include din(8.7rem);
@@ -120,6 +118,9 @@ body{
   }
 }
 @include maxQuery(500px){
+  .About__button{
+    font-size: 1.6rem;
+  }
   .About__text-container--inner{
     width: auto;
     margin-left: auto;

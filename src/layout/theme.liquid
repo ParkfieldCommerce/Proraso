@@ -39,22 +39,6 @@
     {{ 'vendor.js' | asset_url | script_tag }}
     <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'app.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
     <!--[if lte IE 9]><script src="{{ 'app.js' | asset_url }}"></script><![endif]-->
-    <script>
-      var cart;
-      $(document).ready(function() {
-        cart = new Cartfox.Cart({{ cart | json }}, {
-          addItem: '[data-add-to-cart]',
-          cartItemCount: "[data-cart-item-count]",
-          cartTotal: "[data-cart-total]",
-          decreaseQuantity: "[data-minus-one]",
-          increaseQuantity: "[data-plus-one]",
-          itemQuantity: '[data-item-quantity]',
-          removeItem: '[data-remove-item]',
-          emptyTemplate: '[data-cart-template]',
-          itemsContainer: '[data-item-container]'
-        });
-      });
-    </script>
   </head>
 
   <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if template.suffix != null %} suffix-{{ template.suffix }}{% endif %}" itemscope itemtype="http://schema.org/WebSite">
@@ -74,16 +58,31 @@
     {% endif %}
 
     <script type="text/javascript">
+      CartJS.init({{ cart | json }});
       // Cart error handling
-      $(document).on('cartfox:requestComplete', function(event, cart, error) {
-        if (error) {
-          $("#PopupError").find("#errorMessage").text(error);
-          PopupError.show();
-        } else {
-          {% unless template == 'cart' %}
-            cartPopup.show();
-          {% endunless %}
-        }
+      $(document).on('cart.requestComplete', function(event, cart) {
+        {% unless template == 'cart' %}
+          cartPopup.show();
+        {% endunless %}
+      });
+      $('.js-quickAdd').click(function(){
+        var button = $(this);
+        var variantId = button.data('variant-id');
+        console.log(variantId);
+        CartJS.addItem(variantId, 1, {}, {
+          // Define a success callback to display a success message.
+          "success": function(data, textStatus, jqXHR) {
+            button.addClass('Btn--added');
+            button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
+            setTimeout(function(){
+              button.removeClass('Btn--added');
+              button.html('Buy');
+            }, 2000);
+          },
+          "error": function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+          }
+        });
       });
     </script>
   </body>
