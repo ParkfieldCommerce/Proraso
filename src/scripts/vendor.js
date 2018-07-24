@@ -29,9 +29,14 @@
 // =require vendor/Cartfox.js
 
 /*!
- * js.cookie.js
+ * slick.min.js
  */
 // =require vendor/slick.min.js
+
+/*!
+ * rellax.min.js
+ */
+// =require vendor/rellax.min.js
 
 /*!
  * js.cookie.js

@@ -13,33 +13,35 @@ $hero-text: white;
 }
 .Hero__image--mobile{
   display: none;
-  @media screen and (max-width: 800px){
-    display: block;
-  }
 }
 .Hero__image--desktop{
   display: block;
-  @media screen and (max-width: 800px){
-    display: none;
-  }
 }
-.Hero__text-container{
+.Hero__text-container--outer{
   position: absolute;
   top: 50%;
   width: 100%;
   @include prefix(transform, translateY(-50%));
   color: $hero-text;
 }
-.Hero__text-block{
-  width: 350px;
+.Hero__text-container--inner{
   margin-left: auto;
   max-width: 50%;
 }
+.Hero__text-wrap{
+  width: 450px;
+  max-width: 100%;
+  margin-right: auto;
+}
 .Hero__main{
   @include din(4.8rem);
+  margin-bottom: 30px;
+  line-height: 1.25;
+  text-transform: uppercase;
 }
 .Hero__sub{
   @include garI(1.8rem);
+  margin-bottom: 30px;
 }
 .Hero__button{
   border-color: $hero-text;
@@ -47,6 +49,9 @@ $hero-text: white;
   background: transparent;
   border-right: none;
   border-left: none;
+  font-size: 2.4rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
   &:hover{
     background: transparent;
     border-color: $accent;
@@ -58,4 +63,31 @@ $hero-text: white;
   bottom: 20px;
   left: 50%;
   @include prefix(transform, translateX(-50%));
+}
+
+@include maxQuery(800px){
+  .Hero__image--mobile{
+    display: block;
+  }
+  .Hero__image--desktop{
+    display: none;
+  }
+  .Hero__main{
+    font-size: 3.6rem;
+    margin-bottom: 0;
+  }
+  .Hero__sub{
+    display: none;
+  }
+  .Hero__button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.6rem;
+  }
+  .Hero__slider-dots{
+    bottom: 10px;
+  }
+  .Hero__text-container--inner{
+    max-width: 57%;
+  }
 }

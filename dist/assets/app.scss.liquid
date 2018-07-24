@@ -173,9 +173,9 @@ $p: 1rem;
 $small: 0.625rem;
 
 // Screen Sizes
-$s: 600px;
+$s: 800px;
 $m: 850px;
-$l: 1150px;
+$l: 1280px;
 $xl: 1450px;
 
 // Transitions
@@ -539,6 +539,7 @@ $accent2: #005030;
 @mixin din($font-size){
   font-family: 'DINCondensed';
   font-size: $font-size;
+  font-weight: normal;
 }
 
 /* Global ====================================================================*/
@@ -816,7 +817,6 @@ input[type="button"],
 input[type="submit"],
 input[type="reset"] {
   max-width: 100%;
-  height: $gutter;
   line-height: ($gutter - $borderWeight*2);
   padding: 0 $spacing*2;
   font-size: $h4;
@@ -1051,7 +1051,6 @@ form#CartPage {
   textarea,
   .select-wrapper,
   .province-wrapper {
-    width: 100%;
     @include clearfix();
     &:not(:last-child) {
       margin-bottom: $spacing*2;
@@ -1082,6 +1081,7 @@ p,
 
 button{
   @include din(2rem);
+  border-radius: 0;
 }
 
 a{
@@ -1122,8 +1122,15 @@ a{
   color: $accent;
   text-transform: uppercase;
   @include din(1.4rem);
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 5px 10px;
+  background: transparent;
+  border-right: none;
+  border-left: none;
+  &:hover{
+    background: transparent;
+    border-color: $accent;
+    color: $accent;
+  }
 }
 
 /* Slider Defaults */
@@ -1137,7 +1144,7 @@ a{
     height: 10px;
     width: 10px;
     padding: 0px;
-    margin: 0px 2.5px;
+    margin: 0px 5px;
     border-radius: 10px;
     background: transparent;
     border-color: white;
@@ -1536,6 +1543,23 @@ a{
   z-index: 21;
   @include prefix(transform, translateX(-50%));
 }
+
+@include maxQuery(800px){
+  .Header{
+    height: 62px;
+  }
+  .Header__user-row{
+  }
+  .Header__decoration{
+    display: none;
+  }
+  .Header__logo{
+    top: 5px;
+    img{
+      width: 100px;
+    }
+  }
+}
 .Promobar{
   height: 30px;
   width: 100%;
@@ -1614,6 +1638,7 @@ a{
 }
 .Nav__dropdown-menu{
   position: absolute;
+  z-index: 20;
   padding-top: 65px;
   padding-bottom: 40px;
   width: 1040px;
@@ -1664,33 +1689,35 @@ $hero-text: white;
 }
 .Hero__image--mobile{
   display: none;
-  @media screen and (max-width: 800px){
-    display: block;
-  }
 }
 .Hero__image--desktop{
   display: block;
-  @media screen and (max-width: 800px){
-    display: none;
-  }
 }
-.Hero__text-container{
+.Hero__text-container--outer{
   position: absolute;
   top: 50%;
   width: 100%;
   @include prefix(transform, translateY(-50%));
   color: $hero-text;
 }
-.Hero__text-block{
-  width: 350px;
+.Hero__text-container--inner{
   margin-left: auto;
   max-width: 50%;
 }
+.Hero__text-wrap{
+  width: 450px;
+  max-width: 100%;
+  margin-right: auto;
+}
 .Hero__main{
   @include din(4.8rem);
+  margin-bottom: 30px;
+  line-height: 1.25;
+  text-transform: uppercase;
 }
 .Hero__sub{
   @include garI(1.8rem);
+  margin-bottom: 30px;
 }
 .Hero__button{
   border-color: $hero-text;
@@ -1698,6 +1725,9 @@ $hero-text: white;
   background: transparent;
   border-right: none;
   border-left: none;
+  font-size: 2.4rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
   &:hover{
     background: transparent;
     border-color: $accent;
@@ -1709,6 +1739,161 @@ $hero-text: white;
   bottom: 20px;
   left: 50%;
   @include prefix(transform, translateX(-50%));
+}
+
+@include maxQuery(800px){
+  .Hero__image--mobile{
+    display: block;
+  }
+  .Hero__image--desktop{
+    display: none;
+  }
+  .Hero__main{
+    font-size: 3.6rem;
+    margin-bottom: 0;
+  }
+  .Hero__sub{
+    display: none;
+  }
+  .Hero__button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.6rem;
+  }
+  .Hero__slider-dots{
+    bottom: 10px;
+  }
+  .Hero__text-container--inner{
+    max-width: 57%;
+  }
+}
+.About__container{
+  position: relative;
+}
+.About{
+  margin-top: 60px;
+  margin-bottom: 60px;
+  background-color: $accent;
+  color: white;
+  height: 308px;
+  position: relative;
+  @include flex();
+  @include align-items(center);
+  flex-wrap: wrap;
+  z-index: 2;
+}
+.About__content{
+  width: 50%;
+  @include flex();
+  @include justify-content(center);
+  @include align-items(center);
+}
+.About__text-container--inner{
+  width: 400px;
+  max-width: 100%;
+}
+.About__heading{
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+.About__body{
+  margin-bottom: 25px;
+}
+.About__button{
+  border-color: white;
+  color: white;
+  &:hover{
+    border-color: white;
+    color: white;
+  }
+}
+.About__images{
+  position: absolute;
+  right: 60px;
+  text-align: right;
+  img{
+    vertical-align: middle;
+    width: 100%;
+  }
+}
+.About__image--desktop{
+  display: block;
+  margin-left: auto;
+}
+.About__image--mobile{
+  display: none;
+}
+body{
+  height: 2000px;
+}
+.About__parallax{
+  @include din(8.7rem);
+  text-transform: uppercase;
+  color: $accent;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+@include maxQuery(1208px){
+  .About__images{right: 60px;}
+  .About__image--desktop{
+    width: 80%;
+  }
+}
+@include maxQuery(1062px){
+  .About__images{right: 20px;}
+  .About__image--desktop{
+    width: 75%;
+  }
+}
+@include maxQuery(950px){
+  .About__container{
+    padding: 0;
+    .row{
+      margin: 0;
+    }
+    .column{
+      padding: 0;
+    }
+    .About{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  .About{
+    margin-top: 150px;
+    margin-bottom: 0;
+    @include align-items(flex-start);
+    @include justify-content(center);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: auto;
+  }
+  .About__parallax{
+    display: none;
+  }
+  .About__content{
+    width: 100%;
+  }
+  .About__images{
+    position: static;
+    margin-top: -180px;
+    text-align: center;
+  }
+  .About__image--desktop{
+    display: none;
+  }
+  .About__image--mobile{
+    display: block;
+    width: 100%;
+  }
+}
+@include maxQuery(500px){
+  .About__text-container--inner{
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 /* Helpers ===================================================================*/
 /* Helpers ===================================================================*/
@@ -1882,7 +2067,183 @@ $hero-text: white;
 
 
 /* Optional extras ===========================================================*/
-// @import url('utils/additional-helpers.scss');
+/* Optional Additional Helpers ================================================*/
+
+// Margin & Padding
+@for $i from 0 through 20 {
+  $space: $spacing*$i;
+  .margin-#{$i}x {
+    margin: $space;
+  }
+  .margin-top-#{$i}x {
+    margin-top: $space;
+  }
+  .margin-bottom-#{$i}x {
+    margin-bottom: $space;
+  }
+  .margin-left-#{$i}x {
+    margin-left: $space;
+  }
+  .margin-right-#{$i}x {
+    margin-right: $space;
+  }
+  .padding-#{$i}x {
+    padding: $space;
+  }
+  .padding-top-#{$i}x {
+    padding-top: $space;
+  }
+  .padding-bottom-#{$i}x {
+    padding-bottom: $space;
+  }
+  .padding-left-#{$i}x {
+    padding-left: $space;
+  }
+  .padding-right-#{$i}x {
+    padding-right: $space;
+  }
+}
+@include xl() {
+  @for $i from 0 through 20 {
+    $space: $spacing*$i;
+    .xl-margin-#{$i}x {
+      margin: $space;
+    }
+    .xl-margin-top-#{$i}x {
+      margin-top: $space;
+    }
+    .xl-margin-bottom-#{$i}x {
+      margin-bottom: $space;
+    }
+    .xl-margin-left-#{$i}x {
+      margin-left: $space;
+    }
+    .xl-margin-right-#{$i}x {
+      margin-right: $space;
+    }
+    .xl-padding-#{$i}x {
+      padding: $space;
+    }
+    .xl-padding-top-#{$i}x {
+      padding-top: $space;
+    }
+    .xl-padding-bottom-#{$i}x {
+      padding-bottom: $space;
+    }
+    .xl-padding-left-#{$i}x {
+      padding-left: $space;
+    }
+    .xl-padding-right-#{$i}x {
+      padding-right: $space;
+    }
+  }
+}
+@include l() {
+  @for $i from 0 through 20 {
+    $space: $spacing*$i;
+    .l-margin-#{$i}x {
+      margin: $space;
+    }
+    .l-margin-top-#{$i}x {
+      margin-top: $space;
+    }
+    .l-margin-bottom-#{$i}x {
+      margin-bottom: $space;
+    }
+    .l-margin-left-#{$i}x {
+      margin-left: $space;
+    }
+    .l-margin-right-#{$i}x {
+      margin-right: $space;
+    }
+    .l-padding-#{$i}x {
+      padding: $space;
+    }
+    .l-padding-top-#{$i}x {
+      padding-top: $space;
+    }
+    .l-padding-bottom-#{$i}x {
+      padding-bottom: $space;
+    }
+    .l-padding-left-#{$i}x {
+      padding-left: $space;
+    }
+    .l-padding-right-#{$i}x {
+      padding-right: $space;
+    }
+  }
+}
+@include m() {
+  @for $i from 0 through 20 {
+    $space: $spacing*$i;
+    .m-margin-#{$i}x {
+      margin: $space;
+    }
+    .m-margin-top-#{$i}x {
+      margin-top: $space;
+    }
+    .m-margin-bottom-#{$i}x {
+      margin-bottom: $space;
+    }
+    .m-margin-left-#{$i}x {
+      margin-left: $space;
+    }
+    .m-margin-right-#{$i}x {
+      margin-right: $space;
+    }
+    .m-padding-#{$i}x {
+      padding: $space;
+    }
+    .m-padding-top-#{$i}x {
+      padding-top: $space;
+    }
+    .m-padding-bottom-#{$i}x {
+      padding-bottom: $space;
+    }
+    .m-padding-left-#{$i}x {
+      padding-left: $space;
+    }
+    .m-padding-right-#{$i}x {
+      padding-right: $space;
+    }
+  }
+}
+@include s() {
+  @for $i from 0 through 20 {
+    $space: $spacing*$i;
+    .s-margin-#{$i}x {
+      margin: $space;
+    }
+    .s-margin-top-#{$i}x {
+      margin-top: $space;
+    }
+    .s-margin-bottom-#{$i}x {
+      margin-bottom: $space;
+    }
+    .s-margin-left-#{$i}x {
+      margin-left: $space;
+    }
+    .s-margin-right-#{$i}x {
+      margin-right: $space;
+    }
+    .s-padding-#{$i}x {
+      padding: $space;
+    }
+    .s-padding-top-#{$i}x {
+      padding-top: $space;
+    }
+    .s-padding-bottom-#{$i}x {
+      padding-bottom: $space;
+    }
+    .s-padding-left-#{$i}x {
+      padding-left: $space;
+    }
+    .s-padding-right-#{$i}x {
+      padding-right: $space;
+    }
+  }
+}
+
 
 /* =============================================================================
    Shopify core helpers

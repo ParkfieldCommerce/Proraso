@@ -51,6 +51,7 @@
 }
 .Nav__dropdown-menu{
   position: absolute;
+  z-index: 20;
   padding-top: 65px;
   padding-bottom: 40px;
   width: 1040px;

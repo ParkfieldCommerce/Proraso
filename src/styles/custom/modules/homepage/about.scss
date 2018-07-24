@@ -1,0 +1,128 @@
+.About__container{
+  position: relative;
+}
+.About{
+  margin-top: 60px;
+  margin-bottom: 60px;
+  background-color: $accent;
+  color: white;
+  height: 308px;
+  position: relative;
+  @include flex();
+  @include align-items(center);
+  flex-wrap: wrap;
+  z-index: 2;
+}
+.About__content{
+  width: 50%;
+  @include flex();
+  @include justify-content(center);
+  @include align-items(center);
+}
+.About__text-container--inner{
+  width: 400px;
+  max-width: 100%;
+}
+.About__heading{
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+.About__body{
+  margin-bottom: 25px;
+}
+.About__button{
+  border-color: white;
+  color: white;
+  &:hover{
+    border-color: white;
+    color: white;
+  }
+}
+.About__images{
+  position: absolute;
+  right: 60px;
+  text-align: right;
+  img{
+    vertical-align: middle;
+    width: 100%;
+  }
+}
+.About__image--desktop{
+  display: block;
+  margin-left: auto;
+}
+.About__image--mobile{
+  display: none;
+}
+body{
+  height: 2000px;
+}
+.About__parallax{
+  @include din(8.7rem);
+  text-transform: uppercase;
+  color: $accent;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+@include maxQuery(1208px){
+  .About__images{right: 60px;}
+  .About__image--desktop{
+    width: 80%;
+  }
+}
+@include maxQuery(1062px){
+  .About__images{right: 20px;}
+  .About__image--desktop{
+    width: 75%;
+  }
+}
+@include maxQuery(950px){
+  .About__container{
+    padding: 0;
+    .row{
+      margin: 0;
+    }
+    .column{
+      padding: 0;
+    }
+    .About{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  .About{
+    margin-top: 150px;
+    margin-bottom: 0;
+    @include align-items(flex-start);
+    @include justify-content(center);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: auto;
+  }
+  .About__parallax{
+    display: none;
+  }
+  .About__content{
+    width: 100%;
+  }
+  .About__images{
+    position: static;
+    margin-top: -180px;
+    text-align: center;
+  }
+  .About__image--desktop{
+    display: none;
+  }
+  .About__image--mobile{
+    display: block;
+    width: 100%;
+  }
+}
+@include maxQuery(500px){
+  .About__text-container--inner{
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

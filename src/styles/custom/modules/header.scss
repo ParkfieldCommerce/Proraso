@@ -17,3 +17,20 @@
   z-index: 21;
   @include prefix(transform, translateX(-50%));
 }
+
+@include maxQuery(800px){
+  .Header{
+    height: 62px;
+  }
+  .Header__user-row{
+  }
+  .Header__decoration{
+    display: none;
+  }
+  .Header__logo{
+    top: 5px;
+    img{
+      width: 100px;
+    }
+  }
+}

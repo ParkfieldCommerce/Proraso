@@ -1,5 +1,5 @@
 <!-- Homepage Hero -->
-<div class="Hero">
+<div class="Hero margin-bottom-9x s-margin-bottom-4x">
   <div class="Hero__slider js-heroSlider">
     {% for block in section.blocks %}
     {% if block.settings.hero_slide_enable %}
@@ -11,13 +11,15 @@
         <div class="Hero__image Hero__image--mobile">
           <img src="{{block.settings.hero_image_2 | img_url:'master'}}" alt="{{block.settings.hero_image_2.alt}}">
         </div>
-        <div class="Hero__text-container">
-          <div class="Hero__text-block">
-            <h2 class="Hero__main">{{block.settings.hero_maintext}}</h2>
-            <div class="Hero__sub">{{block.settings.hero_subtext}}</div>
-            {% unless block.settings.hero_button_text == blank %}
-            <button type="button" class="Hero__button Text--border-style">{{block.settings.hero_button_text}}</button>
-            {% endunless %}
+        <div class="Hero__text-container Hero__text-container--outer">
+          <div class="Hero__text-container Hero__text-container--inner">
+            <div class="Hero__text-wrap">
+              <h2 class="Hero__main">{{block.settings.hero_maintext}}</h2>
+              <div class="Hero__sub">{{block.settings.hero_subtext}}</div>
+              {% unless block.settings.hero_button_text == blank %}
+              <button type="button" class="Hero__button Text--border-style">{{block.settings.hero_button_text}}</button>
+              {% endunless %}
+            </div>
           </div>
         </div>
       </a>
@@ -101,20 +103,3 @@ $('.js-heroSlider').slick({
   ]
 }
 {% endschema %}
-
-<script>
-//Initalize Hero Slider 
-  $('.hero-slideshow').slick({
-    arrows: true,
-    nextArrow: $('.hero .next'),
-    prevArrow: $('.hero .prev'),
-    autoplay: true,
-    infinite: true,
-    arrows: false,
-    dots: true,
-    appendDots: $('.hero .dots'),
-    autoplaySpeed: 3000,
-    fade: true,
-    adaptiveHeight: true
-  });
-</script>

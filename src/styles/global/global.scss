@@ -205,7 +205,6 @@ input[type="button"],
 input[type="submit"],
 input[type="reset"] {
   max-width: 100%;
-  height: $gutter;
   line-height: ($gutter - $borderWeight*2);
   padding: 0 $spacing*2;
   font-size: $h4;

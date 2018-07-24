@@ -21,6 +21,7 @@ p,
 
 button{
   @include din(2rem);
+  border-radius: 0;
 }
 
 a{
@@ -61,8 +62,15 @@ a{
   color: $accent;
   text-transform: uppercase;
   @include din(1.4rem);
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 5px 10px;
+  background: transparent;
+  border-right: none;
+  border-left: none;
+  &:hover{
+    background: transparent;
+    border-color: $accent;
+    color: $accent;
+  }
 }
 
 /* Slider Defaults */
@@ -76,7 +84,7 @@ a{
     height: 10px;
     width: 10px;
     padding: 0px;
-    margin: 0px 2.5px;
+    margin: 0px 5px;
     border-radius: 10px;
     background: transparent;
     border-color: white;

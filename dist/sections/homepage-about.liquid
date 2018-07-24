@@ -1,0 +1,97 @@
+<!-- Homepage About -->
+{% assign about = section.settings %}
+<div class="About__container container l margin-bottom-12x margin-bottom-6x">
+<div class="row">
+  <div class="column l12 m12 s12">
+    <div class="About">
+      <div class="About__images">
+        <div class="About__image About__image--desktop">
+          <img src="{{about.desktop_image | img_url:'master'}}" alt="{{about.desktop_image.alt}}">
+        </div>
+        <div class="About__image About__image--mobile">
+          <img src="{{about.mobile_image | img_url:'master'}}" alt="{{block.settings.mobile_image.alt}}">
+        </div>
+      </div>
+      <div class="About__content">
+        <div class="About__text-container About__text-container--outer">
+          <div class="About__text-container About__text-container--inner">
+            <h2 class="About__heading">{{ about.heading }}</h2>
+            <p class="About__body">{{about.body}}</p>
+            {% unless about.button_text == blank %}
+            <button type="button" class="About__button Text--border-style">{{about.button_text}}</button>
+            {% endunless %}
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="About__parallax rellax" data-rellax-speed=".3">
+      {{about.parallax_text}}
+      </div>
+  </div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+  var rellax = new Rellax('.rellax');
+});
+</script>
+{% schema %}
+{
+  "name": "About Section",
+  "class":"homepage-about",
+  "settings":[
+    {
+      "type":"header",
+      "content":"Image Settings"
+    },
+    {
+      "type":"image_picker",
+      "id":"desktop_image",
+      "label":"Desktop Image"
+    },
+    {
+      "type":"image_picker",
+      "id":"mobile_image",
+      "label":"Mobile Image"
+    },
+    {
+      "type":"header",
+      "content":"Text Settings"
+    },
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"Heading"
+    },
+    {
+      "type":"textarea",
+      "id":"body",
+      "label":"Body"
+    },
+    {
+      "type":"text",
+      "id":"parallax_text",
+      "label":"Parallax Text"
+    },
+    {
+      "type":"header",
+      "content":"Button Settings"
+    },
+    {
+      "id":"button_text",
+      "type":"text",
+      "label":"Button Text"
+    },
+    {
+      "id": "button_url",
+      "type":"url",
+      "label":"Button Url"
+    }
+  ],
+  "presets":[{
+      "name": "About Section",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}
