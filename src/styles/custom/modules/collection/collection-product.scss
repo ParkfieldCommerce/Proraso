@@ -1,11 +1,34 @@
 .CollectionProduct{
   text-align: center;
+  &:hover{
+    .CollectionProduct__image-container{
+      @include align-items(flex-start);
+    }
+    .CollectionProduct__overlay{
+      opacity: 1;
+    }
+  }
 }
 .CollectionProduct__image-container{
-  min-height: 268px;
   background: $bg-gray;
   @include flex();
   @include align-items(flex-end);
+  position: relative;
+}
+.CollectionProduct__heading{
+  @include din(2.4rem);
+  font-style: normal;
+  line-height: 1.125;
+  display: block;
+  margin-top: 14px;
+}
+.CollectionProduct__price--sale{
+  color: $disabled;
+  margin-right: 10px;
+}
+.CollectionProduct__prices{
+  display: block;
+  margin-top: 10px;
 }
 .CollectionProduct__button-text{
   position: relative;
@@ -15,5 +38,33 @@
     @include prefix(transform, translateY(-50%));
     font-size: 15px;
     right: -20px;
+  }
+}
+.CollectionProduct__overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.3);
+  transition: opacity .3s;
+  opacity: 0;
+  @include maxQuery(800px){
+    display: none;
+  }
+}
+.CollectionProduct__overlay-button{
+  position: absolute;
+  left: 50%;
+  @include prefix(transform, translateX(-50%));
+  bottom: 30px;
+  border-color: white;
+  color: white;
+  font-size: 2.4rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  &:hover{
+    color: white;
+    border-color: white;
   }
 }

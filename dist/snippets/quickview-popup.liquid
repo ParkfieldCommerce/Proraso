@@ -1,0 +1,55 @@
+<div id="Quickview" class="Quickview__popup js-quickviewPopup popup overlay">
+  <div class="popup-inner">
+    <div class="popup-content">
+      <div class="Quickview__header">
+        <h2 class="Quickview__header__heading">{{'product.quickview' | t }}</h2>
+        <a href="#close" class="Quickview__close js-quickviewClose" aria-label="{{ 'common.close' | t }}">
+          {% include 'custom-icon' with icon:'close' %}
+        </a>
+      </div>
+      <div class="Quickview__popup-content js-content">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var quickviewPopup = new Focus('#Quickview');
+  $('.js-quickviewClose').click(function(e){
+    e.preventDefault();
+    quickviewPopup.hide();
+  });
+  $(document).on('focus:open', function(e){
+    var clickedButton = $(e.target.activeElement);
+    if(clickedButton.hasClass('js-quickviewPopupTrigger')){
+      //Takes the info thats in quickview-info.liquid and pastes it into the popup
+      var info = clickedButton.siblings('.js-quickview-info');
+      var popup = $('.js-quickviewPopup');
+      var quickviewContent = popup.find('.js-content');
+      quickviewContent.empty();
+      quickviewContent.append(info.clone());
+
+      //Reapply clickhandlers
+      $('.js-quickview-add').click(function(){
+        var button = $(this);
+        var variantId = button.data('variant-id');
+        var quantity = $(this).closest('.Quickview__form').find('.Quantity__state').val();
+        CartJS.addItem(variantId, 1, {}, {
+          // Define a success callback to display a success message.
+          "success": function(data, textStatus, jqXHR) {
+            button.addClass('Btn--added');
+            button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
+            setTimeout(function(){
+              button.removeClass('Btn--added');
+              button.html('Buy');
+            }, 3000);
+          },
+          "error": function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+          }
+        });
+      });
+    }
+  });
+</script>

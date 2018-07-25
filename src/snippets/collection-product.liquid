@@ -1,5 +1,4 @@
 <!-- /snippets/collection-product.liquid -->
-
 {% assign sold_out = true %}
 {% assign on_sale = false %}
 {% assign sale_price = product.price | money %}
@@ -22,31 +21,37 @@
         <img srcset="{{ product.featured_image | img_url: '512x512', scale: 2 }} 2x" src="{{ product.featured_image | img_url: '512x512' }}" alt="{{ product.featured_image.alt | escape }}">
       </a>
     {% endif %}
+    <div class="CollectionProduct__overlay">
+      <button type="button" data-trigger="popup" data-target="#Quickview" class="CollectionProduct__overlay-button js-quickviewPopupTrigger Text--border-style">{{'product.quickview' | t }}</button>
+      {% include 'quickview-info' with product:product %}
+    </div>
     </div>
     <p>
-      <a href="{{ product.url | within: collection }}">{{ product.title }}</a><br>
-      {% if on_sale %}
-        {% if product.price_varies %}
-          {{ 'product.on_sale_from_html' | t: price: sale_price }}
-        {% else %}
-          <b>{{ 'product.on_sale_html' | t: price: sale_price }}</b>
+      <a class="CollectionProduct__heading" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      <span class="CollectionProduct__prices">
+        {% if on_sale %}
+          <span class="hidden">{{ 'product.original_price' | t }}</span>
+          <s class="CollectionProduct__price CollectionProduct__price--sale">{{ product.compare_at_price | money }}</s>
         {% endif %}
-      {% else %}
-        {% if product.price_varies %}
-          {% assign price = product.price | money %}
-          {{ 'product.priced_from_html' | t: price: price }}
+        {% if on_sale %}
+          {% if product.price_varies %}
+            {{ 'product.on_sale_from_html' | t: price: sale_price }}
+          {% else %}
+            {{ product.price | money }}
+          {% endif %}
         {% else %}
-          {{ product.price | money }}
+          {% if product.price_varies %}
+            {% assign price = product.price | money %}
+            {{ 'product.priced_from_html' | t: price: price }}
+          {% else %}
+            {{ product.price | money }}
+          {% endif %}
         {% endif %}
-      {% endif %}
-      {% if on_sale %}
-        <span class="hidden">{{ 'product.original_price' | t }}</span>
-        <s>{{ product.compare_at_price | money }}</s>
-      {% endif %}
+      </span>
     </p>
     <button
       {% if sold_out %}
-      class="Btn disabled" disabled
+      class="Btn Btn--soldout disabled" disabled
       {% else %}
       class="Btn js-quickAdd"
       {% endif %}

@@ -1,0 +1,65 @@
+.CollectionProduct .Quickview__info{
+  display: none;
+}
+.Quickview__popup .popup-content{
+  background-color: $bg-light;
+  width: 800px;
+  max-width: 85%;
+  padding: 0;
+}
+
+.Quickview__header{
+  background: $bg-dark;
+  position: relative;
+}
+.Quickview__header__heading{
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 2.4rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.Quickview__close{
+  position: absolute;
+  color: white;
+  top: 50%;
+  @include prefix(transform, translateY(-50%));
+  right: 20px;
+  font-size: 1.5rem;
+}
+.Quickview__popup .Quickview__info{
+  @include flex();
+  @include align-items(center);
+  padding: 40px;
+}
+.Quickview__image{
+  width: 50%;
+}
+.Quickview__content{
+  width: 50%;
+}
+.Quickview__heading{
+  margin-bottom: 15px;
+}
+.Quickview__prices{
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.Quickview__quantity{
+  margin-bottom: 20px;
+}
+.Quickview__actions{
+  @include flex();
+  @include align-items(center);
+}
+.Quickview__add{
+  margin: 0;
+  width: 160px;
+  margin-right: 20px;
+}
+.Quickview__link{
+  text-transform: uppercase;
+}

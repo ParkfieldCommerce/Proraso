@@ -1,0 +1,20 @@
+.Quantity{
+  display: block;
+}
+.Quantity__control{
+  @include din(1.8rem);
+  background: transparent;
+  border: none;
+  color: $font-color;
+  flex: 1;
+  &:hover{
+    background: transparent;
+    color: $font-color;
+  }
+}
+input[type="number"].Quantity__state{
+  @include din(1.8rem);
+  border: none;
+  background: none;
+  flex: 1;
+}

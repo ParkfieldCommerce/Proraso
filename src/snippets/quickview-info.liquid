@@ -1,0 +1,52 @@
+<div class="Quickview__info js-quickview-info">
+  <div class="Quickview__image">
+    <img srcset="{{ product.featured_image | img_url: '512x512', scale: 2 }} 2x" src="{{ product.featured_image | img_url: '512x512' }}" alt="{{ product.featured_image.alt | escape }}">
+  </div>
+  <div class="Quickview__content">
+    <span class="h2 Quickview__heading">{{product.title}}</span>
+    <span class="p Quickview__prices">
+      {% if on_sale %}
+        <span class="hidden">{{ 'product.original_price' | t }}</span>
+        <s class="Quickview__price Quickview__price--sale">{{ product.compare_at_price | money }}</s>
+      {% endif %}
+      {% if on_sale %}
+        {% if product.price_varies %}
+          {{ 'product.on_sale_from_html' | t: price: sale_price }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      {% else %}
+        {% if product.price_varies %}
+          {% assign price = product.price | money %}
+          {{ 'product.priced_from_html' | t: price: price }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      {% endif %}
+    </span>
+    <div class="Quickview__description">
+      {{product.description}}
+    </div>
+    <div class="Quickview__form">
+      <div class="Quickview__quantity Quantity">
+        <button class="Quantity__control Quantity__control--decrement">-</button>
+        <input type="number" class="Quantity__state" value="1">
+        <button class="Quantity__control Quantity__control--increment">+</button>
+      </div>
+      <div class="Quickview__actions">
+        <button
+          {% if sold_out %}
+          class="Quickview__add Btn Btn--soldout disabled" disabled
+          {% else %}
+          class="Quickview__add Btn js-quickview-add"
+          {% endif %}
+          type="button"
+          data-variant-id="{{ product.first_available_variant.id }}"
+        >
+          {% if sold_out %}{{ 'product.sold_out' | t }}{% else %}{{ 'product.add_to_cart' | t }}{% endif %}
+        </button>
+        <a class="Quickview__link" href="{{product.url}}">More Info</a>
+      </div>
+    </div>
+  </div>
+</div>

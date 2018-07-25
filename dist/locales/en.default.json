@@ -169,6 +169,7 @@
     }
   },
   "product": {
+    "quickview":"Quick View",
     "add_to_cart": "Buy",
     "regular_price": "Regular price",
     "quantity": "Quantity",

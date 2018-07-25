@@ -4,11 +4,11 @@
   @include justify-content(space-between);
   .CollectionProduct__column{
     width: 23%;
-    max-width: 275px; 
     @include maxQuery(1200px){
       width: 30%;
     }
     @include maxQuery(800px){
+      width: 48%;
       &:last-child,
       &:nth-last-child(2){
         display: none;
@@ -17,5 +17,8 @@
   }
   .CollectionProduct__image-container{
     min-height: 268px;
+    @include maxQuery(800px){
+      min-height: 188px;
+    }
   }
 }

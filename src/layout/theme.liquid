@@ -52,7 +52,7 @@
     {% section 'theme-footer' %}
     {% include 'popup-cart' %}
     {% include 'popup-error' %}
-
+    {% include 'quickview-popup' %}
     {% if customer %}
       {% include 'popup-account' %}
     {% endif %}
@@ -65,10 +65,10 @@
           cartPopup.show();
         {% endunless %}
       });
+      //Quickadd Button Logic for Collection Products
       $('.js-quickAdd').click(function(){
         var button = $(this);
         var variantId = button.data('variant-id');
-        console.log(variantId);
         CartJS.addItem(variantId, 1, {}, {
           // Define a success callback to display a success message.
           "success": function(data, textStatus, jqXHR) {
@@ -77,13 +77,14 @@
             setTimeout(function(){
               button.removeClass('Btn--added');
               button.html('Buy');
-            }, 2000);
+            }, 3000);
           },
           "error": function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
           }
         });
       });
+
     </script>
   </body>
 

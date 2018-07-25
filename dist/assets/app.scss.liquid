@@ -159,7 +159,7 @@ $fontLight: 300;
 $fontNormal: 400;
 $fontBold: 700;
 $fontFamily: sans-serif;
-$lineHeight: 1.5;
+$lineHeight: 1.25;
 $lineMargin: $spacing*2;
 
 // Font bases
@@ -189,13 +189,18 @@ $transition: $transitionProperty $transitionSpeed $transitionStyle;
 $logoWidth: {{ settings.logo_width | default: '450' | append: 'px' }};
 $prefixes: webkit moz ms spec;
 
-$font-color: #333333;
+$font-color: #333;
+
 $bg-dark: #294145;
 $bg-gray: #F4F5F5;
 $bg-light: white;
+
 $accent: #C69F51;
 $accent2: #005030;
 
+$border-dark: #333;
+
+$disabled: #CECECE;
 @font-face {
   font-family:'garamond-bold';
   src: url(' {{ 'Adobe-Garamond-Pro-Bold-Italic.ttf' | asset_url }} ') format('truetype');
@@ -1065,16 +1070,17 @@ body{
   background: white;
   color: $font-color;
 }
-h1{
+h1,.h1{
   @include din(4.8rem);
 }
-h2{
+h2,.h2{
   @include din(3.6rem);
 }
-h3{
+h3,.h3{
   @include din(2.4rem);
 }
 p,
+.p,
 .rte{
   @include garI(1.8rem);
 }
@@ -1086,8 +1092,8 @@ button{
 .Btn{
   width: 180px;
   padding: 0;
-  border: 1px solid black;
-  color: black;
+  border: 2px solid $border-dark;
+  color: $font-color;
   padding-top: 10px;
   padding-bottom: 10px;
   background: white;
@@ -1106,7 +1112,13 @@ button{
   border-color: $accent2;
   color: white;
 }
+.Btn--soldout{
+  background: transparent !important;
+  border-color: $disabled !important;
+  color: $disabled !important;
+}
 a{
+  @include din(1.8rem);
   color: $font-color;
   text-decoration: none;
   &:hover,
@@ -1174,6 +1186,21 @@ a{
   li.slick-active button {
     background: white;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 /* Templates ==================================================================*/
@@ -1695,6 +1722,28 @@ a{
   width: 100%;
   @include garI(1.6rem);
 }
+//Global
+.Quantity{
+  display: block;
+}
+.Quantity__control{
+  @include din(1.8rem);
+  background: transparent;
+  border: none;
+  color: $font-color;
+  flex: 1;
+  &:hover{
+    background: transparent;
+    color: $font-color;
+  }
+}
+input[type="number"].Quantity__state{
+  @include din(1.8rem);
+  border: none;
+  background: none;
+  flex: 1;
+}
+
 //Homepage
 $hero-text: white;
 .Hero{
@@ -1795,11 +1844,11 @@ $hero-text: white;
   @include justify-content(space-between);
   .CollectionProduct__column{
     width: 23%;
-    max-width: 275px; 
     @include maxQuery(1200px){
       width: 30%;
     }
     @include maxQuery(800px){
+      width: 48%;
       &:last-child,
       &:nth-last-child(2){
         display: none;
@@ -1808,6 +1857,9 @@ $hero-text: white;
   }
   .CollectionProduct__image-container{
     min-height: 268px;
+    @include maxQuery(800px){
+      min-height: 188px;
+    }
   }
 }
 .About__container{
@@ -1942,12 +1994,35 @@ $hero-text: white;
 //Collection
 .CollectionProduct{
   text-align: center;
+  &:hover{
+    .CollectionProduct__image-container{
+      @include align-items(flex-start);
+    }
+    .CollectionProduct__overlay{
+      opacity: 1;
+    }
+  }
 }
 .CollectionProduct__image-container{
-  min-height: 268px;
   background: $bg-gray;
   @include flex();
   @include align-items(flex-end);
+  position: relative;
+}
+.CollectionProduct__heading{
+  @include din(2.4rem);
+  font-style: normal;
+  line-height: 1.125;
+  display: block;
+  margin-top: 14px;
+}
+.CollectionProduct__price--sale{
+  color: $disabled;
+  margin-right: 10px;
+}
+.CollectionProduct__prices{
+  display: block;
+  margin-top: 10px;
 }
 .CollectionProduct__button-text{
   position: relative;
@@ -1958,6 +2033,99 @@ $hero-text: white;
     font-size: 15px;
     right: -20px;
   }
+}
+.CollectionProduct__overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.3);
+  transition: opacity .3s;
+  opacity: 0;
+  @include maxQuery(800px){
+    display: none;
+  }
+}
+.CollectionProduct__overlay-button{
+  position: absolute;
+  left: 50%;
+  @include prefix(transform, translateX(-50%));
+  bottom: 30px;
+  border-color: white;
+  color: white;
+  font-size: 2.4rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  &:hover{
+    color: white;
+    border-color: white;
+  }
+}
+.CollectionProduct .Quickview__info{
+  display: none;
+}
+.Quickview__popup .popup-content{
+  background-color: $bg-light;
+  width: 800px;
+  max-width: 85%;
+  padding: 0;
+}
+
+.Quickview__header{
+  background: $bg-dark;
+  position: relative;
+}
+.Quickview__header__heading{
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 2.4rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.Quickview__close{
+  position: absolute;
+  color: white;
+  top: 50%;
+  @include prefix(transform, translateY(-50%));
+  right: 20px;
+  font-size: 1.5rem;
+}
+.Quickview__popup .Quickview__info{
+  @include flex();
+  @include align-items(center);
+  padding: 40px;
+}
+.Quickview__image{
+  width: 50%;
+}
+.Quickview__content{
+  width: 50%;
+}
+.Quickview__heading{
+  margin-bottom: 15px;
+}
+.Quickview__prices{
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.Quickview__quantity{
+  margin-bottom: 20px;
+}
+.Quickview__actions{
+  @include flex();
+  @include align-items(center);
+}
+.Quickview__add{
+  margin: 0;
+  width: 160px;
+  margin-right: 20px;
+}
+.Quickview__link{
+  text-transform: uppercase;
 }
 /* Helpers ===================================================================*/
 /* Helpers ===================================================================*/

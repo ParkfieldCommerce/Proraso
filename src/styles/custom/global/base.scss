@@ -5,16 +5,17 @@ body{
   background: white;
   color: $font-color;
 }
-h1{
+h1,.h1{
   @include din(4.8rem);
 }
-h2{
+h2,.h2{
   @include din(3.6rem);
 }
-h3{
+h3,.h3{
   @include din(2.4rem);
 }
 p,
+.p,
 .rte{
   @include garI(1.8rem);
 }
@@ -26,8 +27,8 @@ button{
 .Btn{
   width: 180px;
   padding: 0;
-  border: 1px solid black;
-  color: black;
+  border: 2px solid $border-dark;
+  color: $font-color;
   padding-top: 10px;
   padding-bottom: 10px;
   background: white;
@@ -46,7 +47,13 @@ button{
   border-color: $accent2;
   color: white;
 }
+.Btn--soldout{
+  background: transparent !important;
+  border-color: $disabled !important;
+  color: $disabled !important;
+}
 a{
+  @include din(1.8rem);
   color: $font-color;
   text-decoration: none;
   &:hover,
@@ -114,4 +121,19 @@ a{
   li.slick-active button {
     background: white;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
