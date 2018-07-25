@@ -1,12 +1,12 @@
 .Quantity{
-  display: block;
+  @include flex();
 }
 .Quantity__control{
   @include din(1.8rem);
   background: transparent;
   border: none;
   color: $font-color;
-  flex: 1;
+  padding: 0;
   &:hover{
     background: transparent;
     color: $font-color;
@@ -16,5 +16,6 @@ input[type="number"].Quantity__state{
   @include din(1.8rem);
   border: none;
   background: none;
-  flex: 1;
+  max-width: 80px;
+  text-align: center;
 }

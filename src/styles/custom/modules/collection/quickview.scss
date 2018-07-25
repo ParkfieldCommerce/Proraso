@@ -48,6 +48,9 @@
   margin-bottom: 20px;
   display: inline-block;
 }
+.Quickview__price--sale{
+  color: $disabled;
+}
 .Quickview__quantity{
   margin-bottom: 20px;
 }
