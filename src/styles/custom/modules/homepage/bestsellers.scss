@@ -1,3 +1,8 @@
+.Bestsellers__heading{
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 50px;
+}
 .Bestsellers__products{
   @include flex();
   flex-flow: row wrap;
@@ -6,10 +11,12 @@
     width: 23%;
     @include maxQuery(1200px){
       width: 30%;
+      &:last-child{
+        display: none;
+      }
     }
     @include maxQuery(800px){
       width: 48%;
-      &:last-child,
       &:nth-last-child(2){
         display: none;
       }

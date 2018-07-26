@@ -30,12 +30,14 @@
       quickviewContent.empty();
       quickviewContent.append(info.clone());
 
-      //Reapply clickhandlers
+      //Apply Add Clickhandler
       $('.js-quickview-add').click(function(){
         var button = $(this);
+        console.log(button);
         var variantId = button.data('variant-id');
-        var quantity = $(this).closest('.Quickview__form').find('.Quantity__state').val();
-        CartJS.addItem(variantId, 1, {}, {
+        var quantity = $(this).closest('.js-form').find('.js-state').val();
+        console.log(quantity);
+        CartJS.addItem(variantId, quantity, {}, {
           // Define a success callback to display a success message.
           "success": function(data, textStatus, jqXHR) {
             button.addClass('Btn--added');
@@ -49,6 +51,22 @@
             console.log(jqXHR);
           }
         });
+      });
+
+      var quantity = $('.js-quickviewPopup .js-quickview-quantity .js-state');
+      var quantityIncrement = $('.js-quickviewPopup .js-quickview-quantity .js-increment');
+      var quantityDecrement = $('.js-quickviewPopup .js-quickview-quantity .js-decrement');
+      //Apply Quantity Clickhandler
+      quantityIncrement.click(function(){
+        var currentQuantity = parseInt(quantity.val());
+        quantity.val(currentQuantity + 1);
+      });
+
+      quantityDecrement.click(function(){
+        var currentQuantity = parseInt(quantity.val());
+        if(currentQuantity > 0){
+          quantity.val(currentQuantity - 1);
+        }
       });
     }
   });
