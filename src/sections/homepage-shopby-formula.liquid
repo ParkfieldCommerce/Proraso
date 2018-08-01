@@ -12,11 +12,11 @@
         <div class="ShopByFormula__ingredients">
           {% for block in section.blocks %}
           {% assign formula = block.settings %}
-          <div class="ShopByFormula__ingredient">
+          <div class="ShopByFormula__ingredient" data-formula="{{formula.title}}">
             <img src="{{ formula.ingredient_image_1 | img_url: "master" }}" alt="{{formula.ingredient_image_1.alt }}">
             <span>{{formula.ingredient_image_1_label}}</span>
           </div>
-          <div class="ShopByFormula__ingredient">
+          <div class="ShopByFormula__ingredient" data-formula="{{formula.title}}">
             <img src="{{ formula.ingredient_image_2 | img_url: "master" }}" alt="{{formula.ingredient_image_2.alt }}">
             <span>{{formula.ingredient_image_2_label}}</span>
           </div>
@@ -24,12 +24,12 @@
         </div>
         <div class="ShopByFormula__controls">
         {% for block in section.blocks %}
-        <button type="button" class="ShopByFormula__control">{{block.settings.title}}</button>
+        <button type="button" class="ShopByFormula__control" data-formula="{{block.settings.title}}">{{block.settings.title}}</button>
         {% endfor %}
         </div>
         <div class="ShopByFormula__descriptions">
           {% for block in section.blocks %}
-          <div class="ShopByFormula__description">
+          <div class="ShopByFormula__description" data-formula="{{block.settings.title}}">
           {{block.settings.description}}
           </div>
           {% endfor %}
@@ -49,7 +49,7 @@
 <script>
 $('.ShopByFormula__slider').slick({
   slidesToShow:4
-})
+});
 </script>
 {% schema %}
 {
