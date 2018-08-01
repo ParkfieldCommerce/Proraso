@@ -1,0 +1,115 @@
+<!-- Homepage About -->
+{% assign ShopByFormula = section.settings %}
+<div class="ShopByFormula__container container l margin-bottom-14x s-margin-bottom-6x">
+  <div class="row">
+    <div class="column l12 m12 s12">
+      <h2 class="ShopByFormula__heading">{{ShopByFormula.heading}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column l12 m12 s12">
+      <div class="ShopByFormula__collections">
+        <div class="ShopByFormula__ingredients">
+          {% for block in section.blocks %}
+          {% assign formula = block.settings %}
+          <div class="ShopByFormula__ingredient">
+            <img src="{{ formula.ingredient_image_1 | img_url: "master" }}" alt="{{formula.ingredient_image_1.alt }}">
+            <span>{{formula.ingredient_image_1_label}}</span>
+          </div>
+          <div class="ShopByFormula__ingredient">
+            <img src="{{ formula.ingredient_image_2 | img_url: "master" }}" alt="{{formula.ingredient_image_2.alt }}">
+            <span>{{formula.ingredient_image_2_label}}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="ShopByFormula__controls">
+        {% for block in section.blocks %}
+        <button type="button" class="ShopByFormula__control">{{block.settings.title}}</button>
+        {% endfor %}
+        </div>
+        <div class="ShopByFormula__descriptions">
+          {% for block in section.blocks %}
+          <div class="ShopByFormula__description">
+          {{block.settings.description}}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="ShopByFormula__slider">
+        {% for block in section.blocks %}
+          {% for product in collections[block.settings.collection].products %}
+            {% include 'collection-product' with column_width:'none' %}
+          {% endfor %}
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<script>
+$('.ShopByFormula__slider').slick({
+  slidesToShow:4
+})
+</script>
+{% schema %}
+{
+  "name": "Shop By Formula",
+  "class":"homepage-shopby-formula",
+  "settings":[
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"Heading"
+    }
+  ],
+  "blocks":[
+    {
+      "name":"Formula",
+      "type":"formula",
+      "limit":4,
+      "settings":[
+        {
+          "type":"collection",
+          "id":"collection",
+          "label":"Collection"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Collection Name"
+        },
+        {
+          "type":"richtext",
+          "id":"description",
+          "label":"Description"
+        },
+        {
+          "type":"image_picker",
+          "id":"ingredient_image_1",
+          "label":"Ingredient Image 1"
+        },
+        {
+          "type":"text",
+          "id":"ingredient_image_1_label",
+          "label":"Ingredient Label 1"
+        },
+        {
+          "type":"image_picker",
+          "id":"ingredient_image_2",
+          "label":"Ingredient Image 2"
+        },
+        {
+          "type":"text",
+          "id":"ingredient_image_2_label",
+          "label":"Ingredient Label 2"
+        }
+      ]
+    }
+  ],
+  "presets":[{
+      "name": "Shop By Formula",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}
