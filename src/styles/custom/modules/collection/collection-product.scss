@@ -21,6 +21,12 @@
   line-height: 1.125;
   display: block;
   margin-top: 14px;
+  margin-bottom: 5px;
+}
+.CollectionProduct__sub-heading{
+  color: $inactive;
+  font-style: normal;
+  @include din(2rem);
 }
 .CollectionProduct__price--sale{
   color: $disabled;
@@ -67,4 +73,21 @@
     color: white;
     border-color: white;
   }
+}
+
+@include maxQuery($s){
+  .CollectionProduct__heading{
+    font-size: 1.6rem;
+  }
+  .CollectionProduct__sub-heading{
+    font-size: 1.4rem;
+  }
+  .CollectionProduct{
+    &:hover{
+      .CollectionProduct__image-container{
+        @include align-items(flex-end);
+      }
+    }
+  }
+
 }

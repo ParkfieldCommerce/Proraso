@@ -13,6 +13,13 @@
   {% assign on_sale = true %}
 {% endif %}
 
+{% for tag in product.tags %}
+  {% if tag contains 'formula_' %}
+  {% assign formula = tag | split:'_' | last %}
+  {% break %}
+  {% endif %}
+{% endfor %}
+
 <div class="CollectionProduct__column {{ column_width }}{% if sold_out %} sold_out{% endif %}{% if on_sale %} on_sale{% endif %}">
   <div class="CollectionProduct">
     <div class="CollectionProduct__image-container">
@@ -28,6 +35,9 @@
     </div>
     <p>
       <a class="CollectionProduct__heading" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      {% unless formula == blank %}
+      <span class="CollectionProduct__sub-heading">{{formula | capitalize }} Formula</span>
+      {% endunless %}
       <span class="CollectionProduct__prices">
         {% if on_sale %}
           <span class="hidden">{{ 'product.original_price' | t }}</span>

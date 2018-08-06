@@ -65,26 +65,13 @@
           cartPopup.show();
         {% endunless %}
       });
-      //Quickadd Button Logic for Collection Products
-      $('.js-quickAdd').click(function(){
-        var button = $(this);
-        var variantId = button.data('variant-id');
-        CartJS.addItem(variantId, 1, {}, {
-          // Define a success callback to display a success message.
-          "success": function(data, textStatus, jqXHR) {
-            button.addClass('Btn--added');
-            button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
-            setTimeout(function(){
-              button.removeClass('Btn--added');
-              button.html('Buy');
-            }, 3000);
-          },
-          "error": function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-          }
-        });
-      });
-
+    </script>
+    {{'parkfield.js' | asset_url | script_tag}}
+    <script>
+    var parkfield = new Parkfield;
+    {% if template == 'index' %}
+      parkfield.initHomepage();
+    {% endif %}
     </script>
   </body>
 
