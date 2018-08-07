@@ -1,0 +1,95 @@
+<!-- Homepage About -->
+<div class="HomepageReviews__container margin-bottom-12x s-margin-bottom-3x">
+  <div class="container m">
+    <div class="row">
+      <div class="column l12 m12 s12">
+        <div class="HomepageReviews">
+          <h2 class="HomepageReviews__heading">{{section.settings.heading}}</h2>
+          <img class="ReviewsSlider__stars" src="{{'stars.png' | asset_url}}" alt="5 Star Reviews">
+          <div class="ReviewsSlider__container">
+            <div class="ReviewsSlider__slider__arrow ReviewsSlider__slider__arrow--left js-reviewsArrow--left">
+              {% include 'custom-icon' with icon:'arrow-left' %}
+            </div>
+            <div class="ReviewsSlider js-reviewsSlider">
+            {% for block in section.blocks %}
+              <div class="ReviewsSlider__slide">
+                <div class="ReviewsSlider__source">
+                  <div class="ReviewsSlider__source__image">
+                    <img src="{{block.settings.image | img_url:'master'}}" alt="{{block.settings.image.alt}}">
+                  </div>
+                  <div class="ReviewsSlider__source__person">
+                    {{block.settings.heading}}<br>
+                    {{block.settings.subheading}}
+                  </div>
+                </div>
+                <p class="ReviewsSlider__body">
+                  {{block.settings.review}}
+                </p>
+              </div>
+            {% endfor %}
+            </div>
+            <div class="ReviewsSlider__slider__arrow ReviewsSlider__slider__arrow--right js-reviewsArrow--right">
+              {% include 'custom-icon' with icon:'arrow-right' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  $('.js-reviewsSlider').slick({
+    prevArrow:'.js-reviewsArrow--left',
+    nextArrow:'.js-reviewsArrow--right',
+    fade: true
+  });
+})
+</script>
+{% schema %}
+{
+  "name": "Homepage Reviews",
+  "class":"homepage-reviews",
+  "settings":[
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"Heading"
+    }
+  ],
+  "blocks":[
+    {
+      "name":"Review",
+      "type":"review",
+      "limit":5,
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"Heading"
+        },
+        {
+          "type":"text",
+          "id":"subheading",
+          "label":"Subheading"
+        },
+        {
+          "type":"textarea",
+          "id":"review",
+          "label":"Review"
+        }
+      ]
+    }
+  ],
+  "presets":[{
+      "name": "Reviews Slider",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}

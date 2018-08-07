@@ -10,25 +10,7 @@
 {% assign form_success = section.settings.form_success %}
 {% assign form_show_button = section.settings.form_show_button %}
 
-<footer class="theme-footer" role="contentinfo">
-  <div class="container center">
-    <div class="row l-table">
-      <div class="column l5 m12 s12 l-left v-middle">
-        {% if show_social %}
-          {% include 'social-links' %}
-        {% endif %}
-      </div>
-      <div class="column l7 m12 s12 l-right v-middle">
-        {% if show_subscribe %}
-          {% unless form_heading == blank %}
-            <h5>{{ form_heading }}</h5>
-          {% endunless %}
-          {% include 'form-subscribe' %}
-        {% endif %}
-      </div>
-    </div>
-  </div>
-
+<footer class="theme-footer" role="contentinfo" style="background-image:url('{{section.settings.footer_background | img_url:'master'}}');">
   <div class="container center">
     <div class="row l-table">
       <div class="column l7 m12 s12 l-left v-middle">
@@ -50,6 +32,11 @@
       {
         "type": "header",
         "content": "Footer"
+      },
+      {
+        "type":"image_picker",
+        "id":"footer_background",
+        "label":"Footer Background"
       },
       {
         "type": "checkbox",

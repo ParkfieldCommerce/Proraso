@@ -56,7 +56,11 @@
   display: block;
   @include garI(1.8rem);
 }
-
+.ShopByFormula__description a{
+  @include garI(1.6rem);
+  text-transform: none;
+  text-decoration: underline;
+}
 .ShopByFormula__controls{
   display: flex;
   justify-content: space-between;

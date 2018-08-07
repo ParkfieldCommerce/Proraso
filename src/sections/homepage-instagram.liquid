@@ -1,0 +1,56 @@
+<!-- homepage-instagram.liquid -->
+<div class="container l">
+<div class="row">
+  <div class="column l12 m12 s12">
+    <div class="Instagram">
+      <h2><a target="_blank" rel="nofollow" href="{{section.settings.heading_url}}" class="Instagram__heading">{{section.settings.section_heading}}</a></h2>
+      <ul class="Instagram__posts js-instagram"></ul>
+    </div>  
+  </div>
+</div>
+</div>
+
+{{'instagramLite.js' | asset_url | script_tag }}
+
+<script>
+  $('.js-instagram').instagramLite({
+    accessToken: '{{section.settings.access_token}}',
+    limit: 6,
+    urls: true
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Instagram",
+  "class":"homepage-instagram",
+  "settings":[
+    {
+      "type":"header",
+      "content":"General Settings"
+    },
+    {
+      "id": "section_heading",
+      "type": "text",
+      "label": "Section Heading"
+    },
+    {
+      "id":"heading_url",
+      "type":"url",
+      "label":"Section Heading URL"
+    },
+    {
+      "id":"access_token",
+      "type":"textarea",
+      "label":"Instagram Access Token",
+      "info":"The access token may expire after sometime, go here to generate a new one http://instagram.pixelunion.net"
+    }
+  ],
+  "presets":[{
+      "name": "Instagram",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}
+
