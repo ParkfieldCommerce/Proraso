@@ -1,9 +1,32 @@
 <!-- Homepage About -->
 {% assign Events = section.settings %}
-<div class="HomepageEvents__container margin-bottom-12x s-margin-bottom-6x">
-  <div class="HomepageEvents__container container l">
+
+<div class="HomepageEvents HomepageEvents__container margin-bottom-12x s-margin-bottom-6x">
+  <div class="container l">
     <div class="row">
       <div class="column l12 m12 s12">
+        <h2 class="HomepageEvents__heading">{{Events.heading}}</h2>
+        <p class="HomepageEvents__body">{{Events.body}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container m">
+    <div class="HomepageEvents__events margin-top-5x s-margin-top-0x">
+      <div class="row">
+        {% unless Events.blog == blank %}
+          {% for article in blogs[Events.blog].articles limit: 3 %}
+            <div class="column l4 m4 {% if forloop.last %}s-hide{% else %}s6{% endif %}">
+              {% include 'event-listing' with article:article %}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for block in section.blocks %}
+            {% assign article = articles[block.settings.article] %}
+            <div class="column l4 m4 {% if forloop.last %}s-hide{% else %}s6{% endif %}">
+              {% include 'event-listing' with article:article %}
+            </div>
+          {% endfor %}
+        {% endunless %}
       </div>
     </div>
   </div>
@@ -23,6 +46,12 @@
       "type":"textarea",
       "id":"body",
       "label":"Body"
+    },
+    {
+      "type":"blog",
+      "id":"blog",
+      "label":"Events Blog",
+      "info":"Will override blocks and pull from the blog automatically"
     }
   ],
   "blocks":[
@@ -32,9 +61,9 @@
       "limit":3,
       "settings":[
         {
-          "type":"collection",
-          "id":"collection",
-          "label":"Collection"
+          "type":"article",
+          "id":"article",
+          "label":"Event Article"
         }
       ]
     }

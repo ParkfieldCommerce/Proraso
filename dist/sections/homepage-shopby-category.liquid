@@ -11,11 +11,11 @@
       <div class="ShopByCategory__collections">
       {% for block in section.blocks %}
         <div class="ShopByCategory__collection">
-          <a class="ShopByCategory__link" href="{{block.settings.url}}">
-            <div class="ShopByCategory__image">
+          <a class="ShopByCategory__collection__link" href="{{block.settings.url}}">
+            <div class="ShopByCategory__collection__image">
               <img src="{{block.settings.image | img_url:'master'}}" alt="{{block.settings.image.alt}}">
             </div>
-            <h3 class="ShopByCategory__heading">{{block.settings.title}}</h3>
+            <h3 class="ShopByCategory__collection__heading">{{block.settings.title}}</h3>
           </a>
         </div>
       {% endfor %}

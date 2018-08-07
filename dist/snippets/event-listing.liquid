@@ -1,0 +1,17 @@
+<div class="EventListing">
+  <a href="{{article.url}}">
+    <img src="{{article.image | img_url:'master'}}" alt="{{article.image.alt}}">
+  </a>
+  <p class="EventListing__text">
+    <a class="EventListing__link" href="{{article.url}}">
+      {{article.title}}
+      {% for tag in article.tags %}
+        {% if tag contains '_' %}
+        <br>
+        {{tag | split:'_' | first }} {{tag | split:'_' | last }}
+        {% endif %}
+      {% endfor %}
+      <i class="fa fa-angle-right"></i>
+    </a>
+  </p>
+</div>

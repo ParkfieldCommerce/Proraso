@@ -51,6 +51,9 @@ class Parkfield {
     
       $('.js-formulaControl').removeClass('active');
       $(this).addClass('active');
+
+      let collectionURL = $(this).data('url');
+      $('.js-formulaMobileLink').attr('href', '/collections/' + collectionURL);
     });
     
     $('.js-formulaControl').first().trigger('click');

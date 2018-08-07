@@ -2,6 +2,10 @@
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 40px;
+  @include s(){
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+  }
 }
 .ShopByCategory__collections{
   @include flex();
@@ -11,15 +15,15 @@
 .ShopByCategory__collection{
   text-align: center;
   &:hover{
-    .ShopByCategory__link{
+    .ShopByCategory__collection__link{
       color: $font-color;
     }
-    .ShopByCategory__image{
+    .ShopByCategory__collection__image{
       background-color: #c69f51cc;
     }
   }
 }
-.ShopByCategory__image{
+.ShopByCategory__collection__image{
   height: 138px;
   width: 138px;
   margin-left: auto;
@@ -38,7 +42,10 @@
   }
 }
 @include maxQuery(550px){
-  .ShopByCategory__image{
+  .ShopByCategory__collection__heading{
+    font-size: 1.6rem;
+  }
+  .ShopByCategory__collection__image{
     width: 80px;
     height: 80px;
     img{

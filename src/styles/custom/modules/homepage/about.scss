@@ -26,6 +26,10 @@
 .About__heading{
   text-transform: uppercase;
   margin-bottom: 25px;
+  @include s(){
+    font-size: 2.4rem;
+    margin-bottom: 13px;
+  }
 }
 .About__body{
   margin-bottom: 25px;

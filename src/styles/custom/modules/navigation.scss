@@ -45,7 +45,7 @@
   background: $bg-light;
   &:hover{
     .Nav__dropdown-menu{
-      display: block;
+      @include flex();
     }
   }
 }
@@ -85,4 +85,43 @@
   display: block;
   width: 100%;
   @include garI(1.6rem);
+}
+
+.Nav__dropdown--hasProduct{
+  .Nav__dropdown-menu{
+    padding-top: 25px;
+    padding-bottom: 0;
+    @include justify-content(space-between);
+  }
+  .Nav__dropdown-menu-links{
+    width: 630px;
+    padding-top: 50px;
+    margin-left: 80px;
+    margin-right: 0;
+    li{flex: 1;}
+    @include maxQuery(930px){
+      margin-left: 25px;
+    }
+  }
+  .Nav__featured-product{
+    width: 330px;
+    max-width: 100%;
+    background: $bg-gray;
+    padding-bottom: 40px;
+    padding-top: 50px;
+    h5{
+      font-size: 2rem;
+      display: block;
+      text-align: center;
+    }
+    .CollectionProduct__image-container{
+      justify-content: center;
+      img{
+        max-height: 130px;
+      }
+    }
+    .CollectionProduct__overlay{
+      display: none;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <!-- Homepage About -->
 {% assign ShopByFormula = section.settings %}
-<div class="ShopByFormula__container padding-top-6x padding-bottom-6x margin-bottom-12x s-margin-bottom-6x">
+<div class="ShopByFormula__container padding-top-6x s-padding-top-4x padding-bottom-6x s-padding-bottom-2x margin-bottom-12x s-margin-bottom-4x">
   <div class="ShopByFormula__container container l">
     <div class="row">
       <div class="column l12 m12 s12">
@@ -10,56 +10,57 @@
     <div class="row">
       <div class="column l12 m12 s12">
         <div class="ShopByFormula__collections">
-        <div class="ShopByFormula__collections-header">
-          <div class="ShopByFormula__collections__header__left">
-            <div class="ShopByFormula__ingredients">
+          <div class="ShopByFormula__collections-header">
+            <div class="ShopByFormula__collections__header__left">
+              <div class="ShopByFormula__ingredients">
+                {% for block in section.blocks %}
+                {% assign formula = block.settings %}
+                <div class="ShopByFormula__ingredient js-formulaIngredient {% if forloop.index > 1 %}hidden{% endif %}" data-formula="{{formula.title}}">
+                  <img src="{{ formula.ingredient_image_1 | img_url: "master" }}" alt="{{formula.ingredient_image_1.alt }}">
+                  <span class="ShopByFormula__ingredient__label">{{formula.ingredient_image_1_label}}</span>
+                </div>
+                <div class="ShopByFormula__ingredient js-formulaIngredient {% if forloop.index > 1 %}hidden{% endif %}" data-formula="{{formula.title}}">
+                  <img src="{{ formula.ingredient_image_2 | img_url: "master" }}" alt="{{formula.ingredient_image_2.alt }}">
+                  <span class="ShopByFormula__ingredient__label">{{formula.ingredient_image_2_label}}</span>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="ShopByFormula__collections__header__right">
+              <div class="ShopByFormula__collections__header__right-content">
+                <div class="ShopByFormula__controls">
+                  {% for block in section.blocks %}
+                  <button type="button" class="ShopByFormula__control js-formulaControl" data-url="{{block.settings.collection}}" data-formula="{{block.settings.title}}">{{block.settings.title}}</button>
+                  {% endfor %}
+                </div>
+                <div class="ShopByFormula__descriptions">
+                  {% for block in section.blocks %}
+                  <div class="ShopByFormula__description js-formulaDescription {% if forloop.index > 1 %}hidden{% endif %}" data-formula="{{block.settings.title}}">
+                  {{block.settings.description}}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ShopByFormula__slider-container">
+            <div class="ShopByFormula__slider__arrow ShopByFormula__slider__arrow--left js-formulaArrow--left">
+              {% include 'custom-icon' with icon:'arrow-left' %}
+            </div>
+            <div class="ShopByFormula__slider js-formulaSlider">
               {% for block in section.blocks %}
-              {% assign formula = block.settings %}
-              <div class="ShopByFormula__ingredient js-formulaIngredient {% if forloop.index > 1 %}hidden{% endif %}" data-formula="{{formula.title}}">
-                <img src="{{ formula.ingredient_image_1 | img_url: "master" }}" alt="{{formula.ingredient_image_1.alt }}">
-                <span class="ShopByFormula__ingredient__label">{{formula.ingredient_image_1_label}}</span>
-              </div>
-              <div class="ShopByFormula__ingredient js-formulaIngredient {% if forloop.index > 1 %}hidden{% endif %}" data-formula="{{formula.title}}">
-                <img src="{{ formula.ingredient_image_2 | img_url: "master" }}" alt="{{formula.ingredient_image_2.alt }}">
-                <span class="ShopByFormula__ingredient__label">{{formula.ingredient_image_2_label}}</span>
-              </div>
+                {% for product in collections[block.settings.collection].products %}
+                  <div class="ShopByFormula__slide" data-formula="{{block.settings.title}}">
+                    {% include 'collection-product' with column_width:'none' %}
+                  </div>
+                {% endfor %}
               {% endfor %}
             </div>
-          </div>
-          <div class="ShopByFormula__collections__header__right">
-            <div class="ShopByFormula__collections__header__right-content">
-              <div class="ShopByFormula__controls">
-                {% for block in section.blocks %}
-                <button type="button" class="ShopByFormula__control js-formulaControl" data-formula="{{block.settings.title}}">{{block.settings.title}}</button>
-                {% endfor %}
-              </div>
-              <div class="ShopByFormula__descriptions">
-                {% for block in section.blocks %}
-                <div class="ShopByFormula__description js-formulaDescription {% if forloop.index > 1 %}hidden{% endif %}" data-formula="{{block.settings.title}}">
-                {{block.settings.description}}
-                </div>
-                {% endfor %}
-              </div>
+            <div class="ShopByFormula__slider__arrow ShopByFormula__slider__arrow--right js-formulaArrow--right">
+              {% include 'custom-icon' with icon:'arrow-right' %}
             </div>
           </div>
-        </div>
-        <div class="ShopByFormula__slider-container">
-          <div class="ShopByFormula__slider__arrow ShopByFormula__slider__arrow--left js-formulaArrow--left">
-            {% include 'custom-icon' with icon:'arrow-left' %}
-          </div>
-          <div class="ShopByFormula__slider js-formulaSlider">
-            {% for block in section.blocks %}
-              {% for product in collections[block.settings.collection].products %}
-                <div class="ShopByFormula__slide" data-formula="{{block.settings.title}}">
-                  {% include 'collection-product' with column_width:'none' %}
-                </div>
-              {% endfor %}
-            {% endfor %}
-          </div>
-          <div class="ShopByFormula__slider__arrow ShopByFormula__slider__arrow--right js-formulaArrow--right">
-            {% include 'custom-icon' with icon:'arrow-right' %}
-          </div>
-        </div>
+          <a href="" class="ShopByFormula__mobile-link js-formulaMobileLink">See the full line</a>
         </div>
       </div>
       </div>

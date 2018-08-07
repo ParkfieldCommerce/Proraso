@@ -5,7 +5,7 @@
   <div class="Nav__half Nav__half--{{index}}">
   {% endif %}
   {% if link.levels > 0 %}
-    <li class="Nav__main-link Nav__dropdown dropdown Nav__main-link--{{forloop.index}}" aria-haspopup="true">
+    <li class="Nav__main-link Nav__dropdown dropdown Nav__main-link--{{forloop.index}} {% unless section.settings.featured_product == blank %}Nav__dropdown--hasProduct{% endunless %}" aria-haspopup="true">
       <a href="{{ link.url }}" class="Nav__parent nav-link{% if link.active %} active{% endif %}"{% if theme-nav == 'toggled' %} data-trigger="popup" data-target="{{ link.title | handleize | prepend: '#Nav_' }}"{% endif %}>
         {{ link.title }}
       </a>
@@ -22,6 +22,13 @@
           </li>
         {% endfor %}
         </div>
+        {% unless section.settings.featured_product == blank %}
+        {% assign product = all_products[section.settings.featured_product] %}
+        <div class="Nav__featured-product">
+          <h5>Featured Product</h5>
+          {% include 'collection-product' with column_width:'none' %}
+        </div>
+        {% endunless %}
       </ul>
     </li>
   {% else %}

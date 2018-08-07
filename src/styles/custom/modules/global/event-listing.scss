@@ -1,0 +1,44 @@
+.EventListing{
+  background-color: $bg-dark;
+  width: 310px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  img{
+    vertical-align: middle;
+  }
+}
+.EventListing__text{
+  text-align: left;
+  padding: 15px 0 15px 40px;
+  margin-bottom: 0;
+  position: relative;
+  .fa{
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    @include prefix(transform, translateY(-50%));
+    path{
+      transition: stroke .3s;
+      stroke: white;
+    }
+  }
+}
+.EventListing__link{
+  color: white;
+  @include din(2.4rem);
+  &:hover{
+    svg path{
+      stroke: $accent;
+    }
+  }
+}
+
+@include maxQuery($s){
+  .EventListing__text{
+    padding-left: 15px;
+  }
+  .EventListing__link{
+    font-size: 1.7rem;
+  }
+}
