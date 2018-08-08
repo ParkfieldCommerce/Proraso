@@ -11,12 +11,12 @@
   {% if form.posted_successfully? %}
     <p class="note form-success">{{ form_success }}</p>
   {% else %}
+    <div>
     <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ form_email_placeholder }}" name="contact[email]" aria-label="{{ form_email_placeholder }}" autocorrect="off" autocapitalize="off">
     <input type="hidden" name="contact[tags]" value="newsletter">
     <input type="hidden" name="customer[accepts_marketing]" value="" />
-    {% if form_show_button %}
-      <input type="submit" name="subscribe" class="button" value="{{ form_button_text }}">
-    {% endif %}
+    <input type="submit" name="subscribe" class="button Text--border-style" value="{{ form_button_text }}">
+    </div>
   {% endif %}
 
 {% endform %}

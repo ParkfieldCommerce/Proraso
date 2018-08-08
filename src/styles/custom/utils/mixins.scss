@@ -84,6 +84,7 @@
   font-family: 'garamond-italic';
   font-size: $font-size;
   font-style: italic;
+  text-transform: none;
 }
 @mixin garR($font-size){
   font-family: 'garamond-regular';

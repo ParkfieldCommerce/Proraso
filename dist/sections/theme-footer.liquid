@@ -3,28 +3,76 @@
 {% assign show_subscribe = section.settings.show_subscribe %}
 {% assign show_social = section.settings.show_social %}
 {% assign show_gateways = section.settings.show_gateways %}
-
+{% assign show_attribution = section.settings.attribution %}
 {% assign form_heading = section.settings.form_heading %}
 {% assign form_email_placeholder = section.settings.form_email_placeholder %}
 {% assign form_button_text = section.settings.form_button_text %}
 {% assign form_success = section.settings.form_success %}
 {% assign form_show_button = section.settings.form_show_button %}
-
-<footer class="theme-footer" role="contentinfo" style="background-image:url('{{section.settings.footer_background | img_url:'master'}}');">
-  <div class="container center">
-    <div class="row l-table">
-      <div class="column l7 m12 s12 l-left v-middle">
-        {% if show_gateways %}
-          {% include 'payment-gateways' %}
-        {% endif %}
-      </div>
-      <div class="column l5 m12 s12 l-right v-middle">
-        <small>&copy; {{ 'now' | date: "%Y" }} <a href="/">{{ shop.name }}</a> | site by <a href="https://elkfox.com?ref={{ shop.name | handleize }}" title="Digital Commerce Agency Elkfox.com" target="_blank">{% include 'icon' with 'elkfox' %}</a> &amp; <a href="http://shopify.com?ref=elkfox" title="Shopify.com" class="icon-small" target="_blank">{% include 'icon' with 'shopify' %} Shopify</a></small>
+<div class="Newsletter__container container l">
+  <div class="Newsletter">
+    <img src="{{'lion.png' | asset_url}}" alt="Proraso Lion">
+    <h5 class="Newsletter__heading">{{section.settings.form_heading}}</h5>
+    <p class="Newsletter__subheading">{{section.settings.form_subheading}}</p>
+    <div class="Newsletter__form">
+      {% include 'form-subscribe' %}
+    </div>
+    {% if show_social %}
+      {% include 'social-links' %}
+    {% endif %}
+  </div>
+</div>
+<footer class="Footer theme-footer padding-top-5x s-padding-top-4x" role="contentinfo" style="background-image:url('{{section.settings.footer_background | img_url:'master'}}');">
+  <div class="container l">
+    <div class="row">
+      <div class="column l6 m6 s12"></div>
+      <div class="Footer__half column l6 m6 s12">
+        <div class="Footer__columns">
+          {% for link in linklists[section.settings.footer_nav].links %}
+            <div class="Footer__column js-footerColumn">
+              <h5 class="Footer__nav__heading js-footerNavHeading">{{link.title}}</h5>
+              {% if link.levels > 0 %}
+              <ul class="Footer__nav__links">
+                {% for childlink in link.links %}
+                <li class="Footer__nav__link">
+                  <a href="{{childlink.url}}">{{childlink.title}}</a>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div class="Footer__copyright-section">
+    <div class="container l center">
+      <div class="row">
+        <div class="column l5 m12 s12 l-right v-middle">
+          <div class="Footer__copyright Footer__copyright--desktop">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso {% if show_attribution %}| Design & Dev by ParkfieldCommerce{% endif %}</div>
+          <div class="Footer__copyright Footer__copyright--mobile">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso {% if show_attribution %}<br>Design & Dev by ParkfieldCommerce{% endif %}</div>
+        </div>
+        <div class="column l7 m12 s12 l-left v-middle">
+          {% if show_gateways %}
+            {% include 'payment-gateways' %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-
 </footer>
+<script>
+  $('.js-footerNavHeading').click(function(){
+    if($(this).parent().hasClass('active')){
+      $('.js-footerColumn').removeClass('active');
+    }else{
+      $('.js-footerColumn').removeClass('active');
+      $(this).parent().addClass('active');
+    }
+
+  });
+</script>
 {% schema %}
   {
     "name": "Footer",
@@ -39,6 +87,11 @@
         "label":"Footer Background"
       },
       {
+        "type":"link_list",
+        "id":"footer_nav",
+        "label":"Footer Navigation"
+      },
+      {
         "type": "checkbox",
         "id": "show_social",
         "label": "Show social media icons"
@@ -50,36 +103,37 @@
         "info": "Relevant payment icons will appear automatically when configured in [Payment Settings](/admin/settings/payments)"
       },
       {
+        "type":"checkbox",
+        "id":"attribution",
+        "label":"Show Design Agency Attribution"
+      },
+      {
         "type": "header",
         "content": "Subscribe form"
       },
       {
-        "type": "checkbox",
-        "id": "show_subscribe",
-        "label": "Show subscribe form"
-      },
-      {
-        "type": "checkbox",
-        "id": "form_show_button",
-        "label": "Show submit button"
+        "type": "text",
+        "id": "form_heading",
+        "label": "Heading",
+        "placeholder": "Sign up for our Newsletter"
       },
       {
         "type": "text",
-        "id": "form_heading",
-        "label": "Title",
-        "placeholder": "Subscribe"
+        "id": "form_subheading",
+        "label": "Subheading",
+        "placeholder": "Get exclusive discounts and offers"
       },
       {
         "type": "text",
         "id": "form_email_placeholder",
-        "placeholder": "Email address",
+        "placeholder": "Your email address",
         "label": "Email placeholder"
       },
       {
         "type": "text",
         "id": "form_button_text",
         "label": "Button",
-        "placeholder": "Subscribe"
+        "placeholder": "Sign Up"
       },
       {
         "type": "textarea",

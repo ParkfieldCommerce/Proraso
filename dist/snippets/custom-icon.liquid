@@ -22,6 +22,14 @@
   <svg width="16" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l11.635 12.21L2 26.418" stroke="#000" stroke-width="3"/></svg>
   {% when 'arrow-left' %}
   <svg width="16" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.635 2L3 14.21l11.635 12.209" stroke="#000" stroke-width="3"/></svg>
+  {% when 'facebook' %}
+    <i class="fab fa-facebook-f"></i>
+  {% when 'twitter' %}
+    <i class="fab fa-twitter"></i>
+  {% when 'instagram' %}
+    <i class="fab fa-instagram"></i>
+    {% when 'pinterest' %}
+    <i class="fab fa-pinterest"></i>
   {% else %}
     <!-- No icon "{{ icon }}" found -->
     <title>{{ name }}</title>

@@ -42,3 +42,9 @@
     font-size: 1.7rem;
   }
 }
+
+@include maxQuery(330px){
+  .EventListing__link .fa{
+    display: none;
+  }
+}

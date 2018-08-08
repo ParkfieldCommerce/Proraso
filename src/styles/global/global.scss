@@ -100,14 +100,6 @@ input[type="search"],
 textarea,
 select {
   max-width: 100%;
-  height: $gutter;
-  padding: 0 $spacing*2;
-  font-size: $h4;
-  font-family: inherit;
-  background-color: $colorBackground;
-  border: $borderWeight $borderStyle $colorBorder;
-  border-radius: $borderRadius;
-  color: $colorText;
   @include prefixer(appearance, none);
   @include transition();
   &.error {
@@ -205,23 +197,11 @@ input[type="button"],
 input[type="submit"],
 input[type="reset"] {
   max-width: 100%;
-  line-height: ($gutter - $borderWeight*2);
-  padding: 0 $spacing*2;
-  font-size: $h4;
   font-family: inherit;
-  background-color: $colorBrand;
-  border: $borderWeight $borderStyle $colorBrand;
-  border-radius: $borderRadius;
-  color: $colorBackground;
   text-align: center;
   cursor: pointer;
   @include prefixer(appearance, none);
   @include transition();
-  &:hover {
-    background-color: darken($colorBrand, $adjustAmount);
-    border-color: darken($colorBrand, $adjustAmount);
-    color: $colorBackground;
-  }
   &:disabled, &.disabled {
     cursor: default;
     background-color: lighten($colorAlternate, $adjustAmount);
@@ -261,11 +241,9 @@ a.button {
 
 .errors, .note {
   padding: $gutter/3.5;
-  margin: $gutter/2 auto;
   color: $colorBackground;
-  background-color: $colorHighlight;
-  border: $borderWeight $borderStyle $colorHighlight;
-  border-radius: $borderRadius;
+  display: inline-block;
+  margin-bottom: 10px;
   li {
     margin-bottom: $gutter/3;
     &:last-of-type {
@@ -275,4 +253,12 @@ a.button {
   a {
     color: $colorBackground;
   }
+}
+
+.errors{
+  background: #ff6c6c;
+}
+.note{
+  background: transparent;
+  color: $accent2;
 }

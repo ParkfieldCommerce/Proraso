@@ -14,6 +14,7 @@ h2,.h2{
 h3,.h3{
   @include din(2.4rem);
 }
+
 p,
 .p,
 .rte{
@@ -52,6 +53,7 @@ button{
   border-color: $disabled !important;
   color: $disabled !important;
 }
+
 a{
   @include din(1.8rem);
   color: $font-color;
@@ -85,8 +87,8 @@ a{
   }
 }
 .Text--border-style{
-  border-top: 1px solid $accent;
-  border-bottom: 1px solid $accent;
+  border-top: 2px solid $accent;
+  border-bottom: 2px solid $accent;
   display: inline-block;
   color: $accent;
   text-transform: uppercase;
@@ -102,6 +104,15 @@ a{
   }
 }
 
+input{
+  background: white;
+  height: 40px;
+  padding-left: 20px;
+  @include garI(1.6rem);
+  @include placeholder{
+    @include garI(1.6rem);
+  }
+}
 /* Slider Defaults */
 .slick-dots{
   @include inline-flex();
@@ -117,6 +128,7 @@ a{
     border-radius: 10px;
     background: transparent;
     border-color: white;
+    border: 2px solid white;
   }
   li.slick-active button {
     background: white;

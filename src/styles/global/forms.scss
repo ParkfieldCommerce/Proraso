@@ -45,23 +45,3 @@ form#CartPage {
   width: 100%;
 }
 
-// Small screen form element spacing
-@include s() {
-  input[type="button"],
-  input[type="submit"],
-  input[type="reset"],
-  input[type="text"],
-  input[type="email"],
-  input[type="number"],
-  input[type="tel"],
-  input[type="password"],
-  input[type="search"],
-  textarea,
-  .select-wrapper,
-  .province-wrapper {
-    @include clearfix();
-    &:not(:last-child) {
-      margin-bottom: $spacing*2;
-    }
-  }
-}
