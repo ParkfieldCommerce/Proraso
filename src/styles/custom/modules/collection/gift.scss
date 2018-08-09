@@ -1,0 +1,46 @@
+.Gift__popup .popup-content{
+  background-color: $bg-light;
+  width: 800px;
+  max-width: 85%;
+  padding: 0;
+}
+
+.Gift__header{
+  background: $bg-dark;
+  position: relative;
+}
+.Gift__header__heading{
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 2.4rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.Gift__close{
+  position: absolute;
+  color: white;
+  top: 50%;
+  @include prefix(transform, translateY(-50%));
+  right: 20px;
+  font-size: 1.5rem;
+}
+.Gift__requirements{
+  @include flex();
+}
+.Gift__requirement{
+  width: 33.33%;
+  text-align: center;
+}
+
+.Gift__requirement__image--bought{
+  display: none;
+}
+.Gift__requirement__label{
+  @include garI(1.8rem);
+  display: block;
+}
+.Gift__requirement__button{
+  display: inline-block;
+}

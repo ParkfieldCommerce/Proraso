@@ -26,10 +26,4 @@
       }
     }
   }
-  .CollectionProduct__image-container{
-    min-height: 268px;
-    @include maxQuery(800px){
-      min-height: 188px;
-    }
-  }
 }

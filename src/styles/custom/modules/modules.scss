@@ -6,6 +6,8 @@
 @import url('footer.scss');
 //Global
 @import url('global/quantity.scss');
+@import url('global/select.scss');
+@import url('global/pagination.scss');
 @import url('global/event-listing.scss');
 @import url('global/social.scss');
 //Homepage
@@ -20,3 +22,4 @@
 //Collection
 @import url('collection/collection-product.scss');
 @import url('collection/quickview.scss');
+@import url('collection/gift.scss');

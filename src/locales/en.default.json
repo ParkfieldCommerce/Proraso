@@ -157,11 +157,11 @@
       "list": "List"
     },
     "sort": {
-      "title": "Sort",
+      "title": "Sort By",
       "manual": "Featured",
       "best-selling": "Best selling",
-      "title-ascending": "Alphabetically, A-Z",
-      "title-descending": "Alphabetically, Z-A",
+      "title-ascending": "A - Z",
+      "title-descending": "Z - A",
       "price-ascending": "Price, low to high",
       "price-descending": "Price, high to low",
       "created-descending": "Date, new to old",

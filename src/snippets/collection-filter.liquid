@@ -1,0 +1,36 @@
+<div class="CollectionFilters">
+{% assign categories = '' %}
+{% assign categories = categories | split: '' %}
+{% assign lastCategory = '' %}
+{% for tag in collection.all_tags %}
+  {% if tag contains '_' %}
+    {% assign categoryCheck = tag | split:'_' | first %}
+    {% unless categories contains categoryCheck %}
+      {% if lastCategory != '' and lastCategory != categoryCheck %}
+        </select>
+        </div>
+      {% endif %}
+      {% if lastCategory != categoryCheck %}
+        <div class="CollectionFilter Select__wrapper">
+        <select class="CollectionFilter__select js-filterSelect">
+          <option selected value="">{{categoryCheck | capitalize }}</option>
+      {% endif %}
+      {% assign categories = categories | append: categoryCheck %}
+      {% assign lastCategory = categoryCheck %}
+    {% endunless %}
+    <option
+      {% if current_tags contains tag %}selected{% endif %}
+      class="CollectionFilter__option"
+      id="{{tag}}"
+      value="{{tag | handleize}}"
+    >
+      {{tag | split:'_' | last | capitalize }}
+    </option>
+  {% endif %}
+
+  {% if forloop.last %}
+  </select>
+  </div>
+  {% endif %}
+{% endfor %}
+</div>

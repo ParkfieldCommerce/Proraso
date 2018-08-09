@@ -15,26 +15,10 @@
 .pagination {
   a, .page.current {
     display: inline-block;
-    min-width: $gutter;
-    height: $gutter;
     text-align: center;
-    line-height: ($gutter - $borderWeight*2);
     text-decoration: none;
-    font-size: 1.125rem;
-    color: $colorBrand;
-    padding: 0 $gutter/4;
-    border: $borderWeight $borderStyle $colorBrand;
-    border-radius: $borderRadius;
     -webkit-appearance: none;
     -moz-appearance: none;
-    &.active, &:hover {
-      color: lighten($colorBrand, 25%);
-      background-color: $colorBrand;
-    }
-  }
-  .page.current {
-    color: lighten($colorBrand, 25%);
-    background-color: $colorBrand;
   }
   .deco {
     display: inline-block;

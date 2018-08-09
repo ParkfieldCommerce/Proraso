@@ -1,30 +1,30 @@
 <!-- /snippets/template-collection.liquid -->
 
 {% assign column_width = 'column l4 m6 s12' %}
-{% assign pagination = pagination | default: 50 %}
+{% assign pagination = pagination | default: 16 %}
 
 {% paginate collection.products by pagination %}
 
-  <div class="container l" data-section-type="collection">
+  <div class="CollectionPage container m" data-section-type="collection">
     <header>
       <div class="row">
-        <div class="column l6 m12 s12">
-          <h1>{{ collection.title }}</h1>
+        <div class="column l12 m12 s12">
+          <h1 class="CollectionPage__heading">{{ collection.title }}</h1>
         </div>
-        <div class="column l6 m12 s12 l-right">
+        <div class="column l12 m12 s-hide">
           {% if collection.description != blank %}
-            <div class="rte">
+            <div class="CollectionPage__body rte margin-bottom-6x">
               {{ collection.description }}
             </div>
           {% endif %}
         </div>
       </div>
 
-      <div class="row">
-        <div class="column l6 m12 s12">
-          {% include 'collection-view' %}
+      <div class="row margin-bottom-6x s-margin-bottom-4x">
+        <div class="column l6 m6 s12">
+          {% include 'collection-filter' %}
         </div>
-        <div class="column l6 m12 s12 l-right">
+        <div class="column l6 m6 s-hide m-right l-right">
           {% include 'collection-sort' %}
         </div>
       </div>
@@ -32,7 +32,7 @@
 
     <section class="row">
       {% for product in collection.products %}
-        {% include 'collection-product' %}
+        {% include 'collection-product' with column_width:'column l4 m4 s6' %}
       {% else %}
         <div class="column l12">
           <p class="h4">{{ 'collection.no_matches' | t }}</p>
@@ -40,7 +40,7 @@
       {% endfor %}
     </section>
 
-    {% include 'theme-pagination' with 'hr' %}
+    {% include 'theme-pagination' %}
   </div>
 
 {% endpaginate %}

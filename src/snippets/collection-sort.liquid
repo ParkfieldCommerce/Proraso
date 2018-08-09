@@ -2,9 +2,9 @@
 
 {% assign sort_options = 'manual,best-selling,title-ascending,title-descending,price-ascending,price-descending,created-descending,created-ascending' | split: ',' %}
 
-<label for="SortBy">{{ 'collection.sort.title' | t }}</label>
-<div class="select-wrapper">
-  <select name="SortBy" data-sort>
+<div class="Select__wrapper CollectionPage__sort-wrapper">
+  <label for="CollectionPage__sort-label SortBy">{{ 'collection.sort.title' | t }}</label>
+  <select class="CollectionPage__sort-select" name="SortBy" data-sort>
     {% for option in sort_options %}
       <option value="{{ option }}"{% if collection.sort_by == blank and collection.default_sort_by == option %} selected="selected"{% elsif collection.sort_by == option %} selected="selected"{% endif %}>{{ 'collection.sort.' | append: option | t }}</option>
     {% endfor %}

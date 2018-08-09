@@ -15,6 +15,18 @@
   @include align-items(flex-end);
   position: relative;
 }
+.CollectionProduct__image-container{
+  min-height: 268px;
+  justify-content: center;
+  img{
+    max-height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include maxQuery(800px){
+    min-height: 188px;
+  }
+}
 .CollectionProduct__heading{
   @include din(2.4rem);
   font-style: normal;

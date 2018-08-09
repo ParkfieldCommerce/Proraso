@@ -49,6 +49,7 @@
       {{ content_for_layout }}
     </main>
 
+    {% section 'complete-the-shave' %}
     {% section 'theme-footer' %}
     {% include 'popup-cart' %}
     {% include 'popup-error' %}
@@ -71,6 +72,8 @@
     var parkfield = new Parkfield;
     {% if template == 'index' %}
       parkfield.initHomepage();
+    {% else if template == 'collection' %}
+      parkfield.initCollectionpage();
     {% endif %}
     </script>
   </body>

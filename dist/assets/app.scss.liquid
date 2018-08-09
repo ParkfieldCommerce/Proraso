@@ -199,6 +199,7 @@ $accent: #C69F51;
 $accent2: #005030;
 
 $border-dark: #333;
+$border-light: #E8E8E8;
 
 $inactive: #B7B7B7;
 $disabled: #CECECE;
@@ -1040,6 +1041,9 @@ body{
 }
 h1,.h1{
   @include din(4.8rem);
+  @media screen and (max-width: $s){
+    font-size: 2.4rem;
+  }
 }
 h2,.h2{
   @include din(3.6rem);
@@ -1249,7 +1253,53 @@ input::-webkit-inner-spin-button {
   }
 }
 
+/* Custom Templates */
+.CollectionPage{
+  text-align: center;
+}
+.CollectionPage__body{
+  width: 700px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CollectionFilters{
+  @include flex();
+}
+.CollectionFilter{
+  margin-right: 20px;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.CollectionPage__sort-wrapper{
+  min-width: 220px !important;
+}
+.CollectionPage__sort-select{
+  text-align: right;
+  padding-right: 20px;
+}
 
+.CollectionPage .CollectionProduct{
+  margin-bottom: 90px;
+  @include s(){
+    margin-bottom: 45px;
+  }
+}
+@include s(){
+  .CollectionFilters{
+    @include justify-content(space-between);
+    width: 450px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .CollectionFilters .CollectionFilter{
+    margin-right: 0;
+    width: 48%;
+    min-width: initial;
+  }
+}
 /* Sections ==================================================================*/
 // Section specific styles here
 
@@ -1285,26 +1335,10 @@ input::-webkit-inner-spin-button {
 .pagination {
   a, .page.current {
     display: inline-block;
-    min-width: $gutter;
-    height: $gutter;
     text-align: center;
-    line-height: ($gutter - $borderWeight*2);
     text-decoration: none;
-    font-size: 1.125rem;
-    color: $colorBrand;
-    padding: 0 $gutter/4;
-    border: $borderWeight $borderStyle $colorBrand;
-    border-radius: $borderRadius;
     -webkit-appearance: none;
     -moz-appearance: none;
-    &.active, &:hover {
-      color: lighten($colorBrand, 25%);
-      background-color: $colorBrand;
-    }
-  }
-  .page.current {
-    color: lighten($colorBrand, 25%);
-    background-color: $colorBrand;
   }
   .deco {
     display: inline-block;
@@ -1927,6 +1961,74 @@ input[type="number"].Quantity__state{
   text-align: center;
 }
 
+.Select__wrapper{
+  position: relative;
+  display: inline-block;
+  border: 2px solid $border-light;
+  height: 40px;
+  background: transparent;
+  line-height: 40px;
+  text-align: left;
+  min-width: 150px;
+  box-sizing: content-box;
+  label{
+    font-weight: normal;
+    @include garI(1.8rem);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    @include prefix(transform, translateY(-50%));
+    margin-bottom: 0;
+  }
+  select{
+    height: 100%;
+    width: 100%;
+    @include garI(1.8rem);
+    position: relative;
+    z-index: 2;
+  }
+  &:after{
+    z-index: 1;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    @include prefix(transform, translateY(-50%));
+  }
+}
+.pagination{
+  a{border: none;}
+  .page{
+    opacity: .5;
+    a{@include din(2.4rem);}
+    border: none;
+    background: none;
+    color: $font-color;
+    transition: opacity .3s;
+    &:hover{
+      opacity: 1;
+      background: transparent;
+    }
+    width: 40px;
+    text-align: center;
+    display: inline-block;
+  }
+  .page.current{
+    opacity: 1;
+    @include din(2.4rem);
+    border: none;
+    color: $font-color;
+    background-color: transparent;
+    &:hover{
+      background: transparent;
+    }
+  }
+  .next,.prev{
+    display: none;
+  }
+}
 .EventListing{
   background-color: $bg-dark;
   width: 310px;
@@ -2110,12 +2212,6 @@ $hero-text: white;
       &:nth-last-child(2){
         display: none;
       }
-    }
-  }
-  .CollectionProduct__image-container{
-    min-height: 268px;
-    @include maxQuery(800px){
-      min-height: 188px;
     }
   }
 }
@@ -2633,6 +2729,18 @@ $hero-text: white;
   @include align-items(flex-end);
   position: relative;
 }
+.CollectionProduct__image-container{
+  min-height: 268px;
+  justify-content: center;
+  img{
+    max-height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include maxQuery(800px){
+    min-height: 188px;
+  }
+}
 .CollectionProduct__heading{
   @include din(2.4rem);
   font-style: normal;
@@ -2777,6 +2885,53 @@ $hero-text: white;
 .Quickview__link{
   text-transform: uppercase;
 }
+.Gift__popup .popup-content{
+  background-color: $bg-light;
+  width: 800px;
+  max-width: 85%;
+  padding: 0;
+}
+
+.Gift__header{
+  background: $bg-dark;
+  position: relative;
+}
+.Gift__header__heading{
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 2.4rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.Gift__close{
+  position: absolute;
+  color: white;
+  top: 50%;
+  @include prefix(transform, translateY(-50%));
+  right: 20px;
+  font-size: 1.5rem;
+}
+.Gift__requirements{
+  @include flex();
+}
+.Gift__requirement{
+  width: 33.33%;
+  text-align: center;
+}
+
+.Gift__requirement__image--bought{
+  display: none;
+}
+.Gift__requirement__label{
+  @include garI(1.8rem);
+  display: block;
+}
+.Gift__requirement__button{
+  display: inline-block;
+}
+
 
 /* Helpers ===================================================================*/
 /* Helpers ===================================================================*/

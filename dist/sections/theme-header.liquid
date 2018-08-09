@@ -37,7 +37,19 @@
     </div>
   </div>
 </header>
+{% unless template contains 'index' %}
+<style>
+.Header{
+  margin-bottom: 100px;
+}
+@media screen and (max-width: 800px){
+  .Header{
+    margin-bottom: 30px;
+  }  
+}
 
+</style>
+{% endunless %}
 {% include 'theme-nav-toggled' %}
 
 {% schema %}

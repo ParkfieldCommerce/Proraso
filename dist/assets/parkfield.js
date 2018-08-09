@@ -1,6 +1,7 @@
 class Parkfield {
   constructor(){
     this.initHomepage = this.initHomepage.bind(this);
+    this.initCollectionpage = this.initCollectionpage.bind(this);
   }
   //Homepage
   initHomepage(){
@@ -18,7 +19,7 @@ class Parkfield {
     });
   }
   initHomepageAbout(){
-    var rellax = new Rellax('.rellax');
+    let rellax = new Rellax('.rellax');
   }
   initHomepageFormulaSlider(){
     $('.js-formulaSlider').slick({
@@ -58,13 +59,41 @@ class Parkfield {
     
     $('.js-formulaControl').first().trigger('click');
   }
+  //Collection
+  initCollectionpage(){
+    this.initCollectionFilter();
+    this.initQuickAdd();
+  }
+  initCollectionFilter(){
+    let filterSelects = $('.js-filterSelect');
 
+    filterSelects.change(function(){
+      let rootUrl = '{{shop.url}}'+'{{collection.url}}';
+      if('{{collection.url}}' == ''){
+        rootUrl = '{{shop.url}}'+'/collections/all'
+      }
+      let urlSegment = '';
+      filterSelects.each(function() {
+        let currentValue = $(this).val();
+        if(urlSegment == ''){
+          if(currentValue != ''){
+            urlSegment+='/'+currentValue;
+          }
+        }else{
+          if(currentValue != ''){
+            urlSegment+='+'+currentValue;
+          }
+        }
+      });
+      window.location = rootUrl+urlSegment;
+    });
+  }
   //Misc
   initQuickAdd(){
     //Quickadd Button Logic for Collection Products
     $('.js-quickAdd').click(function(){
-      var button = $(this);
-      var variantId = button.data('variant-id');
+      let button = $(this);
+      let variantId = button.data('variant-id');
       CartJS.addItem(variantId, 1, {}, {
         // Define a success callback to display a success message.
         "success": function(data, textStatus, jqXHR) {
@@ -80,6 +109,5 @@ class Parkfield {
         }
       });
     });
-    console.log($('.js-quickAdd'));
   }
 }
