@@ -1,40 +1,81 @@
 <!-- sections/complete-the-shave.liquid -->
 {% assign GiftPopup = section.settings %}
 {% if GiftPopup.enable_freegift %}
-<div id="Gift" class="Gift__popup js-GiftPopup popup overlay">
-  <div class="popup-inner">
-    <div class="popup-content">
-      <div class="Gift__header">
-        <h2 class="Gift__header__heading">{{GiftPopup.heading}}</h2>
-        <a href="#close" class="Gift__close js-giftClose" aria-label="{{ 'common.close' | t }}">
-          {% include 'custom-icon' with icon:'close' %}
-        </a>
-      </div>
-      <div class="Gift__popup-content js-giftContent">
-        <div class="Gift__requirements">
-          {% for block in section.blocks %}
-          {% assign requirement = block.settings %}
-          <div class="Gift__requirement Gift__requirement--invalid">
-            <img class="Gift__requirement__image--bought" src="{{requirement.bought_image | img_url:'master'}}" alt="{{requirement.bought_image.alt}}">
-            <img class="Gift__requirement__image--unbought" src="{{requirement.unbought_image | img_url:'master'}}" alt="{{requirement.unbought_image.alt}}">
-            <span class="Gift__requirement__label">{{requirement.label}}</span>
-            <a class="Gift__requirement__button Btn" href="{{requirement.url}}">SHOP</a>
+  {% if template contains 'index' or template contains 'collection' %}
+    <div id="Gift" class="Gift__popup js-GiftPopup popup overlay">
+      <div class="popup-inner">
+        <div class="popup-content">
+          <div class="Gift__header">
+            <h2 class="Gift__header__heading">{{GiftPopup.heading}}</h2>
+            <a href="#close" class="Gift__close js-giftClose" aria-label="{{ 'common.close' | t }}">
+              {% include 'custom-icon' with icon:'close' %}
+            </a>
           </div>
-          {% endfor %}
+          <div class="Gift__popup-content js-giftContent">
+            <div class="Gift__requirements">
+              {% for block in section.blocks %}
+              {% assign requirement = block.settings %}
+              <div class="Gift__requirement js-giftRequirement"  data-type="{{requirement.title}}">
+                <a href="{{requirement.url}}" class="Gift__requirement__content--unbought">
+                  <img class="Gift__requirement__image--unbought Gift__requirement__image--unbought--desktop" src="{{requirement.unbought_image | img_url:'master'}}" alt="{{requirement.unbought_image.alt}}">
+                  <img class="Gift__requirement__image--unbought Gift__requirement__image--unbought--mobile" src="{{requirement.unbought_image_mobile | img_url:'master'}}" alt="{{requirement.unbought_image_mobile.alt}}">
+                  <span class="Gift__requirement__label">{{requirement.label}}</span>
+                  <span class="Gift__requirement__button Btn">SHOP</span>
+                </a>
+                <div class="Gift__requirement__content--bought" data-type="{{requirement.title}}">
+                  <img class="Gift__requirement__image--bought Gift__requirement__image--bought--desktop" src="{{requirement.bought_image | img_url:'master'}}" alt="{{requirement.bought_image.alt}}">
+                  <img class="Gift__requirement__image--bought Gift__requirement__image--bought--mobile" src="{{requirement.bought_image_mobile | img_url:'master'}}" alt="{{requirement.bought_image_mobile.alt}}">
+                  <span class="Gift__requirement__label">{{requirement.label}}</span>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <p class="Gift__body js-giftBody">{{GiftPopup.body}}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<script>
-  var giftPopup = new Focus('#Gift');
-  giftPopup.show();
-  $('.js-giftClose').click(function(e){
-    e.preventDefault();
-    giftPopup.hide();
-  });
-</script>
+    <script>
+      var giftPopup = new Focus('#Gift');
+      $('.js-giftClose').click(function(e){
+        e.preventDefault();
+        giftPopup.hide();
+      });
+      
+      $(document).on('cart.requestComplete', function(event, cart) {
+        //Reset Gift Requirements
+        $('.js-giftRequirement').removeClass('active');
+
+        var requiredTypes = [
+          {% for block in section.blocks %}
+            '{{block.settings.title}}'{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ];
+
+        //Toggle Requirements in Popup
+        cart.items.forEach(function(item){
+          var requirement = $('.js-giftRequirement[data-type="'+item.product_type+'"]');
+          var typeIndex = requiredTypes.indexOf(item.product_type);
+
+          if( typeIndex > -1){
+            requirement.addClass('active');
+            requiredTypes.splice(typeIndex, 1);
+          }
+        });
+        
+        //Handle Message
+        var giftBody = $('.js-giftBody');
+        if(requiredTypes.length === 0){
+          giftBody.text("{{GiftPopup.success_body}}");
+        }else{
+          giftBody.text("{{GiftPopup.body}}");
+        }
+
+        giftPopup.show();
+      });
+    </script>
+  {% endif %}
 {% endif %}
 {% schema %}
 {
@@ -53,8 +94,14 @@
     },
     {
       "type":"textarea",
-      "id":"desktop_body",
+      "id":"body",
       "label":"Body Text for Desktop"
+    },
+    {
+      "type":"textarea",
+      "id":"success_body",
+      "label":"Eligibility Message",
+      "default":"You Are Eligible for a Free Gift"
     }
   ],
   "blocks":[
@@ -64,10 +111,9 @@
       "limit":3,
       "settings":[
         {
-          "type":"product",
-          "id":"product",
-          "label":"Type of Product",
-          "info":"Choose the type of product"
+          "type":"text",
+          "id":"title",
+          "label":"Required Product Type"
         },
         {
           "type":"image_picker",
@@ -78,6 +124,16 @@
           "type":"image_picker",
           "label":"Bought Image",
           "id":"bought_image"
+        },
+        {
+          "type":"image_picker",
+          "label":"Unbought Image Mobile",
+          "id":"unbought_image_mobile"
+        },
+        {
+          "type":"image_picker",
+          "label":"Bought Image Mobile",
+          "id":"bought_image_mobile"
         },
         {
           "type":"text",

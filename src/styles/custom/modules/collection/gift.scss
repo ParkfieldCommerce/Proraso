@@ -1,6 +1,6 @@
 .Gift__popup .popup-content{
   background-color: $bg-light;
-  width: 800px;
+  width: 500px;
   max-width: 85%;
   padding: 0;
 }
@@ -8,6 +8,7 @@
 .Gift__header{
   background: $bg-dark;
   position: relative;
+  margin-bottom: 20px;
 }
 .Gift__header__heading{
   color: white;
@@ -26,16 +27,48 @@
   right: 20px;
   font-size: 1.5rem;
 }
+
 .Gift__requirements{
   @include flex();
+  @include justify-content(center);
+  margin-bottom: 20px;
 }
 .Gift__requirement{
-  width: 33.33%;
+  width: 100px;
   text-align: center;
+  position: relative;
+  .Gift__requirement__content--bought{
+    display: none;
+  }
+  .Gift__requirement__image--bought--mobile,
+  .Gift__requirement__image--unbought--mobile{
+    display: none;
+  }
+  @include maxQuery($s){
+    .Gift__requirement__image--bought--mobile,
+    .Gift__requirement__image--unbought--mobile{
+      display: inline-block;
+    }
+    .Gift__requirement__image--bought--desktop,
+    .Gift__requirement__image--unbought--desktop{
+      display: none;
+    }
+  }
 }
-
-.Gift__requirement__image--bought{
-  display: none;
+.Gift__requirement.active{
+  .Gift__requirement__content--unbought{
+    display: none;
+  }
+  .Gift__requirement__content--bought{
+    display: inline-block;
+  }
+}
+.Gift__requirement__content--unbought{
+  &:hover{
+    .Gift__requirement__button{
+      opacity: 1;
+    }
+  }
 }
 .Gift__requirement__label{
   @include garI(1.8rem);
@@ -43,4 +76,59 @@
 }
 .Gift__requirement__button{
   display: inline-block;
+  width: 100px;
+  padding: 0;
+  font-size: 1.6rem;
+  color: white;
+  border-color: $accent;
+  background-color: $accent;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.Gift__body{
+  width: 350px;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+@include maxQuery($s){
+  .Gift__popup.overlay{
+    background: none;
+  }
+  .Gift__close{
+    right: 10px;
+  }
+  .Gift__header{
+    margin-bottom: 0;
+  }
+  .Gift__header__heading{
+    font-size: 1.8rem;
+  }
+ .Gift__popup .popup-content{
+   width: 100%;
+   max-width: 100%;
+   position: absolute !important;
+   bottom: 0;
+   background: $bg-dark;
+ } 
+ .Gift__requirements{
+   margin-bottom: 10px;
+ }
+ .Gift__requirement__label{
+   color: white;
+ }
+ .Gift__requirement__button{
+   display: none;
+ }
+ .Gift__body{
+   display: none;
+ }
 }

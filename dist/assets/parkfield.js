@@ -19,7 +19,7 @@ class Parkfield {
     });
   }
   initHomepageAbout(){
-    let rellax = new Rellax('.rellax');
+    var rellax = new Rellax('.rellax');
   }
   initHomepageFormulaSlider(){
     $('.js-formulaSlider').slick({
@@ -44,7 +44,7 @@ class Parkfield {
     });
     
     $('.js-formulaControl').click(function(){
-      let formula = $(this).data('formula');
+      var formula = $(this).data('formula');
       $('.js-formulaIngredient[data-formula!="'+formula+'"], .js-formulaDescription[data-formula!="'+formula+'"]').addClass('hidden');
       $('.js-formulaIngredient[data-formula="'+formula+'"], .js-formulaDescription[data-formula="'+formula+'"]').removeClass('hidden');
       $('.js-formulaSlider').slick('slickUnfilter');
@@ -53,7 +53,7 @@ class Parkfield {
       $('.js-formulaControl').removeClass('active');
       $(this).addClass('active');
 
-      let collectionURL = $(this).data('url');
+      var collectionURL = $(this).data('url');
       $('.js-formulaMobileLink').attr('href', '/collections/' + collectionURL);
     });
     
@@ -65,16 +65,16 @@ class Parkfield {
     this.initQuickAdd();
   }
   initCollectionFilter(){
-    let filterSelects = $('.js-filterSelect');
+    var filterSelects = $('.js-filterSelect');
 
     filterSelects.change(function(){
-      let rootUrl = '{{shop.url}}'+'{{collection.url}}';
+      var rootUrl = '{{shop.url}}'+'{{collection.url}}';
       if('{{collection.url}}' == ''){
         rootUrl = '{{shop.url}}'+'/collections/all'
       }
-      let urlSegment = '';
+      var urlSegment = '';
       filterSelects.each(function() {
-        let currentValue = $(this).val();
+        var currentValue = $(this).val();
         if(urlSegment == ''){
           if(currentValue != ''){
             urlSegment+='/'+currentValue;
@@ -92,8 +92,8 @@ class Parkfield {
   initQuickAdd(){
     //Quickadd Button Logic for Collection Products
     $('.js-quickAdd').click(function(){
-      let button = $(this);
-      let variantId = button.data('variant-id');
+      var button = $(this);
+      var variantId = button.data('variant-id');
       CartJS.addItem(variantId, 1, {}, {
         // Define a success callback to display a success message.
         "success": function(data, textStatus, jqXHR) {
