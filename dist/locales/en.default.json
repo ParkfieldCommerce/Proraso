@@ -170,7 +170,8 @@
   },
   "product": {
     "quickview":"Quick View",
-    "add_to_cart": "Buy",
+    "add_to_cart_quickview": "Buy",
+    "add_to_cart": "Purchase",
     "regular_price": "Regular price",
     "quantity": "Quantity",
     "priced_from_html": "From {{ price }}",

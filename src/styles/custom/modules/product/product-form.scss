@@ -1,0 +1,143 @@
+.Product__form-column{
+  @include s(){
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+}
+.ProductForm{
+  box-shadow: 2px 2px 10px rgba(0,0,0,.25);
+  text-align: center;
+  @include maxQuery($s){
+    box-shadow: none;
+  }
+}
+.ProductForm__top-half{
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  text-align: left;
+}
+.ProductForm__bottom-half{
+  display: none;
+  width: 500px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 40px;
+}
+@include maxQuery($s){
+  .ProductForm__top-half,
+  .ProductForm__bottom-half{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+.ProductForm__bottom-half.active{
+  display: block;
+}
+.ProductForm__title-container{
+  @include flex();
+  @include align-items(flex-end);
+}
+.ProductForm__title{
+  margin-bottom: 0;
+}
+.ProductForm__size{
+  @include din(2.4rem);
+  display: inline-block;
+}
+.ProductForm__price{
+  @include garI(2.4rem);
+}
+.ProductForm__description{
+  width: 402px;
+  max-width: 100%;
+  margin-bottom: 35px;
+}
+
+@include s(){
+  .ProductForm__title-container{
+    @include justify-content(center);
+  }
+  .ProductForm__title{
+    font-size: 3.6rem;
+  }
+  .ProductForm__price{
+    text-align: center;
+  }
+  .ProductForm__description{
+    text-align: center;
+  }
+}
+.ProductForm__content-controls{
+  @include flex();
+  @include justify-content(space-between);
+}
+.ProductForm__content-control{
+  border: 2px solid white;
+  background: transparent;
+  color: inherit;
+  width: 48%;
+  border-bottom: none;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 2.4rem;
+  @include s(){
+    font-size: 1.6rem;
+  }
+  &:hover{
+    background-color: white;
+    border-color: white;
+    color: $font-color;
+  }
+}
+.ProductForm__content-control.active{
+  background: white;
+  color: $font-color;
+}
+
+.ProductForm__select{
+  display: none;
+}
+.ProductForm__quantity{
+  margin-top: 30px;
+  width: 100px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  .Quantity__state{
+    padding-left: 0;
+  }
+}
+.ProductForm__add{
+  width: 290px;
+  max-width: 100%;
+  margin: 24px auto 30px auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: $accent;
+  border-color: $accent;
+  color: white;
+}
+.ProductForm__shipping-title{
+  position: relative;
+  margin-top: 30px;
+  &:before{
+    content: '';
+    display: inline-block;
+    height: 2px;
+    width: 82px;
+    position: absolute;
+    background: $border-light;
+    left: 50%;
+    top: -30px;
+    @include prefix(transform, translateX(-50%));
+  }
+}
+.ProductForm__shipping-body{
+  margin-top: 24px;
+  margin-bottom: 0;
+  @include maxQuery($s){
+    margin-top: 10px;
+  }
+}

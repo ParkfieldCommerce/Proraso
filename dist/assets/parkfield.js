@@ -2,6 +2,7 @@ class Parkfield {
   constructor(){
     this.initHomepage = this.initHomepage.bind(this);
     this.initCollectionpage = this.initCollectionpage.bind(this);
+    this.initProductpage = this.initProductpage.bind(this);
   }
   //Homepage
   initHomepage(){
@@ -86,6 +87,60 @@ class Parkfield {
         }
       });
       window.location = rootUrl+urlSegment;
+    });
+  }
+  //Product Page
+  initProductpage(){
+    this.initProductpageImageSlider();
+    this.initProductpageForm();
+  }
+  initProductpageImageSlider(){
+    $('.js-photoSlider').slick({
+      arrows: false,
+      dots: true,
+      appendDots:'.js-photoDots',
+      touch: true
+    });
+  }
+  initProductpageForm(){
+    //Form Tabs
+    $('.js-formContentControl').click(function(){
+      var index = $(this).data('tab');
+      $('.js-formContent').hide();
+      $('.js-formContent[data-content="'+index+'"]').show();
+
+      $('.js-formContentControl').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    //Quantity Change Buttons
+    $('.js-quantityChange').click(function(){
+      var changeAmount = $(this).data('change');
+      var currentAmount = parseInt($('.js-quantity').val());
+      if(changeAmount + currentAmount >= 1){
+        $('.js-quantity').val(changeAmount + currentAmount);
+      }
+    });
+
+    //Add to Cart Logic
+    $('.js-productAdd').click(function(){
+      var button = $('.js-productAdd');
+      var quantity = $('.js-quantity').val();
+      var variantId = $('.js-variant').val();
+      CartJS.addItem(variantId, quantity, 
+      {
+        "success": function(data, textStatus, jqXHR) {
+          button.addClass('Btn--added');
+          button.html('<span class="ProductForm__add-text">Added <i class="fas fa-check"></i></span>');
+          setTimeout(function(){
+            button.removeClass('Btn--added');
+            button.html('Purchase');
+          }, 3000);
+        },
+        "error": function(jqXHR, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }
+      });
     });
   }
   //Misc

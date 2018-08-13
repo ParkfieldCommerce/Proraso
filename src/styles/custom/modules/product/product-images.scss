@@ -1,0 +1,15 @@
+.ProductImages__image-slider-container{
+  position: relative;
+}
+.ProductImages__dots{
+  text-align: center;
+  .slick-dots li button{
+    border-color: $font-color;
+  }
+  .slick-dots li.slick-active button{
+    background: $font-color;
+  }
+  @include s(){
+    display: none;
+  }
+}

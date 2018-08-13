@@ -72,8 +72,12 @@
     var parkfield = new Parkfield;
     {% if template == 'index' %}
       parkfield.initHomepage();
-    {% else if template == 'collection' %}
+    {% endif %}
+    {% if template == 'collection' %}
       parkfield.initCollectionpage();
+    {% endif %}
+    {% if template == 'product' %}
+      parkfield.initProductpage();
     {% endif %}
     </script>
   </body>

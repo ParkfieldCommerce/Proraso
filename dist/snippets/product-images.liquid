@@ -1,0 +1,11 @@
+<div class="ProductImages__image-slider-container">
+  <div id="ProductPhoto" class="ProductImages__slider js-photoSlider">
+    <img srcset="{{ product.featured_image | img_url: '1024x1024', scale: 2 }} 2x" src="{{ product.featured_image | img_url: '1024x1024' }}"{% if image.alt %} alt="{{ product.featured_image.alt | escape }}"{% endif %}>
+    {% for image in product.images %}
+    {% unless product.featured_image.src == image.src %}
+    <img srcset="{{ image | img_url: '1024x1024', scale: 2 }} 2x" src="{{ image | img_url: '1024x1024' }}"{% if image.alt %} alt="{{ image.alt | escape }}"{% endif %}>
+    {% endunless %}
+    {% endfor %}
+  </div>
+  <div class="ProductImages__dots js-photoDots"></div>
+</div>

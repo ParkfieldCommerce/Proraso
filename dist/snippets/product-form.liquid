@@ -1,0 +1,96 @@
+<div class="ProductForm">
+  <div class="ProductForm__top-half" style="background-color:{{mainColor}}; color:{{fontColor}};">
+    <div class="ProductForm__title-container">
+      <h1 class="ProductForm__title" itemprop="name">{{ product.title }}
+      <span class="ProductForm__size">{{product.selected_or_first_available_variant.option1}}</span>
+      </h1>
+    </div>
+    <span class="hidden">{{ 'product.regular_price' | t }}</span>
+    <p id="ProductPrice" class="ProductForm__price" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+      {{ current_variant.price | money }}
+    </p>
+    {% if on_sale %}
+      <p id="OnSale">
+        <span class="hidden">{{ 'product.original_price' | t }}</span>
+        <span>{{ 'product.original_price' | t }}</span>
+        <s id="ComparePrice">{{ product.compare_at_price | money }}</s>
+      </p>
+    {% endif %}
+    <div class="ProductForm__description rte" itemprop="description">
+      {{ product.description }}
+    </div>
+    <div class="ProductForm__content-controls">
+      <button type="button" data-tab="1" class="js-formContentControl ProductForm__content-control active Btn ">One Time Purchase</button>
+      <button type="button" data-tab="2" class="js-formContentControl ProductForm__content-control Btn ">Auto Replenishment</button>
+    </div>
+  </div>
+  <div class="ProductForm__bottom-half active ProductForm__bottom-half--single js-formContent" data-content="1">
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+      <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" data-cart-submit>
+        {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+          <div class="ProductForm__select">
+          {% for option in product.options_with_values %}
+            <label {% if option.name == 'default' %}class="hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index }}">
+              {{ option.name }}
+            </label>
+            <div class="select-wrapper">
+              <select class="single-option-selector" id="SingleOptionSelector-{{ forloop.index }}" data-index="option{{ forloop.index }}">
+                {% for value in option.values %}
+                  <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+          </div>
+        {% endunless %}
+
+        {% comment %}
+          Original variant selector, the customer will not see this element
+        {% endcomment %}
+        <div class="hidden">
+          <div class="select-wrapper">
+            <select class="js-variant" name="id" id="productSelect" data-index="option{{ forloop.index }}">
+              {% for variant in product.variants %}
+                {% if variant.available %}
+                  <option
+                    value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}
+                  </option>
+                {% else %}
+                  <option disabled="disabled">
+                    {{ variant.title }} - {{ 'product.sold_out' | t }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <label class="hidden" for="Quantity">{{ 'product.quantity' | t }}</label>
+        <div class="ProductForm__quantity Quantity">
+          <button type="button" class="Quantity__control js-quantityChange" data-change="-1">&#8211;</button>
+          <input type="number" id="Quantity" class="Quantity__state quantity js-quantity" name="quantity" value="1" min="1" data-cart-quantity="1">
+          <button type="button" class="Quantity__control js-quantityChange" data-change="1">&#43;</button>
+        </div>
+        {% if sold_out %}
+          <button type="button" class="Btn ProductForm__add ProductForm__add--soldout" type="submit" name="add" data-add-to-cart disabled>
+            <span id="AddToCartText">{{ 'product.sold_out' | t }}</span>
+          </button>
+        {% else %}
+          <button type="button" class="Btn ProductForm__add ProductForm__add--available js-productAdd" type="submit" name="add" data-cart-add="12345678">
+            <span id="AddToCartText">{{ 'product.add_to_cart' | t }}</span>
+          </button>
+        {% endif %}
+      </form>
+      <div class="ProductForm__shipping">
+        <h3 class="ProductForm__shipping-title">{{section.settings.shipping_heading}}</h3>
+        <p class="ProductForm__shipping-body">{{section.settings.shipping_body}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="ProductForm__bottom-half ProductForm__bottom-half--auto js-formContent" data-content="2">
+    AUto buy
+  </div>
+</div>
