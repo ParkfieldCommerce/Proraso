@@ -1,0 +1,4 @@
+<div class="ProductDirections">
+  <h2 class="ProductDirections__heading">Directions</h2>
+  {{ product.description | split:'<ol>' | last | prepend:'<ol>' | append:'</ol>' }}
+</div>

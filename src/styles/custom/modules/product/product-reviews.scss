@@ -1,0 +1,42 @@
+.ProductReviews{
+  .jdgm-rev-widg{
+    border: none;
+  }
+  .jdgm-histogram{
+    display: none !important;
+  }
+  .jdgm-rev-widg__title{
+    text-align: center;
+    width: 100%;
+    display: block;
+    @include s(){
+      font-size: 2.4rem;
+    }
+  }
+  .jdgm-star{
+    color: $accent;
+  }
+  .jdgm-rev-widg__header{
+    @include flex();
+    flex-flow: row wrap;
+  }
+  .jdgm-rev-widg__summary{
+    width: 100%;
+    text-align: center;
+  }
+  .jdgm-rev-widg__sort-wrapper{
+    display: none;
+  }
+  .jdgm-write-rev-link{
+    margin-top: 10px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include s(){
+    .jdgm-rev-widg{
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

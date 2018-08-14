@@ -1,0 +1,18 @@
+<div class="ProductFormula s-margin-bottom-6x">
+  <h2 class="ProductFormula__heading">Formula</h2>
+  <div class="ProductFormula__body">
+    {{formula.description}}
+  </div>
+  <div class="ProductFormula__ingredients">
+    {% for i in (1..2) %}
+      {% assign ingredientImageSetting = 'ingredient_image_' | append: i %}
+      {% assign ingredientLabelSetting = 'ingredient_image_' | append: i | append: '_label' %}
+      {% if formula[ingredientImageSetting] != blank %}
+        <div class="ProductFormula__ingredient">
+          <img src="{{formula[ingredientImageSetting] | img_url:'master'}}" alt="{{formula[ingredientImageSetting].alt}}">
+          <span class="ShopByFormula__ingredient__label">{{formula[ingredientLabelSetting]}}</span>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

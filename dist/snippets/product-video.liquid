@@ -1,0 +1,20 @@
+{% assign youtubeHandle = video.alt | split:'v=' | last %}
+{% assign youtubeSrc = 'https://www.youtube.com/embed/' | append: youtubeHandle | append:'?rel=0' %}
+
+<div class="ProductVideo">
+  <h2 class="ProductVideo__heading">Tips for the perfect shave</h2>
+  <div class="ProductVideo__video-container">
+    <div class="ProductVideo__video-cover js-productVideoCover" style="background-image:url('{{video | img_url:'master'}}');"></div>
+    <iframe
+      frameborder="0"
+      class="ProductVideo__video js-productVideo"
+      src="{{youtubeSrc}}"></iframe> 
+  </div>
+</div>
+
+<script>
+  $('.js-productVideoCover').click(function(){
+    $(this).hide();
+    $('.js-productVideo')[0].src += "&autoplay=1";
+  });
+</script>

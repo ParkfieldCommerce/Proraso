@@ -1,0 +1,20 @@
+.ProductFormula__heading{
+  @include s(){
+    font-size: 2.4rem;
+  }
+}
+.ProductFormula__body{
+  margin-bottom: 25px;
+  width: 400px;
+  max-width: 100%;
+  margin-right: auto;
+  @include s(){
+    width: 100%;
+  }
+}
+.ProductFormula__ingredients{
+  @include flex();  
+}
+.ProductFormula__ingredient{
+  margin-right: 25px;
+}

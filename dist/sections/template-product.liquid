@@ -6,7 +6,22 @@
   {% if tag contains 'fontcolor' %}
     {% assign fontColor = section.settings[tag] %}
   {% endif %}
+  {% if tag contains 'related' %}
+    {% assign relatedCollection = tag | split:'_' | last %}
+  {% endif %}
+  {% for block in section.blocks %}
+    {% if tag == block.settings.title %}
+      {% assign formula = block.settings %}
+    {% endif %}
+  {% endfor %}
 {% endfor %}
+
+{% for image in product.images %}
+  {% if image.alt contains 'youtube' %}
+    {% assign video = image %}
+  {% endif %}
+{% endfor %}
+
 {% assign sold_out = true %}
 {% assign on_sale = false %}
 {% assign current_variant = product.selected_or_first_available_variant %}
@@ -22,7 +37,7 @@
 <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
 <meta itemprop="image" content="{{ product.featured_image | img_url: '1024x1024' }}">
 
-<div class="padding-top-5x padding-bottom-5x s-padding-top-3x">
+<div class="padding-top-5x s-padding-top-3x">
   <div class="container l" itemscope itemtype="http://schema.org/Product" data-section-type="product" data-section-id="{{ section.id }}" data-enable-history-state="true">
     <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
     <meta itemprop="image" content="{{ product.featured_image | img_url: '1024x1024' }}">
@@ -37,7 +52,55 @@
       </div>
     </div>
   </div>
+  <div class="Product__info margin-top-9x s-margin-top-0x padding-top-9x s-padding-top-4x {% if video %}padding-bottom-20x s-padding-bottom-6x{% else %}padding-bottom-9x s-padding-bottom-4x{% endif %}">
+    <div class="container l">
+      <div class="row">
+        <div class="column l6 m6 s12">
+          {% include 'product-formula' %}
+        </div>
+        <div class="column l6 m6 s12">
+          {% include 'product-directions' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if video %}
+  <div class="ProductVideo__section">
+    <div class="container s">
+      <div class="row">
+        <div class="column l12 m12 s12">
+          {% include 'product-video' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
+
+<div class="ProductReviews margin-top-9x s-margin-top-6x margin-bottom-12x s-margin-bottom-6x">
+  <div class="container l">
+    <div class="row">
+      <div class="column l12 m12 s12">
+        {% include 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if relatedCollection %}
+<div class="ProductRelated">
+<div class="container l">
+  <div class="row collapse">
+    <div class="column l12 m12 s12 center">
+      <h2 class="ProductRelated__heading">Related Products</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% include 'product-related' %}
+  </div>
+</div>
+</div>
+{% endif %}
 {% schema %}
   {
     "name": "Product Page",
@@ -112,7 +175,7 @@
             "type":"text",
             "id":"title",
             "label":"Formula Name",
-            "info":"Must be unique"
+            "info":"Must be unique, and tag the product with the same name"
           },
           {
             "type":"richtext",

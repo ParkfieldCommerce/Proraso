@@ -1,0 +1,3 @@
+{% for relatedProduct in collections[relatedCollection].products limit: 4 %}
+{% include 'collection-product' with product:relatedProduct %}
+{% endfor %}

@@ -1,0 +1,51 @@
+.ProductVideo__section{
+  margin-top: -140px;
+  @include s(){
+    margin-top: 40px;
+  }
+}
+.ProductVideo__heading{
+  text-align: center;
+  margin-bottom: 35px;
+  @include s(){
+    font-size: 2.4rem;
+  }
+}
+
+.ProductVideo__video-container{
+  position: relative;
+}
+.ProductVideo__video-cover{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  &:after{
+    @include flex();
+    @include justify-content(center);
+    @include align-items(center);
+    content: "\f04b";
+    font-size: 2rem;
+    color: white;
+    height: 50px;;
+    width: 50px;
+    border-radius: 50px;
+    background: $font-color;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include prefix(transform, translate(-50%, -50%));
+  }
+}
+.ProductVideo__video{
+  width: 100%;
+  height: 451px;
+  @include maxQuery(500px){
+    height: 200px;
+  }
+}

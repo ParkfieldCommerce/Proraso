@@ -1,0 +1,24 @@
+.ProductRelated__heading{
+  margin-bottom: 40px;
+  @include s(){
+    margin-bottom: 20px;
+    font-size: 2.4rem;
+  }
+}
+.ProductRelated{
+  @include s(){
+    .CollectionProduct{
+      img{
+        max-height: 180px;
+      }
+    }
+    .CollectionProduct__column{
+      &:nth-child(3){
+        display: none;
+      }
+      &:nth-child(4){
+        display: none;
+      }
+    }
+  }
+}

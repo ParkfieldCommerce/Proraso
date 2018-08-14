@@ -1,0 +1,37 @@
+.ProductDirections{
+  ol {
+      counter-reset:item; 
+      margin:0; 
+      padding-left:0; 
+  }
+  ol>li {
+      counter-increment:item; 
+      list-style:none inside; 
+      overflow: hidden;
+      font-size: 16px !important;
+      line-height: 25px;
+      margin-bottom: 10px;
+      @include garI(1.8rem);
+  }
+  ol>li:before {
+      content:counter(item) ;
+      margin-right: 10px;
+      display: block;
+      width: 25px;
+      height: 25px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      border: 1px solid $font-color;
+      color: $font-color;
+      text-align: center; 
+      font-weight: 100;
+      float: left;
+      line-height: 25px;
+  }
+}
+.ProductDirections__heading{
+    @include s(){
+        font-size: 2.4rem;
+    }
+}
