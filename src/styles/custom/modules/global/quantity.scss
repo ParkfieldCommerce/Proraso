@@ -12,7 +12,8 @@
     color: $font-color;
   }
 }
-input[type="number"].Quantity__state{
+input[type="number"].Quantity__state,
+.Quantity__state{
   @include din(1.8rem);
   border: none;
   background: none;

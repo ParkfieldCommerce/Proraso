@@ -1,0 +1,125 @@
+.CartPage{
+  .container.m{
+    width: 900px;
+  }
+}
+.CartPage__form{
+  width: 100%;
+}
+
+.CartPage__heading-row{
+  border-bottom: 1px solid $border-light;
+}
+
+.CartPage__product{
+  @include flex();
+  flex-flow: row wrap;
+  @include align-items(center);
+}
+.CartPage__column1{
+  @include flex();
+  @include align-items(center);
+}
+.CartPage__remove{
+  display: inline-block;
+  margin-right: 15px;
+  svg path{
+    stroke: black;
+  }
+}
+.CartPage__image{
+  margin-right: 25px;
+  min-width: 160px;
+  text-align: center;
+  img{
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 95px;
+  }
+}
+.CartPage__price{
+  @include garI(1.8rem);
+}
+.CartPage__quantity{
+  .Quantity__control{
+    flex: 1;
+  }
+  .Quantity__state{
+    padding: 0;
+    flex: 2;
+  }
+}
+
+.CartPage__summary-row{
+  border-top: 1px solid $border-light;
+  padding-top: 30px;
+}
+.CartPage__note-label{
+  @include garI(1.8rem);
+  font-weight: normal;
+}
+.CartPage__note{
+  border: 1px solid $border-light;
+  height: 100px;
+  @include garI(1.6rem);
+  width: 100%;
+}
+.CartPage__subtotal{
+  margin-top: 31px;
+  @include din(2.8rem);
+  width: 280px;
+  max-width: 100%;
+  @include flex();
+  @include justify-content(space-between);
+  margin-left: auto;
+}
+.CartPage__subtotal-label{
+
+}
+.CartPage__subtotal-price{
+
+}
+.CartPage__checkout{
+  background-color: $accent;
+  color: white;
+  border-color: $accent;
+  width: 280px;
+}
+
+@include s(){
+  .CartPage__product{
+    @include justify-content(center);
+  }
+  .CartPage__column1{
+    position: relative;
+    @include align-items(flex-start);
+    max-width: 100%;
+    width: 500px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .CartPage__image{
+    order: 1;
+    display: inline-block;
+    min-width: initial;
+    width: 130px;
+  }
+  .CartPage__title-container{
+    order: 2;
+    padding-right: 10px;
+  }
+  .CartPage__remove{
+    order: 3;
+    justify-self: flex-end;
+    margin-right: 0;
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+  .CartPage__subtotal{
+    width: auto;
+  }
+  .CartPage__checkout{
+    width: 320px;
+  }
+}

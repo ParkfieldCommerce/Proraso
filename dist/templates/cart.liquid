@@ -1,144 +1,68 @@
-<!-- templates/{{ template }}.liquid -->
-
-{% assign show_notes = false %}
-
-{% if cart.item_count > 0 %}
-
-  <div class="container l">
-    <h1>{{ 'cart.title' | t }}</h1>
-  </div>
-
-  <form id="CartPage" action="/cart" method="post" novalidate>
-    <div class="container l s-hide">
-      <div class="row l-table m-table" id="CartHeader">
-        <div class="column l5 m5">{{ 'cart.product' | t }}</div>
-        <div class="column l3 m2">{{ 'cart.price' | t }}</div>
-        <div class="column l2 m3">{{ 'cart.quantity' | t }}</div>
-        <div class="column l2 m2 l-right m-right">{{ 'cart.subtotal' | t }}</div>
+<!-- /snippets/popup-cart.liquid -->
+{% comment %}
+  The popup cart has been added to display the opportunities for displaying the
+  cart contents on any page
+{% endcomment %}
+<div class="CartPage"  data-cart-view rv-cloak>
+  <form class="CartPage__form" action="/cart" method="post" novalidate>
+    <div class="container m">
+      <div class="row collapse CartPage__heading-row margin-bottom-2x">
+        <div class="column l8 m8 s12 s-center">
+          <h3>My Cart</h3>
+        </div>
+        <div class="column l2 m2 s-hide center">
+          <h3>Qty</h3>
+        </div>
+        <div class="column l2 m2 s-hide right">
+          <h3>Price</h3>
+        </div>
       </div>
-    </div>
-
-    <div class="container l">
-      {% for item in cart.items %}
-        <div class="row l-table m-table">
-          <div class="column l1 m2 s12 v-top">
-            <a href="{{ item.url | within: collections.all }}">
-              <img class="product_image" srcset="{{ item.image | img_url: '512x512', scale: 2 }} 2x" src="{{ item.image | img_url: '512x512' }}" alt="{{ item.title | escape }}">
-            </a>
-          </div>
-          <div class="column l4 m3 s12 v-top">
-            <p>
-              <a class="product_title h4" href="{{ item.url }}">
-                {{ item.product.title }}
-              </a>
-              <span>
-                <a class="variant_title h5" href="{{ item.url }}">
-                  {{ item.variant.title }}
-                </a>
-              </span>
-              {% comment %}
-                Optional, loop through custom product line items if available
-                For more info visit http://docs.shopify.com/support/your-store/products/how-do-I-collect-additional-information-on-the-product-page-Like-for-a-monogram-engraving-or-customization
-              {% endcomment %}
-              {% assign propertySize = item.properties | size %}
-              {% if propertySize > 0 %}
-                {% for property in item.properties %}
-                  {% assign first_character_in_key = property.first | truncate: 1, '' %}
-                  {% unless property.last == blank or first_character_in_key == '_' %}
-                    <br>
-                    {{ property.first }}:
-                    {% comment %}
-                      Check if there was an uploaded file associated
-                    {% endcomment %}
-                    {% if property.last contains '/uploads/' %}
-                      <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                    {% else %}
-                      {{ property.last }}
-                    {% endif %}
-                  {% endunless %}
-                {% endfor %}
-              {% endif %}
-            </p>
-          </div>
-          <div class="column l3 m2 s-hide v-top">
-            {{ item.price | money_with_currency }}
-          </div>
-          <div class="column l2 m3 s12 v-top">
-            <div class="row table collapse">
-              <div class="column l12 m12 s6 v-middle">
-                <div class="quantity-adjust no-margin">
-                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity={{ item.quantity | minus: 1 }}" class="adjust" id="minusOne" data-change="-1">&#8211;</a>
-                  <input class="quantity cart_quantity" type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" pattern="[0-9]*">
-                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity={{ item.quantity | plus: 1 }}" class="adjust" id="plusOne" data-change="1">&#43;</a>
-                </div>
-              </div>
-              <div class="column l6 v-middle s-show right">
-                {% if item.total_discount > 0 %}
-                  <s>{{ item.original_line_price | money_with_currency }}</s>
-                  <p class="no-margin">{{ item.message }}</p>
-                {% else %}
-                  <p class="no-margin"><b>{{ item.line_price | money_with_currency }}</b></p>
-                {% endif %}<br>
-                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><small>{{ 'cart.remove' | t }}</small></a>
-              </div>
-            </div>
-          </div>
-          <div class="column l2 m2 right v-top s-hide">
-            {% if item.total_discount > 0 %}
-              <s>{{ item.original_line_price | money_with_currency }}</s>
-              <p class="no-margin">{{ item.message }}</p>
-            {% else %}
-              <p class="no-margin"><b>{{ item.line_price | money_with_currency }}</b></p>
-            {% endif %}<br>
-            <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><small>{{ 'cart.remove' | t }}</small></a>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-
-    <div class="container l">
       <div class="row">
-        <div class="column l6 m6 s12">
-          {% if show_notes %}
-            <label for="CartSpecialInstructions">{{ 'cart.notes' | t }}</label>
-            <textarea class="wide" name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
-          {% endif %}
-        </div>
-        <div class="column l6 m6 s12 l-right m-right">
-
-          <p>
-            <span class="cart-total-heading">{{ 'cart.total' | t }}</span>
-            <span class="h3">{{ cart.total_price | money_with_currency }}</span>
-          </p>
-
-          {% if cart.total_discount > 0 %}
-            <h3><s>{{ cart.original_total_price | money_with_currency }}</s></h3>
-            <p>
-              {{ 'cart.savings' | t }} <span><i>{{ cart.total_discounts | money_with_currency }}</i></span>
-            </p>
-          {% endif %}
-
-          <p><i>{{ 'cart.shipping_at_checkout' | t }}</i></p>
-
-          <button type="submit" name="update">{{ 'cart.update' | t }}</button>
-          <button type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
-
-          {% if additional_checkout_buttons %}
-            <div class="additional-checkout-buttons">
-              {{ content_for_additional_checkout_buttons }}
+        <div class="CartPage__product margin-bottom-4x" rv-each-item="cart.items">
+          <div class="column l8 m8 s12 CartPage__column1">
+            <a class="CartPage__remove" rv-data-cart-update="0" rv-data-cart-remove="index | plus 1">
+              {% include 'custom-icon' with icon:'close' %}
+            </a>
+            <a class="CartPage__image" rv-href="item.url">
+              <img rv-src="item.image | product_image_size">
+            </a>
+            <div class="CartPage__title-container">
+            <a class="CartPage__title" rv-href="item.url">
+              { item.product_title }
+            </a>
+              <span class="s-show CartPage__price">{ item.line_price | money_with_currency }</span>
+              <div class="s-show CartPage__quantity Quantity">
+                <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</button>
+                <input type="number" disabled="true" class="Quantity__state" rv-value="item.quantity"/>
+                <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</button>
+              </div>
             </div>
-          {% endif %}
-
+          </div>
+          <div class="column l2 m2 s-hide center">
+            <div class="CartPage__quantity Quantity">
+              <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</button>
+              <input type="number" disabled="true" class="Quantity__state" rv-value="item.quantity"/>
+              <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</button>
+            </div>
+          </div>
+          <div class="column l2 m2 s12 right">
+            <span class="s-hide CartPage__price">{ item.line_price | money_with_currency }</span>
+          </div>
+        </div>
+      </div>
+      <div class="row CartPage__summary-row">
+        <div class="column l7 m7 s12">
+          <label class="CartPage__note-label" for="CartNote">Special Instructions</label>
+          <textarea class="CartPage__note" name="note" id="CartNote" cols="30"></textarea>
+        </div>
+        <div class="column l5 m5 s12 right s-center">
+          <p class="CartPage__subtotal">
+            <span class="CartPage__subtotal-label">{{ 'cart.total' | t }}</span>
+            <span class="CartPage__subtotal-price">{ cart.total_price | money_with_currency }</span>
+          </p>
+          <button class="Btn CartPage__checkout" href="/cart" type="submit" name="checkout" class="btn" aria-label="{{ 'cart.checkout' | t }}">{{ 'cart.checkout' | t }}</button>
         </div>
       </div>
     </div>
   </form>
-
-{% else %}
-
-  <div class="container l">
-    <h2>{{ 'cart.title' | t }}</h2>
-    <p class="h4">{{ 'cart.empty' | t }}</p>
-  </div>
-
-{% endif %}
+</div>

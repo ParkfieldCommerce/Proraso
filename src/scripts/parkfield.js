@@ -142,6 +142,8 @@ class Parkfield {
         }
       });
     });
+
+    this.initQuickAdd();
   }
   //Misc
   initQuickAdd(){
