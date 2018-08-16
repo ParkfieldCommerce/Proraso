@@ -1,0 +1,57 @@
+<div class="AboutBanner margin-bottom-9x s-margin-bottom-4x">
+  <div class="AboutBanner__content container l">
+    <div class="row">
+      <div class="column l6 m6 s-hide"></div>
+      <div class="column l6 m6 s12">
+        <h3 class="h1 AboutBanner__heading AboutLineHeading AboutLineHeading--white">{{section.settings.heading}}</h3>
+        <p>{{section.settings.body}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="AboutBanner__background" style="background-image:url('{{section.settings.image | img_url:'master'}}');">
+  </div>
+</div>
+<style>
+@media screen and (max-width: 800px){
+  .AboutBanner__background{
+    background-position: {{section.settings.mobile_position}}% center;
+  }
+}
+</style>
+{% schema %}
+  {
+    "name": "About Banner",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image",
+        "info":"Must be 1440x400"
+      },
+      {
+        "type":"range",
+        "id":"mobile_position",
+        "label":"mobile_position",
+        "min":0,
+        "max":100,
+        "step":5,
+        "unit":"%",
+        "default":20
+      },
+      {
+        "type": "header",
+        "content": "Text Content"
+      },
+      {
+        "id":"heading",
+        "type":"text",
+        "label":"Heading"
+      },
+      {
+        "id":"body",
+        "type":"textarea",
+        "label":"Body"
+      }
+    ]
+  }
+{% endschema %}

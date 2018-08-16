@@ -1260,52 +1260,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Custom Templates */
-.CollectionPage{
-  text-align: center;
-}
-.CollectionPage__body{
-  width: 700px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.CollectionFilters{
-  @include flex();
-}
-.CollectionFilter{
-  margin-right: 20px;
-  &:last-child{
-    margin-right: 0;
-  }
-}
-.CollectionPage__sort-wrapper{
-  min-width: 220px !important;
-}
-.CollectionPage__sort-select{
-  text-align: right;
-  padding-right: 20px;
-}
-
-.CollectionPage .CollectionProduct{
-  margin-bottom: 90px;
-  @include s(){
-    margin-bottom: 45px;
-  }
-}
-@include s(){
-  .CollectionFilters{
-    @include justify-content(space-between);
-    width: 450px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .CollectionFilters .CollectionFilter{
-    margin-right: 0;
-    width: 48%;
-    min-width: initial;
-  }
-}
 .CartPage{
   .container.m{
     width: 900px;
@@ -1429,6 +1383,82 @@ input::-webkit-inner-spin-button {
   }
   .CartPage__checkout{
     width: 320px;
+  }
+}
+.CollectionPage{
+  text-align: center;
+}
+.CollectionPage__body{
+  width: 700px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CollectionFilters{
+  @include flex();
+}
+.CollectionFilter{
+  margin-right: 20px;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.CollectionPage__sort-wrapper{
+  min-width: 220px !important;
+}
+.CollectionPage__sort-select{
+  text-align: right;
+  padding-right: 20px;
+}
+
+.CollectionPage .CollectionProduct{
+  margin-bottom: 90px;
+  @include s(){
+    margin-bottom: 45px;
+  }
+}
+@include s(){
+  .CollectionFilters{
+    @include justify-content(space-between);
+    width: 450px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .CollectionFilters .CollectionFilter{
+    margin-right: 0;
+    width: 48%;
+    min-width: initial;
+  }
+}
+.AboutLineHeading{
+  position: relative;
+  display: inline-block;
+  &:after{
+    content:'';
+    display: inline-block;
+    width: 60%;
+    height: 2px;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+  }
+  margin-bottom: 50px;
+  @include s(){
+    margin-bottom: 25px;
+    &:after{
+      bottom: -10px;
+    }
+  }
+}
+.AboutLineHeading--white{
+  &:after{
+    background-color: white;
+  }
+}
+.AboutLineHeading--black{
+  &:after{
+    background-color: $font-color;
   }
 }
 /* Sections ==================================================================*/
@@ -1905,6 +1935,7 @@ input::-webkit-inner-spin-button {
     }
     .CollectionProduct__image-container{
       justify-content: center;
+      min-height: initial;
       img{
         max-height: 130px;
       }
@@ -3651,7 +3682,195 @@ $hero-text: white;
     }
   }
 }
+//About
+.AboutIntro{
+  position: relative;
+}
+.AboutIntro__background{
+  position: relative;
+}
+.AboutIntro__blue{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 50%;
+  background: $bg-dark;
+}
+.AboutIntro__image{
+  width: 100%;
+  vertical-align: middle;
+}
+.AboutIntro__image--mobile{
+  display: none;
+}
 
+.AboutIntro__content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include prefix(transform, translate(-50%, -50%));
+}
+.AboutIntro__heading{
+  width: 500px;
+  max-width: 100%;
+  margin-left: 0;
+  color: white;
+  @include maxQuery(900px){
+    width: 320px;
+  }
+  @include maxQuery(800px){
+    width: 240px;
+    font-size: 3.6rem;
+  }
+  @include maxQuery(500px){
+    width: 320px;
+  }
+  @include maxQuery(330px){
+    font-size: 2.8rem;
+  }
+}
+
+.AboutIntro__body{
+  width: 400px;
+  max-width: 100%;
+  margin-left: 0;
+  color: white;
+}
+
+@include s(){
+  .AboutIntro__image--desktop{
+    display: none;
+  }
+  .AboutIntro__image--mobile{
+    display: block;
+  }
+  .AboutIntro__blue{
+    display: none;
+  }
+}
+.About__content--image-text{
+  @include flex();
+  flex-flow: row wrap;
+  .AboutContent__text{
+    margin-left: auto;
+  }
+  @include s(){
+    flex-flow: column-reverse wrap;
+  }
+}
+
+.About__content--text-image{
+  @include flex();
+  flex-flow: row-reverse wrap;
+  .AboutContent__text{
+    margin-right: auto;
+  }
+  @include s(){
+    flex-flow: column-reverse wrap;
+  }
+}
+
+.AboutContent__text{
+  width: 83.333%;
+  @include s(){
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}
+.AboutContent__heading{
+  @include s(){
+    font-size: 3.6rem;
+  }
+  @include maxQuery(330px){
+    font-size: 2.8rem;
+  }
+}
+.AboutContent__image{
+  @include s(){
+    text-align: center;
+    img{
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+  }
+}
+.AboutBanner{
+  position: relative;
+}
+.AboutBanner__background{
+  background-size: cover;
+  background-position: center;
+  height: 52vh;
+}
+
+.AboutBanner__heading{
+  @include s(){
+    font-size: 3.6rem;
+    &:after{
+      background: $font-color;
+    }
+  }
+  @include maxQuery(330px){
+    font-size: 2.8rem;
+  }
+}
+.AboutBanner__content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include prefix(transform, translate(-50%,-50%));
+  color: white;
+  @include s(){
+    color: $font-color;
+    position: static;
+    @include prefix(transform, none);
+  }
+}
+.AboutSlider__heading{
+  &:after{
+    left: 50%;
+    @include prefix(transform, translateX(-50%));
+    max-width: 140px;
+  }
+  @include s(){
+    font-size: 3.6rem;
+  }
+  @include maxQuery(330px){
+    font-size: 2.8rem;
+    margin-left: 0;
+  }
+}
+.AboutSlider__body{
+  width: 500px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+@include maxQuery(500px){
+  .AboutSlider__heading,
+  .AboutSlider__body{
+    text-align: left;
+  }
+  .AboutSlider__heading{
+    &:after{
+      left: 0;
+      @include prefix(transform, none);
+      max-width: 140px;
+    }
+  }
+}
+.AboutSlider__slide{
+  text-align: center;
+  img{
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 340px;
+  }
+}
 /* Helpers ===================================================================*/
 /* Helpers ===================================================================*/
 

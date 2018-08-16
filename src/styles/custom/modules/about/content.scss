@@ -1,0 +1,49 @@
+.About__content--image-text{
+  @include flex();
+  flex-flow: row wrap;
+  .AboutContent__text{
+    margin-left: auto;
+  }
+  @include s(){
+    flex-flow: column-reverse wrap;
+  }
+}
+
+.About__content--text-image{
+  @include flex();
+  flex-flow: row-reverse wrap;
+  .AboutContent__text{
+    margin-right: auto;
+  }
+  @include s(){
+    flex-flow: column-reverse wrap;
+  }
+}
+
+.AboutContent__text{
+  width: 83.333%;
+  @include s(){
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}
+.AboutContent__heading{
+  @include s(){
+    font-size: 3.6rem;
+  }
+  @include maxQuery(330px){
+    font-size: 2.8rem;
+  }
+}
+.AboutContent__image{
+  @include s(){
+    text-align: center;
+    img{
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+  }
+}

@@ -116,6 +116,7 @@
     }
     .CollectionProduct__image-container{
       justify-content: center;
+      min-height: initial;
       img{
         max-height: 130px;
       }

@@ -1,0 +1,48 @@
+<div class="AboutIntro margin-bottom-9x s-margin-bottom-4x">
+  <div class="AboutIntro__background">
+    <div class="AboutIntro__blue"></div>
+    <img class="AboutIntro__image AboutIntro__image--desktop" src="{{section.settings.image | img_url:'master'}}" alt="">
+    <img class="AboutIntro__image AboutIntro__image--mobile" src="{{section.settings.mobile_image | img_url:'master'}}" alt="">
+  </div>
+  <div class="AboutIntro__content container l">
+    <div class="row collapse">
+      <div class="column l12 m12 s12">
+        <div class="AboutIntro__text">
+          <h1 class="AboutIntro__heading AboutLineHeading AboutLineHeading--white">{{section.settings.heading}}</h1>
+          <p class="AboutIntro__body">{{section.settings.body}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "About Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"mobile_image",
+        "label":"Image"
+      },
+      {
+        "type": "header",
+        "content": "Text Content"
+      },
+      {
+        "id":"heading",
+        "type":"text",
+        "label":"Heading"
+      },
+      {
+        "id":"body",
+        "type":"textarea",
+        "label":"Body"
+      }
+    ]
+  }
+{% endschema %}

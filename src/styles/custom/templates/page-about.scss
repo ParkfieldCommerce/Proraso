@@ -1,0 +1,30 @@
+.AboutLineHeading{
+  position: relative;
+  display: inline-block;
+  &:after{
+    content:'';
+    display: inline-block;
+    width: 60%;
+    height: 2px;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+  }
+  margin-bottom: 50px;
+  @include s(){
+    margin-bottom: 25px;
+    &:after{
+      bottom: -10px;
+    }
+  }
+}
+.AboutLineHeading--white{
+  &:after{
+    background-color: white;
+  }
+}
+.AboutLineHeading--black{
+  &:after{
+    background-color: $font-color;
+  }
+}

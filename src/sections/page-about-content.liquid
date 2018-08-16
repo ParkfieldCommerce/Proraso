@@ -1,0 +1,49 @@
+<div class="container l">
+  {% for block in section.blocks %}
+  <div class="row  margin-bottom-9x s-margin-bottom-4x About__content{% cycle '--image-text','--text-image' %}">
+    <div class="column l6 m6 s12">
+      <div class="AboutContent__image">
+        <img src="{{block.settings.image | img_url:'master'}}" alt="{{block.settings.image.alt}}">
+      </div>
+    </div>
+    <div class="column l6 m6 s12">
+      <div class="AboutContent__text ">
+        <h3 class="h1 AboutContent__heading AboutLineHeading AboutLineHeading--black">{{block.settings.heading}}</h3>
+        <p>{{block.settings.body}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "About Content",
+    "blocks":[
+      {
+        "type":"content",
+        "name":"Content",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type": "header",
+            "content": "Text Content"
+          },
+          {
+            "id":"heading",
+            "type":"text",
+            "label":"Heading"
+          },
+          {
+            "id":"body",
+            "type":"textarea",
+            "label":"Body"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
