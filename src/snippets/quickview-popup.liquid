@@ -1,5 +1,6 @@
-<div id="Quickview" class="Quickview__popup js-quickviewPopup popup overlay">
-  <div class="popup-inner">
+<div id="Quickview" class="Quickview__popup js-quickviewPopup popup">
+  <div class="overlay js-overlay"></div>
+  <div class="Quickview__inner">
     <div class="popup-content">
       <div class="Quickview__header">
         <h2 class="Quickview__header__heading">{{'product.quickview' | t }}</h2>
@@ -13,61 +14,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  var quickviewPopup = new Focus('#Quickview');
-  $('.js-quickviewClose').click(function(e){
-    e.preventDefault();
-    quickviewPopup.hide();
-  });
-  $(document).on('focus:open', function(e){
-    var clickedButton = $(e.target.activeElement);
-    if(clickedButton.hasClass('js-quickviewPopupTrigger')){
-      //Takes the info thats in quickview-info.liquid and pastes it into the popup
-      var info = clickedButton.siblings('.js-quickview-info');
-      var popup = $('.js-quickviewPopup');
-      var quickviewContent = popup.find('.js-content');
-      quickviewContent.empty();
-      quickviewContent.append(info.clone());
-
-      //Apply Add Clickhandler
-      $('.js-quickview-add').click(function(){
-        var button = $(this);
-        console.log(button);
-        var variantId = button.data('variant-id');
-        var quantity = $(this).closest('.js-form').find('.js-state').val();
-        console.log(quantity);
-        CartJS.addItem(variantId, quantity, {}, {
-          // Define a success callback to display a success message.
-          "success": function(data, textStatus, jqXHR) {
-            button.addClass('Btn--added');
-            button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
-            setTimeout(function(){
-              button.removeClass('Btn--added');
-              button.html('Buy');
-            }, 3000);
-          },
-          "error": function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-          }
-        });
-      });
-
-      var quantity = $('.js-quickviewPopup .js-quickview-quantity .js-state');
-      var quantityIncrement = $('.js-quickviewPopup .js-quickview-quantity .js-increment');
-      var quantityDecrement = $('.js-quickviewPopup .js-quickview-quantity .js-decrement');
-      //Apply Quantity Clickhandler
-      quantityIncrement.click(function(){
-        var currentQuantity = parseInt(quantity.val());
-        quantity.val(currentQuantity + 1);
-      });
-
-      quantityDecrement.click(function(){
-        var currentQuantity = parseInt(quantity.val());
-        if(currentQuantity > 0){
-          quantity.val(currentQuantity - 1);
-        }
-      });
-    }
-  });
-</script>

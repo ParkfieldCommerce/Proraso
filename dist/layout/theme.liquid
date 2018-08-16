@@ -52,7 +52,7 @@
 
     {% section 'complete-the-shave' %}
     {% section 'theme-footer' %}
-    {% include 'popup-cart' %}
+    {% include 'sidecart' %}
     {% include 'popup-error' %}
     {% include 'quickview-popup' %}
     {% if customer %}
@@ -63,7 +63,7 @@
       CartJS.init({{ cart | json }});
       // Cart error handling
       $(document).on('cart.requestComplete', function(event, cart) {
-        {% unless template == 'cart' %}
+        {% unless template == 'cart' or template == 'collection' %}
           cartPopup.show();
         {% endunless %}
       });

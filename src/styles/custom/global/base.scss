@@ -5,6 +5,13 @@ body{
   background: white;
   color: $font-color;
 }
+body.fixed{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
 h1,.h1{
   @include din(4.8rem);
   @media screen and (max-width: $s){

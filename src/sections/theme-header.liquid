@@ -18,10 +18,10 @@
           </a>
         {% endif %}
 
-        <a href="/cart" id="CartLink" data-trigger="popup" data-target="#PopupCart" aria-controls="Cart" aria-expanded="false" class="v-middle">
+        <a data-cart-view href="/cart" id="CartLink" aria-controls="Cart" aria-expanded="false" class="v-middle">
           {% include 'custom-icon' with icon:'cart' %}
-          <span data-cart-item-count>{{ cart.item_count }}</span>
-          (<span data-cart-total>{{ cart.total_price | money_with_currency }}</span>)
+          <span data-cart-item-count rv-text="cart.item_count"></span>
+          (<span data-cart-total rv-text="cart.total_price | money_with_currency"></span>)
         </a>
       </div>
     </div>

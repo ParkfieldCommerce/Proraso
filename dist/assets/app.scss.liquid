@@ -1038,6 +1038,13 @@ body{
   background: white;
   color: $font-color;
 }
+body.fixed{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
 h1,.h1{
   @include din(4.8rem);
   @media screen and (max-width: $s){
@@ -1630,6 +1637,14 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.Quickview__inner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  @include prefix(transform, translate(-50%,-50%));
+  z-index: 9997;
+}
 /* Social ====================================================================*/
 
 .button.share {
@@ -2216,6 +2231,151 @@ input[type="number"].Quantity__state,
     margin-left: 0;
   }
   a{color: white;}
+}
+#SideCart.visible .SideCart.popup-content{
+  right: 0;
+}
+.SideCart{
+  width: 350px;
+  max-width: 95% !important;
+  box-shadow: -2px 4px 8px rgba(0,0,0,.25);
+}
+.SideCart.popup-content{
+  position: fixed !important;
+  right: -350px;
+  top: 50% !important;
+  @include prefix(transform, translateY(-50%));
+  height: 100%;
+  padding: 10px;
+  background: white;
+  transition: right .3s;
+}
+.SideCart__form{
+  width: 100%;
+}
+
+.SideCart__heading-row{
+  border-bottom: 1px solid $border-light;
+  height: 45px;
+  line-height: 45px;
+  @include flex();
+  @include align-items(center);
+  @include justify-content(center);
+
+}
+.SideCart__heading{
+  margin-bottom: 0;
+}
+.SideCart__products-row{
+  height: 70vh;
+  overflow-y: auto;
+}
+.SideCart__product{
+  @include flex();
+  flex-flow: row wrap;
+  margin-bottom: 30px;
+  @include align-items(center);
+  &:last-child{
+    margin-bottom: 60px;
+  }
+}
+.SideCart__column1{
+  @include flex();
+  @include align-items(flex-start);
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+}
+.SideCart__remove{
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  svg path{
+    stroke: black;
+  }
+}
+.SideCart__image{
+  margin-right: 10px;
+  text-align: center;
+  width: 140px;
+  img{
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 95px;
+  }
+}
+.SideCart__title{
+  display: block;
+}
+.SideCart__price{
+  @include garI(1.8rem);
+}
+.SideCart__quantity{
+  width: 120px;
+  .Quantity__control{
+    flex: 1;
+    margin-bottom: 0 !important;
+    text-align: left;
+    max-width: 30px !important;
+  }
+  .Quantity__state{
+    text-align: left !important;
+    padding: 0;
+    flex: 1;
+    margin-bottom: 0 !important;
+    max-width: 30px !important;
+  }
+}
+
+.SideCart__summary-row{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  border-top: 1px solid $border-light;
+  padding-top: 0;
+  background: white;
+  &:before{
+    top: -50px;
+    left: 0;
+    content:'';
+    display: inline-block;
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  }
+}
+.SideCart__subtotal{
+  @include din(2.8rem);
+  max-width: 100%;
+  @include flex();
+  @include justify-content(space-between);
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.SideCart__buttons{
+  background: $bg-gray;
+  padding: 30px;
+  @include s(){
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+.SideCart__checkout{
+  background-color: $accent;
+  color: white;
+  border-color: $accent;
+  width: 280px;
+}
+.SideCart__continue{
+  @include garI(1.8rem);
+  text-align: center;
+  display: block;
 }
 //Homepage
 $hero-text: white;
@@ -2960,6 +3120,7 @@ $hero-text: white;
   width: 800px;
   max-width: 85%;
   padding: 0;
+  text-align: left;
 }
 
 .Quickview__header{
@@ -3661,6 +3822,20 @@ $hero-text: white;
   .s-show { display: block !important; }
 }
 
+.noSelect {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+}
+.overlay{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.35);
+  z-index: 20;
+}
 
 /* Optional extras ===========================================================*/
 /* Optional Additional Helpers ================================================*/
