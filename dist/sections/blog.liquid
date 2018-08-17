@@ -1,0 +1,84 @@
+<!-- /templates/{{ template }}.liquid -->
+{% for block in section.blocks %}
+  {% if block.settings.blog == blog.handle %}
+    {% assign banner = block.settings %}
+  {% endif %}
+{% endfor %}
+
+{% paginate blog.articles by 12 %}
+  <div class="Blog">
+    <div class="Blog__banner margin-bottom-9x s-margin-bottom-4x" style="background-image:url('{{banner.image | img_url:'master'}}');">
+      <div class="Blog__banner__content">
+        <h1 class="Blog__banner__heading">{{ banner.heading }}</h1>
+        <p class="Blog__banner__body">{{banner.body}}</p>
+      </div>
+    </div>
+    <section class="container l">
+      <div class="row">
+        {% for article in blog.articles %}
+          <div class="column l4 m4 s6">
+            {% include 'event-listing' %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row margin-top-6x center">
+        <div class="column l12 m12 s12">
+          {% include 'theme-pagination'%}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endpaginate %}
+
+<style>
+@media screen and (max-width: 800px){
+  .Blog__banner{
+    background-position: {{banner.mobile_position}}% center;
+  }
+}
+</style>
+
+{% schema %}
+  {
+    "name": "Blog Banner",
+    "blocks":[
+      {
+        "type":"Banner",
+        "name":"Content",
+        "settings": [
+          {
+            "type":"blog",
+            "id":"blog",
+            "label":"Blog"
+          },
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image",
+            "info":"Must be 1440x500"
+          },
+          {
+            "type":"range",
+            "id":"mobile_position",
+            "label":"mobile_position",
+            "min":0,
+            "max":100,
+            "step":5,
+            "unit":"%",
+            "default":20
+          },
+          {
+            "id":"heading",
+            "type":"text",
+            "label":"Heading"
+          },
+          {
+            "id":"body",
+            "type":"textarea",
+            "label":"Body"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

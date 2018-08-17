@@ -1,0 +1,43 @@
+.Blog{
+  .EventListing{
+    width: 370px;
+    max-width: 100%;
+    margin-bottom: 90px;
+    @include s(){
+      margin-bottom: 40px;
+    }
+    img{
+      width: 100%;
+    }
+  }
+}
+.Blog__banner{
+  background-size: cover;
+  background-position: center;
+  height: 63vh;
+  position: relative;
+  max-height: 500px;
+  @include s(){
+    max-height: 300px;
+  }
+}
+.Blog__banner__content{
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+}
+.Blog__banner__heading{
+  @include s(){
+    font-size: 2.4rem;
+  }
+}
+.Blog__banner__body{
+  width: 320px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
