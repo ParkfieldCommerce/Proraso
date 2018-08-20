@@ -18,10 +18,7 @@
     <label for="CreatePassword">{{ 'form.password' | t }}</label>
     <input type="password" name="customer[password]" id="CreatePassword"{% if form.errors contains 'password' %} class="error"{% endif %}>
 
-    <button type="submit" class="wide">{{ 'account.register.submit' | t }}</button>
-
-    <p>{{ 'account.register.already_registered' | t }} {{ 'account.login.title' | t | customer_login_link }}</p>
-
+    <button type="submit" class="LoginRegister__btn Btn Btn--dark">{{ 'account.register.submit' | t }}</button>
   {% endform %}
 
 </div>

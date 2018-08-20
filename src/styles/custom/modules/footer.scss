@@ -87,3 +87,25 @@
     margin-bottom: 30px;
   }
 }
+.Footer__payments{
+  text-align: right;
+  .fab, svg{
+    font-size: 3rem;
+    color: white;
+    margin-left: 10px;
+  }
+  @include s(){
+    ul{
+      width: 400px;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      @include flex();
+      @include justify-content(space-between);
+      @include align-items(center);
+    }
+    .fab, svg{
+      margin-left: 0;
+    }
+  }
+}

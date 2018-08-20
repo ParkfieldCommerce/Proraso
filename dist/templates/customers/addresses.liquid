@@ -6,12 +6,10 @@
 
   <div class="container l">
     <header>
-      {% include 'theme-breadcrumbs' %}
-
       {% for address in customer.addresses | limit: 1 %}
-        <h1>{{ 'account.address.count' | t: count: address }}</h1>
+        <h1 class="h2">{{ 'account.address.count' | t: count: address }}</h1>
       {% else %}
-        <h1>{{ 'account.address.title' | t }}</h1>
+        <h1 class="h2">{{ 'account.address.title' | t }}</h1>
       {% endfor %}
     </header>
 
@@ -21,9 +19,8 @@
           {% for address in customer.addresses %}
             <div class="column l4 m6 s12">
               {% if address == customer.default_address %}
-                <label class="small">{{ 'account.address.default' | t }}</label>
+                <label>{{ 'account.address.default' | t }}</label>
               {% endif %}
-
               <p>
                 <b>{{ address.first_name | capitalize }} {{ address.last_name | capitalize }}</b>
                 {% unless address.company == blank %}

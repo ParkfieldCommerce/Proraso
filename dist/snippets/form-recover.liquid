@@ -2,12 +2,12 @@
 
 <div id="PasswordRecoverForm">
   {% form 'recover_customer_password' %}
-    <h4>{{ 'account.recover.message' | t }}</h4>
+    <h3>{{ 'account.recover.message' | t }}</h3>
 
     <label for="RecoverEmail">{{ 'form.email' | t }}</label>
     <input type="email" value="" name="email" id="RecoverEmail" autocorrect="off" autocapitalize="off" autofocus>
 
-    <button type="submit" class="wide">{{ 'account.recover.submit' | t }}</button>
+    <button type="submit" class="LoginRegister__btn Btn Btn--dark">{{ 'account.recover.submit' | t }}</button>
 
   {% endform %}
 </div>

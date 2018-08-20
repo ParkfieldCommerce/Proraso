@@ -8,7 +8,7 @@
               <h3 class="SideCart__heading">My Cart <span rv-if="cart.item_count | gt 0">({cart.item_count})</span></h3>
             </div>
           </div>
-          <div class="SideCart__products-row">
+          <div class="SideCart__products-row" rv-if="cart.item_count | gt 0">
             <div class="SideCart__product margin-bottom-4x" rv-each-item="cart.items">
               <div class="SideCart__column1">
                 <a class="SideCart__image" rv-href="item.url">
@@ -42,6 +42,7 @@
             </div>
           </div>
       </form>
+      <p class="center margin-bottom-0x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
     </div>
   </div>
 </div>

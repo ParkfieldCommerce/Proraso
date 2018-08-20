@@ -1,6 +1,6 @@
 <!-- /snippets/payment-gateways.liquid -->
 
-{% assign icons = false %}
+{% assign icons = true %}
 
 {% unless shop.enabled_payment_types == empty %}
   {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
@@ -9,7 +9,7 @@
       {% if payment_icons_available contains gateway %}
         <li>
           {% if icons %}
-            {% include 'icon' with gateway %}
+            {% include 'custom-icon' with icon: gateway %}
           {% else %}
             {{ gateway | camelcase | replace:'_',' ' }}
           {% endif %}

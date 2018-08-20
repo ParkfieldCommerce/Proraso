@@ -35,9 +35,6 @@
 @import url('templates/product.scss');
 @import url('templates/cart.scss');
 /* Custom Templates */
-@import url('custom/templates/templates.scss');
-/* Sections ==================================================================*/
-// Section specific styles here
 
 /* Modules ===================================================================*/
 @import url('modules/header.scss');
@@ -50,6 +47,8 @@
 @import url('modules/icon.scss');
 /* Custom Modules */
 @import url('custom/modules/modules.scss');
+@import url('custom/templates/templates.scss');
+
 /* Helpers ===================================================================*/
 @import url('global/helpers.scss');
 

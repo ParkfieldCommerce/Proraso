@@ -1,37 +1,91 @@
 <!-- /templates/customers/account.liquid -->
 
-{% assign pagination = 20 %}
-
-<div class="container l">
+{% assign pagination = 15 %}
+<div class="Account">
   <header>
-    {% include 'theme-breadcrumbs' %}
-    <h1>{{ 'account.orders.title' | t }}</h1>
+    <h1 class="h2 center">{{ 'account.orders.title' | t }}</h1>
   </header>
-
-  <section>
-    {% paginate customer.orders by pagination %}
-      {% if customer.orders.size > 0 %}
-        <div class="row table s-hide">
-          <div class="column l2"><label>{{ 'account.order.title' | t }}</label></div>
-          <div class="column l2"><label>{{ 'account.order.date' | t }}</label></div>
-          <div class="column l5"><label>{{ 'account.order.status' | t }}</label></div>
-          <div class="column l3 l-right"><label>{{ 'cart.total' | t }}</label></div>
-        </div>
-
-        {% for order in customer.orders %}
-          <div class="row l-table m-table">
-            <div class="column l2 s12"><p><b>{{ order.name | link_to: order.customer_url }}</b></p></div>
-            <div class="column l2 s12"><p>{{ order.created_at | date: format: 'simple' }}</p></div>
-            <div class="column l5 s12"><p>{{ order.financial_status_label }} / {{ order.fulfillment_status_label }}</p></div>
-            <div class="column l3 s12 l-right"><p>{{ order.total_price | money }}</p></div>
+  <div class="container l">
+    <div class="row">
+      <div class="column l4 m4 s12 s-margin-bottom-4x">
+        <section class="Account__info-container" data-cart-view>
+          <div class="Account__info-container__heading">
+            <h3 class="center">My Cart</h3>
           </div>
-        {% endfor %}
-      {% else %}
-        <p class="h4">{{ 'account.orders.none' | t }}</p>
-        <a href="/collections/all" class="button">{{ 'account.orders.add' | t }}</a>
-      {% endif %}
-
-      {% include 'theme-pagination' with 'hr' %}
-    {% endpaginate %}
-  </section>
+          <div class="Account__info-container__body">
+            <form rv-if="cart.item_count | gt 0" class="SideCart__form" action="/cart" method="post" novalidate>
+              <div class="Account__products-row">
+                <div class="Account__product margin-bottom-4x" rv-each-item="cart.items">
+                  <div class="Account__title-container">
+                    <a class="Account__title" rv-href="item.url">
+                      { item.product_title }
+                    </a>
+                    <div class="Account__quantity Quantity">
+                      <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</button>
+                      <input type="number" disabled="true" class="Quantity__state" rv-value="item.quantity"/>
+                      <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</button>
+                    </div>
+                  </div>
+                  <span class="Account__price">{ item.line_price | money_with_currency }</span>
+                </div>
+              </div>
+              <div class="Account__summary-row">
+                <p class="Account__subtotal">
+                  <span class="Account__subtotal-label">{{ 'cart.total' | t }}:</span>
+                  <span class="Account__subtotal-price">{ cart.total_price | money_with_currency }</span>
+                </p>
+                <div class="Account__buttons">
+                  <button class="Btn Account__checkout" href="/cart" type="submit" name="checkout" class="btn" aria-label="{{ 'cart.checkout' | t }}">{{ 'cart.checkout' | t }}</button>
+                </div>
+              </div>
+            </form>
+            <p class="center margin-bottom-0x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
+          </div>
+        </section>
+      </div>
+      <div class="column l4 m4 s12 s-margin-bottom-4x">
+        <section class="Account__info-container">
+          <div class="Account__info-container__heading">
+            <h3 class="center">Order History</h3>
+          </div>
+          <div class="Account__info-container__body">
+            {% paginate customer.orders by pagination %}
+              {% if customer.orders.size > 0 %}
+                {% for order in customer.orders %}
+                <div class="Account__order">
+                  <span class="Account__order__num">{{ "Order" | append: order.name | link_to: order.customer_url }}</span>
+                  <span class="Account__order__date">{{ order.created_at | date: "%m/%d/%Y" }}</span>
+                    <br>
+                  <span class="Account__order__price">{{ order.total_price | money }}</span>
+                </div>
+                {% endfor %}
+              {% endif %}
+            {% endpaginate %}
+          </div>
+        </section>
+      </div>
+      <div class="column l4 m4 s12 s-margin-bottom-4x">
+        <section class="Account__info-container">
+          <div class="Account__info-container__heading">
+            <h3 class="center">Account Details</h3>
+          </div>
+          <div class="Account__info-container__body">
+          <p class="Account__details">
+            {{customer.first_name}} {{customer.last_name}}<br>
+            {{ customer.default_address.street }}<br>
+            {{ customer.default_address.city | capitalize }}<br>
+            {% if customer.default_address.province_code %}
+              {{ customer.default_address.province_code | upcase }},
+            {% endif %}
+            {{ customer.default_address.zip | upcase }},
+            {{ customer.default_address.country }}<br>
+            {{ customer.default_address.phone }}
+            {{customer.email}}
+          </p>
+          <a class="Account__details-edit" href="/account/addresses" title="{{ 'account.address.title' | t }}"><i class="fas fa-pencil-alt"></i> Edit Info</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
 </div>

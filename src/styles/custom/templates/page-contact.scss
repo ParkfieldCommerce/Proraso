@@ -1,0 +1,85 @@
+.contact-form{
+  @include flex();
+  @include justify-content(space-between);
+  flex-flow: row wrap;
+}
+.Contact__title{
+  font-size: 3.6rem;
+  @include s(){
+    font-size: 2.4rem;
+  }
+}
+.Contact__body{
+  width: 450px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Form__field{
+  margin-bottom: 30px;
+  label{
+    @include garI(1.8rem);
+    font-weight: normal;
+  }
+  select{
+    height: 40px;
+  }
+  input,
+  select,
+  textarea{
+    @include garI(1.8rem);
+    width: 100%;
+    border: 1px solid $border-light;
+  }
+}
+.Form__field--half{
+  width: 49%;
+  @include s(){
+    width: 100%;
+  }
+}
+.Form__field--full{
+  width: 100%;
+}
+
+.Form__btn{
+  display: inline-block;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: $bg-dark;
+  color: white;
+  @include s(){
+    width: 100%;
+    max-width: 320px;
+  }
+}
+.select-wrapper{
+  position: relative;
+  width: 100%;
+  svg{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    @include prefix(transform, translateY(-50%));
+  }
+  &:after{
+    display: none;
+  }
+}
+
+.note.form-success{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 2rem;
+}
+
+.Contact__map-image{
+  width: 100%;
+  vertical-align: middle;
+}
+
+.Contact__map-link{
+
+}

@@ -1,18 +1,33 @@
 <!-- /templates/customers/login.liquid -->
-
-<div class="container s">
-  <h1>{{ 'account.login.title' | t }}</h1>
-  <h4>{{ 'account.login.message' | t }}</h4>
-
-  {% comment %}
-    Display the recovery success message if the recovery form has just been submitted.
-  {% endcomment %}
-  {% form 'recover_customer_password' %}
-    {{ form.errors | default_errors }}
-    {% if form.posted_successfully? %}
-      <p class="note">{{ 'account.recover.success' | t }}</p>
-    {% endif %}
-  {% endform %}
-
-  {% include 'form-login' %}
+<div class="LoginRegister">
+  <div class="LoginRegister__section LoginRegister__login">
+    <div class="LoginRegister__form-container">
+      <div class="container">
+      <div class="row">
+      <div class="column l12 m12 s12">
+        <h1 class="h2 center">{{ 'account.login.title' | t }}</h1>
+        {% form 'recover_customer_password' %}
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+            <p class="note">{{ 'account.recover.success' | t }}</p>
+          {% endif %}
+        {% endform %}
+        {% include 'form-login' %}
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="LoginRegister__section LoginRegister__register">
+    <div class="LoginRegister__form-container">
+      <div class="container">
+        <div class="row">
+        <div class="column l12 m12 s12">
+          <h1 class="h2 center">{{ 'account.register.title' | t }}</h1>
+          {% include 'form-register' %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

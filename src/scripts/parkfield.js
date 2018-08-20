@@ -1,13 +1,16 @@
 class Parkfield {
   constructor(){
+    this.initGlobal = this.initGlobal.bind(this);
     this.initHomepage = this.initHomepage.bind(this);
     this.initCollectionpage = this.initCollectionpage.bind(this);
     this.initProductpage = this.initProductpage.bind(this);
   }
-  //Homepage
-  initHomepage(){
+  initGlobal(){
     this.initQuickAdd();
     this.initQuickView();
+  }
+  //Homepage
+  initHomepage(){
     this.initHomepageHero();
     this.initHomepageAbout();
     this.initHomepageFormulaSlider();
@@ -64,8 +67,6 @@ class Parkfield {
   //Collection
   initCollectionpage(){
     this.initCollectionFilter();
-    this.initQuickAdd();
-    this.initQuickView();
   }
   initCollectionFilter(){
     var filterSelects = $('.js-filterSelect');
@@ -93,7 +94,6 @@ class Parkfield {
   }
   //Product Page
   initProductpage(){
-    this.initQuickView();
     this.initProductpageImageSlider();
     this.initProductpageForm();
   }

@@ -5,11 +5,7 @@ form {
 }
 
 // Basic form element spacing
-#ContactForm form,
 .popup form,
-form#customer_login,
-form#create_customer,
-#PasswordRecoverForm form,
 #PasswordResetForm form,
 #ActivateAccountForm form,
 form#address_form_new {
@@ -32,7 +28,6 @@ form#address_form_new {
 
 // Wide forms
 form#AddToCartForm,
-form#contact_form,
 .popup form,
 form#customer_login,
 form#create_customer,

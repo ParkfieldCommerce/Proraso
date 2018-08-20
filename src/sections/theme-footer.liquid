@@ -9,7 +9,8 @@
 {% assign form_button_text = section.settings.form_button_text %}
 {% assign form_success = section.settings.form_success %}
 {% assign form_show_button = section.settings.form_show_button %}
-<div class="margin-top-18x s-margin-top-6x">
+{% assign noMarginTemplates = 'page.contact, customers/login, customers/register' %}
+<div class="{% unless noMarginTemplates contains template %}margin-top-18x s-margin-top-6x{% endunless %}">
 <div class="Newsletter__container container l">
   <div class="Newsletter">
     <img src="{{'lion.png' | asset_url}}" alt="Proraso Lion">
@@ -55,9 +56,11 @@
           <div class="Footer__copyright Footer__copyright--mobile">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso {% if show_attribution %}<br>Design & Dev by ParkfieldCommerce{% endif %}</div>
         </div>
         <div class="column l7 m12 s12 l-left v-middle">
+          <div class="Footer__payments">
           {% if show_gateways %}
             {% include 'payment-gateways' %}
           {% endif %}
+          </div>
         </div>
       </div>
     </div>

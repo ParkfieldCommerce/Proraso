@@ -63,7 +63,10 @@ button{
   border-color: $disabled !important;
   color: $disabled !important;
 }
-
+.Btn--dark{
+  background-color: $bg-dark;
+  color: white;
+}
 a{
   @include din(1.8rem);
   color: $font-color;
@@ -113,7 +116,10 @@ a{
     color: $accent;
   }
 }
-
+label{
+  @include garI(1.8rem);
+  font-weight: normal;
+}
 input{
   background: white;
   height: 40px;
@@ -122,6 +128,9 @@ input{
   @include placeholder{
     @include garI(1.6rem);
   }
+}
+hr{
+  border-color: $border-light;
 }
 /* Slider Defaults */
 .slick-dots{

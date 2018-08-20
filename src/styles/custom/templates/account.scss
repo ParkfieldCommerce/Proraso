@@ -1,0 +1,74 @@
+.Account__info-container{
+  box-shadow: 0px 2px 10px rgba(0,0,0,.1);
+}
+.Account__info-container__heading{
+  height: 57px;
+  background: $bg-dark;
+  h3{
+    line-height: 57px;
+    color: white;
+    margin-bottom: 0;
+  }
+}
+.Account__info-container__body{
+  padding: 30px;
+}
+
+//Account Column 1
+.Account__product{
+  @include flex();
+  @include justify-content(space-between);
+}
+.Account__quantity{
+  .Quantity__state{
+    padding-left: 0;
+    max-width: 40px;
+  }
+}
+.Account__price{
+  @include garI(1.8rem);
+}
+.Account__subtotal{
+  @include flex();
+  @include justify-content(space-between);
+  @include din(2.8rem);
+  padding-top: 30px;
+  border-top: 2px solid $border-light;
+}
+.Account__checkout{
+  background-color: $accent;
+  color: white;
+  border-color: $accent;
+  width: 100%;
+}
+
+//Account Column 2
+.Account__order{
+  @include flex();
+  flex-flow: row wrap;
+  margin-bottom: 15px;
+}
+.Account__order__num{
+  width: 50%;
+  display: block;
+}
+.Account__order__date{
+  width: 50%;
+  display: block;
+  text-align: right;
+  @include garI(1.8rem);
+}
+.Account__order__price{
+  width: 100%;
+  display: block;
+  @include garI(1.8rem);
+}
+
+//Account Column 3
+.Account__details{
+  line-height: 2;
+}
+.Account__details-edit{
+  color: $inactive;
+  @include garI(1.8rem);
+}

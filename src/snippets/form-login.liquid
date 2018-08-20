@@ -7,18 +7,16 @@
   <label for="CustomerEmail">{{ 'form.email' | t }}</label>
   <input type="email" name="customer[email]" id="CustomerEmail"{% if form.errors contains 'email' %} class="error"{% endif %} autocorrect="off" autocapitalize="off" autofocus>
 
+  <div class="LoginRegister__password">
+  {% if form.password_needed %}
+    <a class="LoginRegister__recover js-accountRecoverLink" href="/account/login?view=recover">{{ 'account.login.forgot' | t }}</a>
+  {% endif %}
   {% if form.password_needed %}
     <label for="CustomerPassword">{{ 'form.password' | t }}</label>
     <input type="password" value="" name="customer[password]" id="CustomerPassword"{% if form.errors contains 'password' %} class="error"{% endif %}>
   {% endif %}
-
-  <button type="submit" class="wide">{{ 'account.login.submit' | t }}</button>
-
-  <p>{{ 'account.login.no_account' | t }} {{ 'account.login.register' | t | customer_register_link }}</p>
-  {% if form.password_needed %}
-    <p>{{ 'account.login.forgot' | t }} <a href="/account/login?view=recover">{{ 'account.login.recover' | t }}</a></p>
-  {% endif %}
-
+  </div>
+  <button type="submit" class="LoginRegister__btn Btn Btn--dark">{{ 'account.login.submit' | t }}</button>
 {% endform %}
 
 {% if shop.checkout.guest_login %}
@@ -28,3 +26,22 @@
     <input type="submit" value="{{ 'form.continue' | t }}">
   {% endform %}
 {% endif %}
+
+<div class="LoginRegister__recover-form js-recoverForm">
+{% include 'form-recover' %}
+<a class="LoginRegister__cancel-recover js-recoverFormCancel" href="#">Cancel</a>
+</div>
+
+<script>
+  $('.js-accountRecoverLink').click(function(e){
+    e.preventDefault();
+    $('#customer_login').hide();
+    $('.js-recoverForm').show();
+  });
+
+  $('.js-recoverFormCancel').click(function(e){
+    e.preventDefault();
+    $('#customer_login').show();
+    $('.js-recoverForm').hide();
+  });
+</script>

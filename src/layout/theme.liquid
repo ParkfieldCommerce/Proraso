@@ -1,7 +1,6 @@
 <!doctype html>
 
   <!-- ===========================================================================
-  Feel free to add your own header, but please keep the following:
    ___  _   _    _
   /   || | | |  | |
   \__  | | | |  | |  __
@@ -55,15 +54,12 @@
     {% include 'sidecart' %}
     {% include 'popup-error' %}
     {% include 'quickview-popup' %}
-    {% if customer %}
-      {% include 'popup-account' %}
-    {% endif %}
-
+    
     <script type="text/javascript">
       CartJS.init({{ cart | json }});
       // Cart error handling
       $(document).on('cart.requestComplete', function(event, cart) {
-        {% unless template == 'cart' or template == 'collection' %}
+        {% unless template == 'cart' or template == 'collection' or template == 'customers/account' %}
           cartPopup.show();
         {% endunless %}
       });
@@ -71,6 +67,7 @@
     {{'parkfield.js' | asset_url | script_tag}}
     <script>
     var parkfield = new Parkfield;
+    parkfield.initGlobal();
     {% if template == 'index' %}
       parkfield.initHomepage();
     {% endif %}

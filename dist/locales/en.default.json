@@ -75,7 +75,7 @@
       }
     },
     "login": {
-      "title": "Login",
+      "title": "Account Login",
       "message": "Sign in to your existing account",
       "no_account": "No account?",
       "register": "Register now",
@@ -85,7 +85,7 @@
       "guest": "Login as guest"
     },
     "register": {
-      "title": "Register account",
+      "title": "Create An Account",
       "message": "Create a new account",
       "already_registered": "Already have an account?",
       "submit": "Create account"
@@ -112,13 +112,14 @@
     "email": "Email address",
     "phone": "Phone",
     "message": "Message",
+    "country":"Country",
     "send": "Send",
     "submit": "Submit",
     "cancel": "Cancel",
     "continue": "Continue",
     "password": "Password",
     "password_confirm": "Confirm password",
-    "success": "Form posted successfully"
+    "success": "Thank you for your inquiry. We'll be in contact with you as soon as possible."
   },
   "subscribe": {
     "title": "Subscribe",

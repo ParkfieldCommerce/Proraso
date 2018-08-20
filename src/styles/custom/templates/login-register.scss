@@ -1,0 +1,69 @@
+.LoginRegister{
+  @include flex();
+  flex-flow: row wrap;
+  input{
+    border: 1px solid $border-light;
+    width: 100%;
+    margin-bottom: 30px;
+    @include s(){
+      margin-bottom: 20px;
+    }
+  }
+  a{
+    @include garI(1.8rem);
+  }
+}
+.LoginRegister__section{
+  width: 50%;
+  @include s(){
+    width: 100%;
+  }
+}
+.LoginRegister__login{
+  background: #f7f7f7;
+  padding-top: 120px;
+  padding-bottom: 200px;
+}
+.LoginRegister__register{
+  background: #fcfcfc;
+  padding-top: 120px;
+  padding-bottom: 200px;
+}
+.LoginRegister__form-container{
+  width: 506px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.LoginRegister__login .LoginRegister__form-container{
+  margin-right: 100px; 
+}
+.LoginRegister__register .LoginRegister__form-container{
+  margin-left: 100px;
+}
+
+@include maxQuery(1200px){
+  .LoginRegister__login .LoginRegister__form-container{
+    margin-right: auto; 
+  }
+  .LoginRegister__register .LoginRegister__form-container{
+    margin-left: auto;
+  }
+}
+
+
+.LoginRegister__password{
+  position: relative;
+}
+.LoginRegister__recover{
+  position: absolute;
+  right: 0;
+  color: #919191;
+}
+.LoginRegister__recover-form{
+  display: none; 
+}
+.LoginRegister__cancel-recover{
+  display: inline-block;
+  margin-top: 10px;
+}
