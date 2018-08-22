@@ -184,8 +184,8 @@ input[type="checkbox"] {
     & + label {
       &:before {
         content: '\2714';
-        border-color: $colorBrand;
-        background-color: $colorBrand;
+        border-color: $accent;
+        background-color: $accent;
       }
     }
   }

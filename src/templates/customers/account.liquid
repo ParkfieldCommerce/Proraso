@@ -79,7 +79,7 @@
             {% endif %}
             {{ customer.default_address.zip | upcase }},
             {{ customer.default_address.country }}<br>
-            {{ customer.default_address.phone }}
+            {{ customer.default_address.phone }}<br>
             {{customer.email}}
           </p>
           <a class="Account__details-edit" href="/account/addresses" title="{{ 'account.address.title' | t }}"><i class="fas fa-pencil-alt"></i> Edit Info</a>

@@ -21,7 +21,8 @@ h1,.h1{
 h2,.h2{
   @include din(3.6rem);
 }
-h3,.h3{
+h3,.h3,
+h4,.h4{
   @include din(2.4rem);
 }
 

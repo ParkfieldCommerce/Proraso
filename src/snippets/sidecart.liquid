@@ -1,49 +1,47 @@
 <div id="SideCart" class="js-sideCart popup noSelect">
   <div class="overlay js-overlay"></div>
-  <div>
-    <div class="SideCart popup-content" data-cart-view>
-      <form class="SideCart__form" action="/cart" method="post" novalidate>
-          <div class="SideCart__heading-row margin-bottom-2x">
-            <div class="s-center">
-              <h3 class="SideCart__heading">My Cart <span rv-if="cart.item_count | gt 0">({cart.item_count})</span></h3>
-            </div>
+  <div class="SideCart popup-content" data-cart-view>
+    <form class="SideCart__form" action="/cart" method="post" novalidate>
+        <div class="SideCart__heading-row margin-bottom-2x">
+          <div class="s-center">
+            <h3 class="SideCart__heading">My Cart <span rv-if="cart.item_count | gt 0">({cart.item_count})</span></h3>
           </div>
-          <div class="SideCart__products-row" rv-if="cart.item_count | gt 0">
-            <div class="SideCart__product margin-bottom-4x" rv-each-item="cart.items">
-              <div class="SideCart__column1">
-                <a class="SideCart__image" rv-href="item.url">
-                  <img rv-src="item.image | product_image_size">
+        </div>
+        <div class="SideCart__products-row" rv-if="cart.item_count | gt 0">
+          <div class="SideCart__product margin-bottom-4x" rv-each-item="cart.items">
+            <div class="SideCart__column1">
+              <a class="SideCart__image" rv-href="item.url">
+                <img rv-src="item.image | product_image_size">
+              </a>
+              <div class="SideCart__title-container">
+                <a class="SideCart__title" rv-href="item.url">
+                  { item.product_title }
                 </a>
-                <div class="SideCart__title-container">
-                  <a class="SideCart__title" rv-href="item.url">
-                    { item.product_title }
-                  </a>
-                  <span class="SideCart__price">{ item.line_price | money_with_currency }</span>
-                  <div class="SideCart__quantity Quantity">
-                    <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</button>
-                    <input type="number" disabled="true" class="Quantity__state" rv-value="item.quantity"/>
-                    <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</button>
-                  </div>
+                <span class="SideCart__price">{ item.line_price | money_with_currency }</span>
+                <div class="SideCart__quantity Quantity">
+                  <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</button>
+                  <input type="number" disabled="true" class="Quantity__state" rv-value="item.quantity"/>
+                  <button type="button" class="Quantity__control" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</button>
                 </div>
-                <a class="SideCart__remove" rv-data-cart-update="0" rv-data-cart-remove="index | plus 1">
-                  {% include 'custom-icon' with icon:'close' %}
-                </a>
               </div>
+              <a class="SideCart__remove" rv-data-cart-update="0" rv-data-cart-remove="index | plus 1">
+                {% include 'custom-icon' with icon:'close' %}
+              </a>
             </div>
           </div>
-          <div class="SideCart__summary-row">
-            <p class="SideCart__subtotal">
-              <span class="SideCart__subtotal-label">{{ 'cart.total' | t }}:</span>
-              <span class="SideCart__subtotal-price">{ cart.total_price | money_with_currency }</span>
-            </p>
-            <div class="SideCart__buttons">
-              <button class="Btn SideCart__checkout" href="/cart" type="submit" name="checkout" class="btn" aria-label="{{ 'cart.checkout' | t }}">{{ 'cart.checkout' | t }}</button>
-              <a href="#" class="SideCart__continue">{{ 'cart.continue_shopping' | t }}</a>
-            </div>
+        </div>
+        <div class="SideCart__summary-row">
+          <p class="SideCart__subtotal">
+            <span class="SideCart__subtotal-label">{{ 'cart.total' | t }}:</span>
+            <span class="SideCart__subtotal-price">{ cart.total_price | money_with_currency }</span>
+          </p>
+          <div class="SideCart__buttons">
+            <button class="Btn SideCart__checkout" href="/cart" type="submit" name="checkout" class="btn" aria-label="{{ 'cart.checkout' | t }}">{{ 'cart.checkout' | t }}</button>
+            <a href="#" class="SideCart__continue">{{ 'cart.continue_shopping' | t }}</a>
           </div>
-      </form>
-      <p class="center margin-bottom-0x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
-    </div>
+        </div>
+    </form>
+    <p class="center margin-bottom-0x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
   </div>
 </div>
 <script>

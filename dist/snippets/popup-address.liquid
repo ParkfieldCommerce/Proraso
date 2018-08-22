@@ -3,8 +3,9 @@
 {% case popup-address %}
   {% when 'edit' %}
 
-    <div id="PopupAddress_{{ address.id }}" class="popup overlay">
-      <div class="popup-inner">
+    <div id="PopupAddress_{{ address.id }}" class="PopupAddress popup">
+      <div class="overlay"></div>
+      <div class="popup-outer">
         <div class="popup-content">
           {% form 'customer_address', address %}
             <h4>{{ 'account.address.edit' | t }}</h4>
@@ -48,13 +49,27 @@
               <label for="address_default_address_{{ address.id }}">{{ 'account.address.set_default' | t }}</label>
             </p>
 
-            <button type="submit" class="wide no-margin">{{ 'account.address.update' | t }}</button>
+            <button type="submit" class="Btn no-margin">{{ 'account.address.update' | t }}</button>
 
             {% if form.errors %}
               <script>
                 $(document).ready(function() {
-                  var AddressPopup_{{ address.id }} = new Focus('#PopupAddress_{{ address.id }}');
+                  var AddressPopup_{{ address.id }} = new Focus('#PopupAddress_{{ address.id }}',{
+                    bodyClass:'fixed'
+                  });
                   AddressPopup_{{ address.id }}.show();
+                });
+              </script>
+            {% else %}
+              <script>
+                $(document).ready(function() {
+                  var AddressPopup_{{ address.id }} = new Focus('#PopupAddress_{{ address.id }}',{
+                    bodyClass:'fixed'
+                  });
+
+                  $('#PopupAddress_{{ address.id }} .overlay').click(function(){
+                    AddressPopup_{{ address.id }}.hide();
+                  });
                 });
               </script>
             {% endif %}
@@ -65,21 +80,34 @@
       </div>
     </div>
 
-    <div id="PopupAddressDelete_{{ address.id }}" class="popup overlay">
-      <div class="popup-inner">
-        <div class="popup-content">
+    <div id="PopupAddressDelete_{{ address.id }}" class="PopupAddress PopupAddress--delete popup">
+      <div class="overlay"></div>
+      <div class="popup-outer">
+        <div class="popup-content center">
           <h4>{{ 'account.address.delete' | t }}</h4>
           <p>{{ 'account.address.delete_confirm' | t }}</p>
           <a href="#close" class="popup-close" data-close data-target="#PopupAddressDelete_{{ address.id }}" aria-label="{{ 'common.close' | t }}">{{ 'common.close' | t }}</a>
           <p><a href="#" class="button wide" onclick="Shopify.CustomerAddress.destroy({{ address.id }});return false">{{ 'account.address.delete' | t }}</a></p>
         </div>
       </div>
+      <script>
+        $(document).ready(function() {
+          var DeleteAddressPopup_{{ address.id }} = new Focus('#PopupAddressDelete_{{ address.id }}',{
+            bodyClass:'fixed'
+          });
+
+          $('#PopupAddressDelete_{{ address.id }} .overlay').click(function(){
+            DeleteAddressPopup_{{ address.id }}.hide();
+          });
+        });
+      </script>
     </div>
 
   {% else %}
 
-    <div id="PopupAddress" class="popup overlay">
-      <div class="popup-inner">
+    <div id="PopupAddress" class="PopupAddress popup">
+      <div class="overlay"></div>
+      <div class="popup-outer">
         <div class="popup-content">
           {% form 'customer_address', customer.new_address %}
             <h4>{{ 'account.address.add' | t }}</h4>
@@ -123,15 +151,29 @@
               <label for="address_default_address_new">{{ 'account.address.set_default' | t }}</label>
             </p>
 
-            <button type="submit" class="wide">{{ 'account.address.add' | t }}</button>
+            <button type="submit" class="Btn">{{ 'account.address.add' | t }}</button>
 
             {% if form.errors %}
               <script>
                 $(document).ready(function() {
-                  var AddressPopup = new Focus('#PopupAddress');
+                  var AddressPopup = new Focus('#PopupAddress',{
+                    bodyClass:'fixed'
+                  });
                   AddressPopup.show();
                 });
               </script>
+            {% else %}
+            <script>
+              $(document).ready(function() {
+                var AddressPopup = new Focus('#PopupAddress',{
+                  bodyClass:'fixed'
+                });
+
+                $('#PopupAddress .overlay').click(function(){
+                  AddressPopup.hide();
+                });
+              });
+            </script>
             {% endif %}
           {% endform %}
 

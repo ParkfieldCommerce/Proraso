@@ -22,7 +22,7 @@
                 <label>{{ 'account.address.default' | t }}</label>
               {% endif %}
               <p>
-                <b>{{ address.first_name | capitalize }} {{ address.last_name | capitalize }}</b>
+                {{ address.first_name | capitalize }} {{ address.last_name | capitalize }}
                 {% unless address.company == blank %}
                   ({{ address.company }})
                 {% endunless %}
@@ -55,7 +55,7 @@
       {% endif %}
 
       {% include 'popup-address' %}
-      <a href="#PopupAddress" data-target="#PopupAddress" data-trigger="popup" class="button">{{ 'account.address.add' | t }}</a>
+      <a href="#PopupAddress" data-target="#PopupAddress" data-trigger="popup">{{ 'account.address.add' | t }}</a>
     </section>
   </div>
 
