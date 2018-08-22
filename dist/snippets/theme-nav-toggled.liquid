@@ -1,10 +1,59 @@
 <!-- /snippets/theme-nav-toggled.liquid -->
-
-<nav id="PopupNavigation" class="theme-nav-toggled drawer from-left" role="navigation">
-  <div class="inner">
-    <ul>
-      {% include 'theme-nav' with 'toggled' %}
-    </ul>
-    <a href="#close" class="drawer-close" data-close aria-label="{{ 'common.close' | t }}">{{ 'common.close' | t }}</a>
+<nav class="MobileNav js-mobileNav" role="navigation">
+  <div class="container MobileNav__header">
+    <div class="row">
+      <div class="column l12 m12 s12">
+        <div class="js-mobileNavClose">
+          {% include 'custom-icon' with icon:'dark-close' %}
+        </div>
+        <div class="MobileNav__searchTrigger js-mobileSearchToggle">
+          {% include 'custom-icon' with icon:'dark-search' %}
+        </div>
+        <div>
+        {% if customer %}
+          <a href="/account">
+            {% include 'custom-icon' with icon:'dark-user' %}
+          </a>
+        {% else %}
+          <a href="/account">
+            {% include 'custom-icon' with icon:'dark-user' %}
+          </a>
+        {% endif %}
+        </div>
+        <div>
+        <a data-cart-view href="/cart" id="CartLink" aria-controls="Cart" aria-expanded="false" class="js-cartTrigger v-middle">
+          {% include 'custom-icon' with icon:'dark-cart' %}
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="MobileNav__search js-mobileNavSearch">
+    <div class="container">
+      <div class="row">
+        <div class="column l12 m12 s12">
+        <form class="search" action="/search">
+          <input type="hidden" name="type" value="product">
+          <button type="submit">{% include 'custom-icon' with icon:'search' %}</button>
+          <input type="text" placeholder="Search..." name="q" value="{{ search.terms | escape }}"  />
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="column l12 m12 s12">
+        {% include 'mobile-theme-nav' %}
+      </div>
+    </div>
+  </div>
+  <div class="container MobileNav__decoration-container js-mobileDecoration">
+    <div class="row">
+      <div class="column l12 m12 s12 center">
+        <div>{% include 'custom-icon' with icon:'logo' %}</div>
+        <div class="MobileNav__decoration Text--border-style">{{section.settings.tagline}}</div>
+      </div>
+    </div>
   </div>
 </nav>

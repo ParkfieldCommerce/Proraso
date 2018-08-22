@@ -25,6 +25,9 @@
   }
   @include maxQuery(800px){
     min-height: 188px;
+    img{
+      max-height: 180px;
+    }
   }
 }
 .CollectionProduct__heading{

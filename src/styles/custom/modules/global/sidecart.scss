@@ -5,6 +5,10 @@
   width: 350px;
   max-width: 95% !important;
   box-shadow: -2px 4px 8px rgba(0,0,0,.25);
+  @include s(){
+    width: 100vw;
+    max-width: 100% !important;
+  }
 }
 .SideCart.popup-content{
   position: fixed !important;
@@ -14,7 +18,10 @@
   height: 100%;
   padding: 10px;
   background: white;
-  transition: right .3s;
+  transition: right .5s;
+  @include s(){
+    right: -100vw;
+  }
 }
 .SideCart__form{
   width: 100%;
@@ -27,10 +34,18 @@
   @include flex();
   @include align-items(center);
   @include justify-content(center);
-
+  position: relative;
 }
 .SideCart__heading{
   margin-bottom: 0;
+}
+.SideCart__heading-close{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  @include prefix(transform, translateY(-50%));
+  @include flex();
+  @include align-items(center);
 }
 .SideCart__products-row{
   height: 70vh;

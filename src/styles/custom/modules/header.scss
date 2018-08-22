@@ -17,15 +17,34 @@
   z-index: 21;
   @include prefix(transform, translateX(-50%));
 }
-
+.Header__hamburger{
+  display: none;
+}
+.Header__cart--mobile{
+  display: none;
+}
 @include maxQuery(800px){
   .Header{
     height: 62px;
   }
   .Header__user-row{
+    height: 62px;
   }
-  .Header__decoration{
+  .Header__decoration,
+  .Header__price,
+  .Header__user,
+  .Header__cart--desktop{
     display: none;
+  }
+  .Header__cart--mobile{
+    display: inline;
+  }
+  .Header__hamburger{
+    display: inline-block;
+  }
+  .Header__hamburger.active{
+    position: relative;
+    z-index: 10001;
   }
   .Header__logo{
     top: 5px;

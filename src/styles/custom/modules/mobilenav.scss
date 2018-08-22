@@ -1,0 +1,112 @@
+.MobileNav{
+  position: fixed;
+  left: -100vw;
+  top: 0;
+  bottom: 0;
+  z-index: 25;
+  width: 100vw;
+  background: white;
+  transition: left .5s;
+}
+.MobileNav.active{
+  left: 0;
+}
+
+.MobileNav__dropdown-menu-links.active{
+  .MobileNav__headinglink{
+    margin-bottom: 0;
+    &:after{
+      display: none;
+    }
+  }
+  .MobileNav__sublink{
+    display: block;
+  }
+}
+
+.MobileNav__header{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .column.l12{
+    @include flex();
+    @include justify-content(space-between);
+  }
+  .stroke svg path{
+    stroke: $font-color;
+  }
+  .fill svg path{
+    fill: $font-color;
+  }
+}
+
+.MobileNav__searchTrigger.active{
+  svg path{
+    fill: $accent;
+    stroke: $accent;
+  }
+}
+.MobileNav__search{
+  display: none;
+  margin-bottom: 60px;
+  form{
+    width: 100%;
+  }
+  input{
+    margin-left: 20px;
+    width: 500px;
+    max-width: 100%;
+    border-bottom: 2px solid $font-color;
+  }
+}
+.MobileNav__search.active{
+  display: block;
+  form{@include flex();}
+}
+
+.MobileNav__back{
+  display: none;
+  @include garI(1.8rem);
+  opacity: .4;
+  margin-bottom: 15px;
+}
+.MobileNav__headinglink{
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  @include din(2.4rem);
+  margin-bottom: 30px;
+  &:after{
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    @include prefix(transform, translateY(-50%));
+  }
+}
+.MobileNav__link{
+  position: relative;
+  display: block;
+  @include din(2.4rem);
+  margin-bottom: 30px;
+  &:after{
+    display: none;
+  }
+}
+.MobileNav__sublink{
+  @include garI(1.8rem);
+  display: none;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  &:first-of-type{
+    margin-top: 30px;
+  }
+}
+
+.MobileNav__decoration-container{
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  @include prefix(transform, translateX(-50%));
+}

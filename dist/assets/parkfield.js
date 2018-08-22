@@ -8,6 +8,8 @@ class Parkfield {
   initGlobal(){
     this.initQuickAdd();
     this.initQuickView();
+    this.initMobileMenu();
+    this.initSideCart();
   }
   //Homepage
   initHomepage(){
@@ -239,6 +241,94 @@ class Parkfield {
     $('.js-quickviewClose').click(function(e){
       e.preventDefault();
       quickviewPopup.hide();
+    });
+  }
+
+  initMobileMenu(){
+    $('.js-mobileNavTrigger').click(function(){
+      $(this).removeClass('active');
+      $('.js-mobileNav').addClass('active');
+    });
+
+    $('.js-mobileNavClose').click(function(){
+      $('.js-mobileNav').removeClass('active');
+    });
+
+    //Dropdown Logic
+    $('.js-mobileMenuLinks').click(function(){
+      var dropdown = $(this);
+      var allDropdowns = $('.js-mobileMenuLinks');
+      var allRegularLinks = $('.js-regularMobileLink');
+      var navigation = $('.MobileNav__navigation');
+      var backButton = $('.js-mobileBack');
+      var decoration = $('.js-mobileDecoration');
+
+      if(dropdown.hasClass('active')){
+        navigation.fadeOut('fast', function(){
+          backButton.hide();
+          decoration.show();
+          dropdown.removeClass('active');
+          allDropdowns.show();
+          allRegularLinks.show();
+          navigation.fadeIn();
+        });
+      }else{
+        navigation.fadeOut('fast', function(){
+          backButton.css('display','block');
+          decoration.hide();
+          dropdown.addClass('active');
+          allDropdowns.hide();
+          allRegularLinks.hide();
+          dropdown.show();
+          navigation.fadeIn();
+        });
+      }
+    });
+    
+    $('.js-mobileBack').click(function(e){
+      e.preventDefault();
+      var allDropdowns = $('.js-mobileMenuLinks');
+      var allRegularLinks = $('.js-regularMobileLink');
+      var navigation = $('.MobileNav__navigation');
+      var backButton = $('.js-mobileBack');
+      var decoration = $('.js-mobileDecoration');
+      
+      navigation.fadeOut('fast', function(){
+        backButton.hide();
+        decoration.show();
+        allDropdowns.removeClass('active');
+        allDropdowns.show();
+        allRegularLinks.show();
+        navigation.fadeIn();
+      });
+    });
+
+    //Search Logic
+    $('.js-mobileSearchToggle').click(function(){
+      $('.js-mobileNavSearch').toggleClass('active');
+      $(this).toggleClass('active');
+    });
+  }
+  initSideCart(){
+    var cartPopup = new Focus('.js-sideCart',{
+      bodyClass:'fixed'
+    });
+  
+    $('.js-cartTrigger').click(function(e){
+      e.preventDefault();
+      cartPopup.show();
+      $('.js-mobileNavTrigger').delay(3000).addClass('active');
+    });
+    
+    //Closing Popup Logic
+    $('.js-sideCart .js-overlay').click(function(){
+      cartPopup.hide();
+    });
+  
+    $('.js-cartClose').click(function(e){
+      e.preventDefault();
+      $('.js-mobileNavTrigger').removeClass('active');
+      cartPopup.hide();
     });
   }
 }

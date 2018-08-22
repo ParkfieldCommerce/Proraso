@@ -1,0 +1,26 @@
+<!-- /snippets/theme-nav.liquid -->
+<ul class="MobileNav__navigation">
+<a href="#" class="MobileNav__back js-mobileBack"><i class="fa fa-angle-left"></i> Back</a>
+{% for link in linklists.main-menu.links %}
+  {% if link.levels > 0 %}
+    <li class="MobileNav__main-link MobileNav__dropdown dropdown MobileNav__main-link--{{forloop.index}} {% unless section.settings.featured_product == blank %}MobileNav__dropdown--hasProduct{% endunless %}" aria-haspopup="true">
+      <ul class="MobileNav__dropdown-menu dropdown-menu">
+        {% for childlink in link.links %}
+          <li class="MobileNav__dropdown-menu-links js-mobileMenuLinks">
+            <span href="{{ childlink.url }}" class="MobileNav__headinglink nav-link{% if childlink.active %} active{% endif %}">{{ childlink.title }}</span>
+            {% if childlink.links %}
+              {% for grandchildlink in childlink.links %}
+                <a href="{{ grandchildlink.url }}" class="MobileNav__sublink nav-link{% if grandchildlink.active %} active{% endif %}">{{ grandchildlink.title }}</a>
+              {% endfor %}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
+    <li class="MobileNav__main-link MobileNav__main-link--nodropdown js-regularMobileLink">
+      <a href="{{ link.url }}" class="MobileNav__link Link--underline nav-link{% if link.active %} active{% endif %}">{{ link.title }}</a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>

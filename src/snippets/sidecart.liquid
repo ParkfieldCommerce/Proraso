@@ -3,9 +3,8 @@
   <div class="SideCart popup-content" data-cart-view>
     <form class="SideCart__form" action="/cart" method="post" novalidate>
         <div class="SideCart__heading-row margin-bottom-2x">
-          <div class="s-center">
-            <h3 class="SideCart__heading">My Cart <span rv-if="cart.item_count | gt 0">({cart.item_count})</span></h3>
-          </div>
+          <h3 class="s-center SideCart__heading">My Cart <span rv-if="cart.item_count | gt 0">({cart.item_count})</span></h3>
+          <span class="SideCart__heading-close js-cartClose">{% include 'custom-icon' with icon:'dark-close' %}</span>
         </div>
         <div class="SideCart__products-row" rv-if="cart.item_count | gt 0">
           <div class="SideCart__product margin-bottom-4x" rv-each-item="cart.items">
@@ -37,30 +36,10 @@
           </p>
           <div class="SideCart__buttons">
             <button class="Btn SideCart__checkout" href="/cart" type="submit" name="checkout" class="btn" aria-label="{{ 'cart.checkout' | t }}">{{ 'cart.checkout' | t }}</button>
-            <a href="#" class="SideCart__continue">{{ 'cart.continue_shopping' | t }}</a>
+            <a href="#" class="SideCart__continue js-cartClose">{{ 'cart.continue_shopping' | t }}</a>
           </div>
         </div>
     </form>
     <p class="center margin-bottom-0x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
   </div>
 </div>
-<script>
-  var cartPopup = new Focus('.js-sideCart',{
-    bodyClass:'fixed'
-  });
-
-  $('#CartLink').click(function(e){
-    e.preventDefault();
-    cartPopup.show();
-  })
-  
-  //Closing Popup Logic
-  $('.js-sideCart .js-overlay').click(function(){
-    cartPopup.hide();
-  });
-
-  $('.SideCart__continue').click(function(e){
-    e.preventDefault();
-    cartPopup.hide();
-  });
-</script>
