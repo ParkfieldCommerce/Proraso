@@ -16,7 +16,7 @@
   top: 50% !important;
   @include prefix(transform, translateY(-50%));
   height: 100%;
-  padding: 10px;
+  padding: 0;
   background: white;
   transition: right .5s;
   @include s(){
@@ -157,4 +157,80 @@
   @include garI(1.8rem);
   text-align: center;
   display: block;
+}
+
+
+//Gift
+.SideCart__gift{
+  width: 100%;
+  @include din(1.8rem);
+  .Gift__requirement__image--bought--mobile,
+  .Gift__requirement__image--unbought--mobile{
+    display: inline-block !important;
+  }
+  .Gift__requirement__image--bought--desktop,
+  .Gift__requirement__image--unbought--desktop{
+    display: none !important;
+  }
+  .Gift__popup.overlay{
+    background: none;
+  }
+  .Gift__header{
+    margin-bottom: 0;
+    position: relative;
+  }
+  .Gift__header__heading{
+    font-size: 1.8rem;
+    padding: 0;
+  }
+  .Gift__close{
+    right: 0;
+    position: absolute;
+    top: 50%;
+    @include prefix(transform, translateY(-50%));
+    svg{
+      display: none;
+    }
+    &:after{
+      content: "\f055";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+    }
+  }
+  .popup-content{
+    background: $bg-dark;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+  } 
+  .Gift__requirements{
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .Gift__requirement{
+    @include flex();
+    @include align-items(flex-end);
+    @include justify-content(center);
+  }
+  .Gift__requirement__label{
+    color: white;
+  }
+  .Gift__requirement__button{
+    display: none;
+  }
+  .Gift__body{
+    display: none;
+  }
+}
+
+.SideCart__gift.active{
+  .Gift__requirements{
+    @include flex();
+  }
+  .Gift__close{
+    &:after{
+      content:'\f056';
+    }
+  }
 }

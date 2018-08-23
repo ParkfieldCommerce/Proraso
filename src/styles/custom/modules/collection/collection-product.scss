@@ -1,9 +1,6 @@
 .CollectionProduct{
   text-align: center;
   &:hover{
-    .CollectionProduct__image-container{
-      @include align-items(flex-start);
-    }
     .CollectionProduct__overlay{
       opacity: 1;
     }
@@ -97,14 +94,6 @@
   .CollectionProduct__sub-heading{
     font-size: 1.4rem;
   }
-  .CollectionProduct{
-    &:hover{
-      .CollectionProduct__image-container{
-        @include align-items(flex-end);
-      }
-    }
-  }
-
 }
 
 .CollectionProduct{

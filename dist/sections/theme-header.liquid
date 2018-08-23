@@ -11,23 +11,32 @@
         </div>
       </div>
       <div class="column l6 right">
-        <span class="Header__user">
-        {% if customer %}
-          <a href="/account">
-            {% include 'custom-icon' with icon:'user' %}
+        <div class="Header__content">
+          <span class="Header__search Header__icon">
+            <span class="Header__search-trigger js-headerSearch">{% include 'custom-icon' with icon:'search' %}</span>
+            <form class="search" action="/search">
+              <input type="hidden" name="type" value="product">
+              <button type="submit">{% include 'custom-icon' with icon:'search' %}</button>
+              <input type="text" placeholder="Search..." name="q" value="{{ search.terms | escape }}"  />
+            </form>
+          </span>
+          <span class="Header__user Header__icon ">
+            {% if customer %}
+              <a href="/account">
+                {% include 'custom-icon' with icon:'user' %}
+              </a>
+            {% else %}
+              <a href="/account">
+                {% include 'custom-icon' with icon:'user' %}
+              </a>
+            {% endif %}
+          </span>
+          <a data-cart-view href="/cart" id="CartLink" aria-controls="Cart" aria-expanded="false" class="Header__cart Header__icon js-cartTrigger v-middle">
+            <span class="Header__cart-price" data-cart-total rv-text="cart.total_price | money_with_currency"></span>
+            <span class="Header__cart--desktop">{% include 'custom-icon' with icon:'cart' %}</span>
+            <span class="Header__cart--mobile">{% include 'custom-icon' with icon:'dark-cart' %}</span>
           </a>
-        {% else %}
-          <a href="/account">
-            {% include 'custom-icon' with icon:'user' %}
-          </a>
-        {% endif %}
-        </span>
-        <a data-cart-view href="/cart" id="CartLink" aria-controls="Cart" aria-expanded="false" class="js-cartTrigger v-middle">
-          <span class="Header__cart--desktop">{% include 'custom-icon' with icon:'cart' %}</span>
-          <span class="Header__cart--mobile">{% include 'custom-icon' with icon:'dark-cart' %}</span>
-          <span data-cart-item-count rv-text="cart.item_count"></span>
-          <span class="Header__price">(<span data-cart-total rv-text="cart.total_price | money_with_currency"></span>)</span>
-        </a>
+        </div>
       </div>
     </div>
     <div class="Header__logo-container">

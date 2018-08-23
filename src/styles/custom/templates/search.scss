@@ -1,0 +1,14 @@
+.SearchPage{
+  .CollectionProduct__column{
+    margin-bottom: 60px;
+    @include s(){
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.SearchPage__form{
+  input{
+    border-bottom: 2px solid $border-dark;
+  }
+}

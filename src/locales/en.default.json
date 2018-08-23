@@ -202,7 +202,7 @@
   },
   "search": {
     "title": "Search",
-    "submit": "Go",
+    "submit": "Search",
     "no_results_html": "Sorry, no results for \"{{ terms }}\"",
     "results_for_html": "We found these matches for \"{{ terms }}\""
   },

@@ -43,7 +43,7 @@
         giftPopup.hide();
       });
       
-      $(document).on('cart.requestComplete', function(event, cart) {
+      function updateGiftContent(cart, showPopup){
         //Reset Gift Requirements
         $('.js-giftRequirement').removeClass('active');
 
@@ -72,7 +72,26 @@
           giftBody.text("{{GiftPopup.body}}");
         }
 
-        giftPopup.show();
+        //Update Cart Gift Section
+        $('.js-sideCartGift').empty();
+        $('.Gift__popup .popup-content').clone().appendTo('.js-sideCartGift');
+        $('.js-sideCartGift .js-giftClose').click(function(){
+          $('.js-sideCartGift').toggleClass('active');
+        });
+
+
+        if(showPopup){
+          giftPopup.show();
+        }
+      }
+
+      $(document).on('cart.requestComplete', function(event, cart) {
+       updateGiftContent(cart, true); 
+      });
+
+      $(document).ready(function(){
+        var cart = CartJS.cart;
+        updateGiftContent(cart, false);
       });
     </script>
   {% endif %}

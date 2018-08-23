@@ -70,17 +70,14 @@ Copyright 2017 Shopify Inc. & ParkfieldCommerce
     
     <script type="text/javascript">
       CartJS.init({{ cart | json }});
-      // Cart error handling
-      $(document).on('cart.requestComplete', function(event, cart) {
-        {% unless template == 'cart' or template == 'collection' or template == 'customers/account' %}
-          cartPopup.show();
-        {% endunless %}
-      });
     </script>
     {{'parkfield.js' | asset_url | script_tag}}
     <script>
     var parkfield = new Parkfield;
+    var pageTemplate = "{{template}}"
+
     parkfield.initGlobal();
+    
     {% if template == 'index' %}
       parkfield.initHomepage();
     {% endif %}

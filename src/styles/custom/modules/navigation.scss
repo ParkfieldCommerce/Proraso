@@ -45,6 +45,7 @@
   background: $bg-light;
   &:hover{
     .Nav__dropdown-menu{
+      box-shadow: 1px 23px 19px rgba(0,0,0,.1);
       @include flex();
     }
   }

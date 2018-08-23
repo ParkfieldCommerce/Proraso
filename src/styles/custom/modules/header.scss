@@ -20,9 +20,71 @@
 .Header__hamburger{
   display: none;
 }
+
+.Header__content{
+  width: 240px;
+  max-width: 100%;
+  margin-left: auto;
+  @include flex();
+  @include align-items(center);
+  @include justify-content(space-between);
+  @include s(){
+    @include justify-content(flex-end);
+  }
+}
+.Header__icon{
+  @include flex();
+  @include align-items(center);
+  @include justify-content(center);
+}
+.Header__search{
+  position: relative;
+  button{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    @include prefix(transform, translateY(-50%));
+  }
+  form{
+    background: white;
+    border: 1px solid $border-light;
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    right: -230px;
+    width: 200px;
+    padding-right: 20px;
+    max-width: initial;
+    transition: opacity .3s;
+  }
+  input{
+  }
+}
+.Header__search.active{
+  .Header__search-trigger{
+    svg path{
+      fill: $accent;
+      stroke: $accent;
+    }
+  }
+  form{
+    z-index: 2;
+    opacity: 1;
+  }
+}
+.Header__cart{
+  @include flex();
+  @include align-items(center);
+  @include garI(1.2rem);
+}
+.Header__cart-price{
+  display: inline-block;
+  margin-right: 10px;
+}
 .Header__cart--mobile{
   display: none;
 }
+
 @include maxQuery(800px){
   .Header{
     height: 62px;
@@ -33,6 +95,7 @@
   .Header__decoration,
   .Header__price,
   .Header__user,
+  .Header__search,
   .Header__cart--desktop{
     display: none;
   }

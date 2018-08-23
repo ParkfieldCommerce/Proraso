@@ -6,10 +6,11 @@ class Parkfield {
     this.initProductpage = this.initProductpage.bind(this);
   }
   initGlobal(){
-    this.initQuickAdd();
-    this.initQuickView();
+    this.initHeader();
     this.initMobileMenu();
     this.initSideCart();
+    this.initQuickAdd();
+    this.initQuickView();
   }
   //Homepage
   initHomepage(){
@@ -243,7 +244,11 @@ class Parkfield {
       quickviewPopup.hide();
     });
   }
-
+  initHeader(){
+    $('.js-headerSearch').click(function(){
+      $(this).parent().toggleClass('active');
+    });
+  }
   initMobileMenu(){
     $('.js-mobileNavTrigger').click(function(){
       $(this).removeClass('active');
@@ -313,7 +318,15 @@ class Parkfield {
     var cartPopup = new Focus('.js-sideCart',{
       bodyClass:'fixed'
     });
-  
+
+    // Cart error handling
+    $(document).on('cart.requestComplete', function(event, cart) {
+      var disabledPages = ['cart', 'collection', 'customers/account'];
+      if(disabledPages.indexOf(pageTemplate) == -1){
+        cartPopup.show();
+      }
+    });
+
     $('.js-cartTrigger').click(function(e){
       e.preventDefault();
       cartPopup.show();
