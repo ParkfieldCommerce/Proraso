@@ -24,6 +24,7 @@
             <div class="CartPage__title-container">
             <a class="CartPage__title" rv-href="item.url">
               { item.product_title }
+              <span rv-if="item.properties.subscription_id"><br>({item.properties.shipping_interval_frequency} {item.properties.shipping_interval_unit_type})</span>
             </a>
               <span class="s-show CartPage__price">{ item.line_price | money_with_currency }</span>
               <div class="s-show CartPage__quantity Quantity">
@@ -61,3 +62,4 @@
     </div>
   </form>
 </div>
+{% include 'subscription-cart-footer' %}

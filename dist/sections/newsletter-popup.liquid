@@ -1,0 +1,143 @@
+<div class="NewsletterPopup popup" id="NewsletterPopup">
+  <div class="overlay"></div>
+  <div class="popup-outer">
+    <div class="NewsletterPopup__content popup-content">
+      <div class="NewsletterPopup__image">
+        <img src="{{section.settings.image | img_url:'master'}}" alt="{{section.settings.image.alt}}">
+      </div>
+      <div class="NewsletterPopup__text s-center">
+        <h4 class="NewsletterPopup__heading">{{section.settings.heading}}</h4>
+        {% form 'customer' %}
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+            <p class="note form-success">{{ section.settings.success_text }}</p>
+          {% else %}
+            <div>
+            <input class="NewsletterPopup__email" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Your email address" name="contact[email]" aria-label="{{ form_email_placeholder }}" autocorrect="off" autocapitalize="off">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input type="hidden" name="customer[accepts_marketing]" value="" />
+            <button class="NewsletterPopup__btn Btn" type="submit" name="subscribe">{{'form.signup' | t }}</button>
+            <img src="{{ settings.logo | img_url: '80x' }}" alt="{{ shop.name }}" title="{{ shop.name }}" itemprop="image" class="block center">
+            </div>
+          {% endif %}
+
+        {% endform %}
+      </div>
+      <a class="NewsletterPopup__close js-newsletterPopupClose" data-close aria-label="Close popup">
+        {% include 'custom-icon' with icon:'dark-close' %}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  var newsletterPopup = new Focus('#NewsletterPopup');
+  //Check whether to show newsletter or not
+  {% if section.settings.enable_popup %}
+  $(document).ready(function(){
+    setTimeout(function(){
+      var subscribed = Cookies.get('newsletter-subscribed');
+      var temp = Cookies.get('newsletter-popup-timeout');
+      if(subscribed == false || subscribed == undefined){
+        if(temp==false || temp == undefined){
+          newsletterPopup.show();
+        }
+      }
+    }, {{section.settings.delay}});
+
+    //Close Newsletter Popup
+    $('.js-newsletterPopupClose').click(function(e){
+      e.preventDefault();
+      newsletterPopup.hide();
+      var subscribed = Cookies.get('newsletter-subscribed');
+      if(subscribed==false || subscribed == undefined){
+        Cookies.set('newsletter-popup-timeout', true, { expires: {{section.settings.expiration}} });
+      }
+    });
+  });
+  {% endif %}
+</script>
+{% schema %}
+{
+  "name": "Newsletter Popup",
+  "class":"homepage-newsletter-popup",
+  "settings":[
+    {
+      "type":"header",
+      "content":"General Settings"
+    },
+    {
+      "id":"enable_popup",
+      "type":"checkbox",
+      "label":"Enable Popup",
+      "default":true
+    },
+    {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Image"
+    },
+    {
+      "type":"header",
+      "content":"Default Text"
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "Heading"
+    },
+    {
+      "type":"header",
+      "content":"Successful Sign Up"
+    },
+    {
+      "id": "success_text",
+      "type": "text",
+      "label": "Text",
+      "default":"Thank you"
+    },
+    {
+      "type":      "select",
+      "id":        "delay",
+      "label":     "Time before showing popup",
+      "options": [
+        {
+          "value": "7000",
+          "label": "After 7 Seconds"
+        },
+        {
+          "value": "5000",
+          "label": "After 5 seconds"
+        },
+        {
+          "value": "3000",
+          "label": "After 3 seconds"
+        }
+      ],
+      "info":"Timer Resets if User Changes Pages",
+      "default":   "3000"
+    },
+    {
+      "type":      "select",
+      "id":        "expiration",
+      "label":     "Re-show Popup",
+      "options": [
+        {
+          "value": "3",
+          "label": "After 3 Days"
+        },
+        {
+          "value": "7",
+          "label": "After a Week"
+        },
+        {
+          "value": "14",
+          "label": "After 2 Weeks"
+        }
+      ],
+      "info":"If user doesn't fill out their email, when is the next time they should see the popup",
+      "default":   "7"
+    }
+  ]
+}
+{% endschema %}

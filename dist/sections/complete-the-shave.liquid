@@ -1,100 +1,99 @@
 <!-- sections/complete-the-shave.liquid -->
 {% assign GiftPopup = section.settings %}
 {% if GiftPopup.enable_freegift %}
-  {% if template contains 'collection' %}
-    <div id="Gift" class="Gift__popup js-GiftPopup popup overlay">
-      <div class="popup-inner">
-        <div class="popup-content">
-          <div class="Gift__header">
-            <h2 class="Gift__header__heading">{{GiftPopup.heading}}</h2>
-            <a href="#close" class="Gift__close js-giftClose" aria-label="{{ 'common.close' | t }}">
-              {% include 'custom-icon' with icon:'close' %}
-            </a>
-          </div>
-          <div class="Gift__popup-content js-giftContent">
-            <div class="Gift__requirements">
-              {% for block in section.blocks %}
-              {% assign requirement = block.settings %}
-              <div class="Gift__requirement js-giftRequirement"  data-type="{{requirement.title}}">
-                <a href="{{requirement.url}}" class="Gift__requirement__content--unbought">
-                  <img class="Gift__requirement__image--unbought Gift__requirement__image--unbought--desktop" src="{{requirement.unbought_image | img_url:'master'}}" alt="{{requirement.unbought_image.alt}}">
-                  <img class="Gift__requirement__image--unbought Gift__requirement__image--unbought--mobile" src="{{requirement.unbought_image_mobile | img_url:'master'}}" alt="{{requirement.unbought_image_mobile.alt}}">
-                  <span class="Gift__requirement__label">{{requirement.label}}</span>
-                  <span class="Gift__requirement__button Btn">SHOP</span>
-                </a>
-                <div class="Gift__requirement__content--bought" data-type="{{requirement.title}}">
-                  <img class="Gift__requirement__image--bought Gift__requirement__image--bought--desktop" src="{{requirement.bought_image | img_url:'master'}}" alt="{{requirement.bought_image.alt}}">
-                  <img class="Gift__requirement__image--bought Gift__requirement__image--bought--mobile" src="{{requirement.bought_image_mobile | img_url:'master'}}" alt="{{requirement.bought_image_mobile.alt}}">
-                  <span class="Gift__requirement__label">{{requirement.label}}</span>
-                </div>
+  <div id="Gift" class="Gift__popup js-GiftPopup popup overlay">
+    <div class="popup-inner">
+      <div class="popup-content">
+        <div class="Gift__header">
+          <h2 class="Gift__header__heading">{{GiftPopup.heading}}</h2>
+          <a href="#close" class="Gift__close js-giftClose" aria-label="{{ 'common.close' | t }}">
+            {% include 'custom-icon' with icon:'close' %}
+          </a>
+        </div>
+        <div class="Gift__popup-content js-giftContent">
+          <div class="Gift__requirements">
+            {% for block in section.blocks %}
+            {% assign requirement = block.settings %}
+            <div class="Gift__requirement js-giftRequirement"  data-type="{{requirement.title}}">
+              <a href="{{requirement.url}}" class="Gift__requirement__content--unbought">
+                <img class="Gift__requirement__image--unbought Gift__requirement__image--unbought--desktop" src="{{requirement.unbought_image | img_url:'master'}}" alt="{{requirement.unbought_image.alt}}">
+                <img class="Gift__requirement__image--unbought Gift__requirement__image--unbought--mobile" src="{{requirement.unbought_image_mobile | img_url:'master'}}" alt="{{requirement.unbought_image_mobile.alt}}">
+                <span class="Gift__requirement__label">{{requirement.label}}</span>
+                <span class="Gift__requirement__button Btn">SHOP</span>
+              </a>
+              <div class="Gift__requirement__content--bought" data-type="{{requirement.title}}">
+                <img class="Gift__requirement__image--bought Gift__requirement__image--bought--desktop" src="{{requirement.bought_image | img_url:'master'}}" alt="{{requirement.bought_image.alt}}">
+                <img class="Gift__requirement__image--bought Gift__requirement__image--bought--mobile" src="{{requirement.bought_image_mobile | img_url:'master'}}" alt="{{requirement.bought_image_mobile.alt}}">
+                <span class="Gift__requirement__label">{{requirement.label}}</span>
               </div>
-              {% endfor %}
             </div>
-            <p class="Gift__body js-giftBody">{{GiftPopup.body}}</p>
+            {% endfor %}
           </div>
+          <p class="Gift__body js-giftBody">{{GiftPopup.body}}</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      var giftPopup = new Focus('#Gift');
-      $('.js-giftClose').click(function(e){
-        e.preventDefault();
-        giftPopup.hide();
+  <script>
+    var giftPopup = new Focus('#Gift');
+    $('.js-giftClose').click(function(e){
+      e.preventDefault();
+      giftPopup.hide();
+    });
+    
+    function updateGiftContent(cart, showPopup){
+      //Reset Gift Requirements
+      $('.js-giftRequirement').removeClass('active');
+
+      var requiredTypes = [
+        {% for block in section.blocks %}
+          '{{block.settings.title}}'{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+
+      //Toggle Requirements in Popup
+      cart.items.forEach(function(item){
+        var requirement = $('.js-giftRequirement[data-type="'+item.product_type+'"]');
+        var typeIndex = requiredTypes.indexOf(item.product_type);
+
+        if( typeIndex > -1){
+          requirement.addClass('active');
+          requiredTypes.splice(typeIndex, 1);
+        }
       });
       
-      function updateGiftContent(cart, showPopup){
-        //Reset Gift Requirements
-        $('.js-giftRequirement').removeClass('active');
-
-        var requiredTypes = [
-          {% for block in section.blocks %}
-            '{{block.settings.title}}'{% unless forloop.last %},{% endunless %}
-          {% endfor %}
-        ];
-
-        //Toggle Requirements in Popup
-        cart.items.forEach(function(item){
-          var requirement = $('.js-giftRequirement[data-type="'+item.product_type+'"]');
-          var typeIndex = requiredTypes.indexOf(item.product_type);
-
-          if( typeIndex > -1){
-            requirement.addClass('active');
-            requiredTypes.splice(typeIndex, 1);
-          }
-        });
-        
-        //Handle Message
-        var giftBody = $('.js-giftBody');
-        if(requiredTypes.length === 0){
-          giftBody.text("{{GiftPopup.success_body}}");
-        }else{
-          giftBody.text("{{GiftPopup.body}}");
-        }
-
-        //Update Cart Gift Section
-        $('.js-sideCartGift').empty();
-        $('.Gift__popup .popup-content').clone().appendTo('.js-sideCartGift');
-        $('.js-sideCartGift .js-giftClose').click(function(){
-          $('.js-sideCartGift').toggleClass('active');
-        });
-
-
-        if(showPopup){
-          giftPopup.show();
-        }
+      //Handle Message
+      var giftBody = $('.js-giftBody');
+      if(requiredTypes.length === 0){
+        giftBody.text("{{GiftPopup.success_body}}");
+      }else{
+        giftBody.text("{{GiftPopup.body}}");
       }
 
-      $(document).on('cart.requestComplete', function(event, cart) {
-       updateGiftContent(cart, true); 
+      //Update Cart Gift Section
+      $('.js-sideCartGift').empty();
+      $('.Gift__popup .popup-content').clone().appendTo('.js-sideCartGift');
+      $('.js-sideCartGift .js-giftClose').click(function(){
+        $('.js-sideCartGift').toggleClass('active');
       });
 
-      $(document).ready(function(){
-        var cart = CartJS.cart;
-        updateGiftContent(cart, false);
-      });
-    </script>
-  {% endif %}
+      {% unless template == 'product' %}
+      if(showPopup){
+        giftPopup.show();
+      }
+      {% endunless %}
+    }
+
+    $(document).on('cart.requestComplete', function(event, cart) {
+      updateGiftContent(cart, true); 
+    });
+
+    $(document).ready(function(){
+      var cart = CartJS.cart;
+      updateGiftContent(cart, false);
+    });
+  </script>
 {% endif %}
 {% schema %}
 {

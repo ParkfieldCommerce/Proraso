@@ -1,0 +1,52 @@
+.NewsletterPopup{
+  .popup-outer{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    @include prefix(transform, translate(-50%,-50%));
+    z-index: 999;
+  }
+}
+.NewsletterPopup .NewsletterPopup__content{
+  position: relative;
+  @include flex();
+  width: 710px;
+  padding: 0;
+  background: transparent;
+  @include s(){
+    width: 311px;
+  }
+}
+.NewsletterPopup__image{
+  width: 50%;
+  img{
+    vertical-align: middle;
+  }
+  @include s(){
+    display: none;
+  }
+}
+.NewsletterPopup__text{
+  width: 50%;
+  padding: 30px;
+  padding-bottom: 10px;
+  background: white;
+  @include s(){
+    width: 100%;
+    padding-bottom: 30px;
+  }
+}
+.NewsletterPopup__heading{
+  font-size: 3.6rem;
+  @include s(){
+    font-size: 3rem;
+  }
+}
+.NewsletterPopup__email{
+  border: 1px solid $border-light;
+}
+.NewsletterPopup__close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

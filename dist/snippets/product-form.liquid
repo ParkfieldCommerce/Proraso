@@ -2,20 +2,23 @@
   <div class="ProductForm__top-half" style="background-color:{{mainColor}}; color:{{fontColor}};">
     <div class="ProductForm__title-container">
       <h1 class="ProductForm__title" itemprop="name">{{ product.title }}
+      {% unless product.selected_or_first_available_variant.option1 == 'Default Title' %}
       <span class="ProductForm__size">{{product.selected_or_first_available_variant.option1}}</span>
+      {% endunless %}
       </h1>
     </div>
+    <div class="ProductForm__prices">
     <span class="hidden">{{ 'product.regular_price' | t }}</span>
-    <p id="ProductPrice" class="ProductForm__price" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+    <p id="ProductPrice" class="ProductForm__price js-originalProductPrice" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
       {{ current_variant.price | money }}
     </p>
     {% if on_sale %}
-      <p id="OnSale">
-        <span class="hidden">{{ 'product.original_price' | t }}</span>
-        <span>{{ 'product.original_price' | t }}</span>
-        <s id="ComparePrice">{{ product.compare_at_price | money }}</s>
-      </p>
+    <p class="ProductForm__compare-price" id="OnSale">
+      <span class="hidden">{{ 'product.original_price' | t }}</span>
+      <s id="ComparePrice">{{ product.compare_at_price | money }}</s>
+    </p>
     {% endif %}
+    </div>
     <div class="ProductForm__description rte" itemprop="description">
       {{ product.description | split:'<ol>' | first }}
     </div>
@@ -91,6 +94,38 @@
     </div>
   </div>
   <div class="ProductForm__bottom-half ProductForm__bottom-half--auto js-formContent" data-content="2">
-    AUto buy
+    <div class="ProductSubscribe center">
+      <h3>How Many Times a Week Do You Shave?</h3>
+      <div class="ProductSubscribe__buttons">
+        <button type="button" class="ProductSubscribe__button js-shaveOption" data-option="1">Every Day</button>
+        <button type="button" class="ProductSubscribe__button js-shaveOption" data-option="2">3-4 Times</button>
+        <button type="button" class="ProductSubscribe__button js-shaveOption" data-option="3">1-2 Times</button>
+      </div>
+      <p class="ProductSubscribe__description js-subscribeDescription">
+        We recommend you replenish every <span class="js-subscribeTime"></span>
+        <br>
+        You will be billed
+        <strong><span class="js-subscribePrice"></span></strong> every 
+        <strong><span class="js-subscribeTime"></span></strong>,
+        saving <strong><span class="js-subscribeSavings"></span></strong> annually
+      </p>
+      <form id="add-item-form" class="ProductSubscribe__form js-subscribeForm" action="/cart/add" method="post" data-productid="{{product.id}}">
+        {% if product.available %}{% include 'subscription-product' %}{% endif %}
+        <select name="id" data-index="option{{ forloop.index }}" data-productid="{{product.id}}">
+          {% for variant in product.variants %}
+            {% if variant.available %}
+              <option
+                value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}
+              </option>
+            {% else %}
+              <option disabled="disabled">
+                {{ variant.title }} - {{ 'product.sold_out' | t }}
+              </option>
+            {% endif %}
+          {% endfor %}
+        </select>
+        <button class="Btn ProductForm__add ProductForm__add--available" type="submit">Subscribe</button>
+      </form>
+    </div>
   </div>
 </div>

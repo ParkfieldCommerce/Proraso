@@ -68,7 +68,15 @@
 .Account__details{
   line-height: 2;
 }
-.Account__details-edit{
+.Account__recharge{
+  margin-top: 5px;
+  .fas{
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+.Account__details-edit,
+.Account__recharge{
   color: $inactive;
   @include garI(1.8rem);
 }

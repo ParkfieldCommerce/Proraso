@@ -99,6 +99,7 @@ class Parkfield {
   initProductpage(){
     this.initProductpageImageSlider();
     this.initProductpageForm();
+    this.initProductPageSubscribeForm();
   }
   initProductpageImageSlider(){
     $('.js-photoSlider').slick({
@@ -150,6 +151,42 @@ class Parkfield {
     });
 
     this.initQuickAdd();
+  }
+  initProductPageSubscribeForm(){
+    $(document).ready(function(){
+      $('.js-shaveOption').click(function(){
+        var option = $(this).data('option');
+
+        $('.js-shaveOption').removeClass('active');
+        $('.js-subscribeDescription').addClass('active');
+        $('.js-subscribeForm').show();
+        $(this).addClass('active');
+        
+        //Update Interval
+        var subscribeTimeText = $('.js-subscribeTime');
+        var intervalSelect = $('.rc_select__frequency');
+        var intervalOption = intervalSelect.find('option:nth-child('+option+')');
+        
+        subscribeTimeText.text(intervalOption.text());
+        intervalSelect.val(intervalOption.val());
+
+        //Update Prices
+        var time = 52/intervalOption.val();
+
+        var subscribePrice = $('#rc_price_autodeliver').text();
+        var originalPrice = $('.js-originalProductPrice').text();
+        
+        //Amount to pay every interval
+        $('.js-subscribePrice').text(subscribePrice);
+        
+        subscribePrice = parseInt(subscribePrice.replace(/\D+/g, ''))*time;
+        originalPrice = parseInt(originalPrice.replace(/\D+/g, ''))*time;
+
+        //Amount Saved
+        $('.js-subscribeSavings').text(Shopify.formatMoney(originalPrice - subscribePrice));
+
+      });
+    });
   }
   //Misc
   initQuickAdd(){

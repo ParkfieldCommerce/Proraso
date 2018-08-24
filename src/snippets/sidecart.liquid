@@ -17,6 +17,7 @@
             <div class="SideCart__title-container">
               <a class="SideCart__title" rv-href="item.url">
                 { item.product_title }
+                <span rv-if="item.properties.subscription_id"><br>({item.properties.shipping_interval_frequency} {item.properties.shipping_interval_unit_type})</span>
               </a>
               <span class="SideCart__price">{ item.line_price | money_with_currency }</span>
               <div class="SideCart__quantity Quantity">
@@ -42,6 +43,7 @@
         </div>
       </div>
     </form>
-    <p class="center margin-bottom-0x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
+    <p class="center margin-bottom-0x margin-top-1x" rv-if="cart.item_count | eq 0">{{'cart.empty' | t }}</p>
   </div>
 </div>
+{% include 'subscription-cart-footer' %}

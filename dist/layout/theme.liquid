@@ -57,17 +57,19 @@ Copyright 2017 Shopify Inc. & ParkfieldCommerce
   <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if template.suffix != null %} suffix-{{ template.suffix }}{% endif %}" itemscope itemtype="http://schema.org/WebSite">
     {% section 'promobar' %}
     {% section 'theme-header' %}
-
     <main id="MainContent" role="main">
       {{ content_for_layout }}
     </main>
-
     {% section 'complete-the-shave' %}
     {% section 'theme-footer' %}
+
+    {% unless template == 'cart' %}
     {% include 'sidecart' %}
+    {% endunless %}
+    {% section 'newsletter-popup' %}
+
     {% include 'popup-error' %}
     {% include 'quickview-popup' %}
-    
     <script type="text/javascript">
       CartJS.init({{ cart | json }});
     </script>
@@ -88,6 +90,9 @@ Copyright 2017 Shopify Inc. & ParkfieldCommerce
       parkfield.initProductpage();
     {% endif %}
     </script>
+
+    <!-- Recharge Code -->
+    {% include 'subscription-theme-footer' %}
   </body>
 
 </html>

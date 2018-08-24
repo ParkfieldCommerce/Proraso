@@ -83,6 +83,13 @@
             {{customer.email}}
           </p>
           <a class="Account__details-edit" href="/account/addresses" title="{{ 'account.address.title' | t }}"><i class="fas fa-pencil-alt"></i> Edit Info</a>
+          {% if customer.metafields.subscriptions.customer_string %}
+          <!--BeginRechargeCode-->
+          <div class="Account__recharge">
+            <i class="fas fa-clock"></i><a class="Account__details-edit" href="/tools/recurring/customer/{{customer.metafields.subscriptions.customer_string}}/subscriptions/">Manage Subscriptions</a>
+          </div>
+          <!--EndRechargeCode-->
+          {% endif %}<br>
           </div>
         </section>
       </div>

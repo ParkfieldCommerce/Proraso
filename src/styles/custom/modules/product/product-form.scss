@@ -46,7 +46,14 @@
   @include din(2.4rem);
   display: inline-block;
 }
+.ProductForm__prices{
+  @include flex();
+}
 .ProductForm__price{
+  @include garI(2.4rem);
+  margin-right: 10px;
+}
+.ProductForm__compare-price{
   @include garI(2.4rem);
 }
 .ProductForm__description{
@@ -69,6 +76,7 @@
     text-align: center;
   }
 }
+
 .ProductForm__content-controls{
   @include flex();
   @include justify-content(space-between);
@@ -140,4 +148,46 @@
   @include maxQuery($s){
     margin-top: 10px;
   }
+}
+
+.ProductSubscribe{
+  margin-top: 30px;
+  width: 400px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ProductSubscribe__buttons{
+  @include flex();
+  @include justify-content(space-between);
+}
+.ProductSubscribe__button{
+  color: #A0A0A0;
+  border-bottom: 2px solid transparent;
+}
+.ProductSubscribe__button.active{
+  color: $font-color;
+  border-bottom: 2px solid $border-dark;
+}
+.ProductSubscribe__description{
+  display: none;
+  margin-top: 30px;
+  margin-bottom: 0;
+  strong{
+    text-decoration: underline;
+  }
+}
+.ProductSubscribe__description.active{
+  display: block;
+}
+.ProductSubscribe__form{
+  display: none;
+}
+.ProductSubscribe .ProductForm__add{
+  margin-bottom: 0;
+}
+.ProductSubscribe .rc_block__type__onetime,
+.ProductSubscribe #rc_container,
+.ProductSubscribe select{
+  display: none !important;
 }
