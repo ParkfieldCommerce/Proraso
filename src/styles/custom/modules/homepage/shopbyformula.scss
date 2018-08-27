@@ -118,9 +118,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-  .CollectionProduct:hover .CollectionProduct__image-container a{
-    @include align-items(flex-start);
-  }
   .CollectionProduct__image-container{
     justify-content: center;
     a{

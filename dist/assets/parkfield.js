@@ -193,16 +193,19 @@ class Parkfield {
     //Quickadd Button Logic for Collection Products
     $('.js-quickAdd').click(function(){
       var button = $(this);
+      var cartLink = button.next();
       var variantId = button.data('variant-id');
       CartJS.addItem(variantId, 1, {}, {
         // Define a success callback to display a success message.
         "success": function(data, textStatus, jqXHR) {
           button.addClass('Btn--added');
           button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
+          cartLink.addClass('active');
           setTimeout(function(){
             button.removeClass('Btn--added');
+            cartLink.removeClass('active');
             button.html('Buy');
-          }, 3000);
+          }, 5000);
         },
         "error": function(jqXHR, textStatus, errorThrown) {
           console.log(jqXHR);
@@ -213,7 +216,6 @@ class Parkfield {
   
   initQuickView(){
     var clickedButton;
-
     function updateQuickViewContent(){
       //Takes the info thats in quickview-info.liquid and pastes it into the popup
       var info = clickedButton.siblings('.js-quickview-info');
@@ -225,19 +227,20 @@ class Parkfield {
       //Apply Add Clickhandler
       $('.js-quickview-add').click(function(){
         var button = $(this);
-        console.log(button);
+        var cartLink = button.next();
         var variantId = button.data('variant-id');
         var quantity = $(this).closest('.js-form').find('.js-state').val();
-        console.log(quantity);
         CartJS.addItem(variantId, quantity, {}, {
           // Define a success callback to display a success message.
           "success": function(data, textStatus, jqXHR) {
             button.addClass('Btn--added');
             button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
+            cartLink.addClass('active');
             setTimeout(function(){
               button.removeClass('Btn--added');
               button.html('Buy');
-            }, 3000);
+              cartLink.removeClass('active');
+            }, 5000);
           },
           "error": function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
@@ -354,14 +357,6 @@ class Parkfield {
   initSideCart(){
     var cartPopup = new Focus('.js-sideCart',{
       bodyClass:'fixed'
-    });
-
-    // Cart error handling
-    $(document).on('cart.requestComplete', function(event, cart) {
-      var disabledPages = ['cart', 'collection', 'customers/account'];
-      if(disabledPages.indexOf(pageTemplate) == -1){
-        cartPopup.show();
-      }
     });
 
     $('.js-cartTrigger').click(function(e){

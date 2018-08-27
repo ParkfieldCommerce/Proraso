@@ -87,10 +87,10 @@
 
 @include maxQuery(800px){
   .Header{
-    height: 62px;
+    height: 45px;
   }
   .Header__user-row{
-    height: 62px;
+    height: 45px;
   }
   .Header__decoration,
   .Header__price,
@@ -104,10 +104,14 @@
   }
   .Header__hamburger{
     display: inline-block;
+    bottom: -3px;
+    position: relative;
   }
   .Header__hamburger.active{
-    position: relative;
     z-index: 10001;
+  }
+  .Header__hamburger.active.with-promobar{
+    bottom: 27px;
   }
   .Header__logo{
     top: 5px;

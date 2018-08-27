@@ -86,7 +86,15 @@
     border-color: white;
   }
 }
-
+.CollectionProduct__cart-link{
+  display: none;
+  @include garI(1.8rem);
+  text-align: center;
+  margin-top: 10px;
+}
+.CollectionProduct__cart-link.active{
+  display: block;
+}
 @include maxQuery($s){
   .CollectionProduct__heading{
     font-size: 1.6rem;

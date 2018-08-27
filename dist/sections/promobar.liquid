@@ -18,11 +18,16 @@
 </style>
 <script>
   if(Cookies.get('promobar-closed') === undefined){
+    console.log('here');
     $('.js-promobar').removeClass('Promobar--hidden');
+    $(document).ready(function(){
+      $('.js-mobileNavTrigger').addClass('with-promobar');
+    });
   }
   $('.js-closePromobar').click(function(){
     $('.js-promobar').addClass('Promobar--hidden');
-    Cookies.set('promobar-closed', true);
+    $('.js-mobileNavTrigger').removeClass('with-promobar');
+    Cookies.set('promobar-closed', true, {expires: 3});
   });
 </script>
 {% endif %}

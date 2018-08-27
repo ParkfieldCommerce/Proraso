@@ -1647,10 +1647,10 @@ input::-webkit-inner-spin-button {
 
 @include maxQuery(800px){
   .Header{
-    height: 62px;
+    height: 45px;
   }
   .Header__user-row{
-    height: 62px;
+    height: 45px;
   }
   .Header__decoration,
   .Header__price,
@@ -1664,10 +1664,14 @@ input::-webkit-inner-spin-button {
   }
   .Header__hamburger{
     display: inline-block;
+    bottom: -3px;
+    position: relative;
   }
   .Header__hamburger.active{
-    position: relative;
     z-index: 10001;
+  }
+  .Header__hamburger.active.with-promobar{
+    bottom: 27px;
   }
   .Header__logo{
     top: 5px;
@@ -2344,7 +2348,7 @@ input[type="number"].Quantity__state,
   margin-bottom: 30px;
   @include align-items(center);
   &:last-child{
-    margin-bottom: 60px;
+    margin-bottom: 100px;
   }
 }
 .SideCart__column1{
@@ -3005,9 +3009,6 @@ $hero-text: white;
     margin-left: auto;
     margin-right: auto;
   }
-  .CollectionProduct:hover .CollectionProduct__image-container a{
-    @include align-items(flex-start);
-  }
   .CollectionProduct__image-container{
     justify-content: center;
     a{
@@ -3281,7 +3282,15 @@ $hero-text: white;
     border-color: white;
   }
 }
-
+.CollectionProduct__cart-link{
+  display: none;
+  @include garI(1.8rem);
+  text-align: center;
+  margin-top: 10px;
+}
+.CollectionProduct__cart-link.active{
+  display: block;
+}
 @include maxQuery($s){
   .CollectionProduct__heading{
     font-size: 1.6rem;
@@ -3569,6 +3578,9 @@ $hero-text: white;
 }
 .ProductForm__prices{
   @include flex();
+  @include s(){
+    @include justify-content(center);
+  }
 }
 .ProductForm__price{
   @include garI(2.4rem);
@@ -4183,10 +4195,16 @@ $hero-text: white;
     display: inline-block;
     min-width: initial;
     width: 130px;
+    @include s(){
+      flex: 1;
+    }
   }
   .CartPage__title-container{
     order: 2;
     padding-right: 10px;
+    @include s(){
+      flex: 2;
+    }
   }
   .CartPage__remove{
     order: 3;

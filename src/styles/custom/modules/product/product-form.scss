@@ -48,6 +48,9 @@
 }
 .ProductForm__prices{
   @include flex();
+  @include s(){
+    @include justify-content(center);
+  }
 }
 .ProductForm__price{
   @include garI(2.4rem);

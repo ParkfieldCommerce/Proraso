@@ -45,6 +45,7 @@
         >
           {% if sold_out %}{{ 'product.sold_out' | t }}{% else %}{{ 'product.add_to_cart_quickview' | t }}{% endif %}
         </button>
+        <a href="/cart" class="Quickview__cart-link js-cartTrigger">View Cart</a>
         <a class="Quickview__link" href="{{product.url}}">More Info</a>
       </div>
     </div>

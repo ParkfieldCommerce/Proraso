@@ -103,10 +103,16 @@
     display: inline-block;
     min-width: initial;
     width: 130px;
+    @include s(){
+      flex: 1;
+    }
   }
   .CartPage__title-container{
     order: 2;
     padding-right: 10px;
+    @include s(){
+      flex: 2;
+    }
   }
   .CartPage__remove{
     order: 3;

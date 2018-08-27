@@ -86,7 +86,9 @@
     }
 
     $(document).on('cart.requestComplete', function(event, cart) {
-      updateGiftContent(cart, true); 
+      setTimeout(function(){
+        updateGiftContent(cart, true); 
+      }, 3000);
     });
 
     $(document).ready(function(){
