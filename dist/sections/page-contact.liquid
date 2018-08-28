@@ -21,33 +21,10 @@
     </div>
   </div>
 </div>
-{% if section.settings.map_image %}
-<div class="Contact__map margin-top-9x s-margin-top-6x">
-  <a class="Contact__map-link" href="{{section.settings.map_link}}" target="_blank" rel="nofollow">
-    <img class="Contact__map-image s-hide" src="{{section.settings.map_image | img_url:'master' }}" alt="{{section.settings.map_image.alt }}">
-    <img class="Contact__map-image s-show" src="{{section.settings.map_mobile_image | img_url:'master' }}" alt="{{section.settings.map_mobile_image.alt }}">
-  </a>
-</div>
-{% endif %}
 {% schema %}
   {
     "name": "About Content",
     "settings":[
-      {
-        "type":"image_picker",
-        "id":"map_image",
-        "label":"Map Image"
-      },
-      {
-        "type":"image_picker",
-        "id":"map_mobile_image",
-        "label":"Mobile Map Image"
-      },
-      {
-        "type":"url",
-        "id":"map_link",
-        "label":"Map Link"
-      }
     ],
     "blocks":[
       {

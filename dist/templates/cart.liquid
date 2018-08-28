@@ -1,5 +1,5 @@
 <div class="CartPage"  data-cart-view rv-cloak>
-  <form class="CartPage__form" action="/cart" method="post" novalidate>
+  <form rv-if="cart.item_count | gt 0" class="CartPage__form" action="/cart" method="post" novalidate>
     <div class="container m">
       <div class="row collapse CartPage__heading-row margin-bottom-2x">
         <div class="column l8 m8 s12 s-center">
@@ -61,5 +61,8 @@
       </div>
     </div>
   </form>
+  <div class="container m" rv-if="cart.item_count | eq 0">
+    <h2 class="center">Your cart is empty</h2>
+  </div>
 </div>
 {% include 'subscription-cart-footer' %}

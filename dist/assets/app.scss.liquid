@@ -2824,7 +2824,7 @@ $hero-text: white;
     margin-bottom: 0;
     @include align-items(flex-start);
     @include justify-content(center);
-    padding-top: 30px;
+    padding-top: 60px;
     padding-bottom: 30px;
     height: auto;
   }
@@ -2836,7 +2836,7 @@ $hero-text: white;
   }
   .About__images{
     position: static;
-    margin-top: -180px;
+    margin-top: -210px;
     text-align: center;
   }
   .About__image--desktop{
@@ -2855,6 +2855,15 @@ $hero-text: white;
     width: auto;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+@include maxQuery(330px){
+  .About{
+    padding-top: 50px;
+  }
+  .About__images{
+    margin-top: -190px;
   }
 }
 .ShopByCategory__heading{
@@ -3793,6 +3802,7 @@ $hero-text: white;
 }
 .ProductFormula__ingredient{
   margin-right: 25px;
+  text-align: center;
 }
 .ProductDirections{
   ol {
@@ -4320,6 +4330,7 @@ $hero-text: white;
 .CollectionPage__sort-select{
   text-align: right;
   padding-right: 30px;
+  text-align-last:right; 
 }
 
 .CollectionPage .CollectionProduct{
@@ -4415,10 +4426,6 @@ $hero-text: white;
   margin-left: auto;
   margin-right: auto;
 }
-.Article{
-
-}
-
 .rte{
   h2,h3,h4{
     margin-top: 40px;
@@ -4428,7 +4435,10 @@ $hero-text: white;
     width: 100%;
   }
 }
-
+.Article__sidebar-column{
+  @include prefix(position, sticky);
+  top: 10px;
+}
 .Article__sidebar{
   padding: 30px;
   background-color: $bg-gray;
@@ -4540,15 +4550,6 @@ $hero-text: white;
   width: 100%;
   text-align: center;
   font-weight: 2rem;
-}
-
-.Contact__map-image{
-  width: 100%;
-  vertical-align: middle;
-}
-
-.Contact__map-link{
-
 }
 .LoginRegister{
   @include flex();

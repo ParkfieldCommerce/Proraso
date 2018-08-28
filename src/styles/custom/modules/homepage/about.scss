@@ -98,7 +98,7 @@
     margin-bottom: 0;
     @include align-items(flex-start);
     @include justify-content(center);
-    padding-top: 30px;
+    padding-top: 60px;
     padding-bottom: 30px;
     height: auto;
   }
@@ -110,7 +110,7 @@
   }
   .About__images{
     position: static;
-    margin-top: -180px;
+    margin-top: -210px;
     text-align: center;
   }
   .About__image--desktop{
@@ -129,5 +129,14 @@
     width: auto;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+@include maxQuery(330px){
+  .About{
+    padding-top: 50px;
+  }
+  .About__images{
+    margin-top: -190px;
   }
 }

@@ -1,7 +1,3 @@
-.Article{
-
-}
-
 .rte{
   h2,h3,h4{
     margin-top: 40px;
@@ -11,7 +7,10 @@
     width: 100%;
   }
 }
-
+.Article__sidebar-column{
+  @include prefix(position, sticky);
+  top: 10px;
+}
 .Article__sidebar{
   padding: 30px;
   background-color: $bg-gray;

@@ -78,8 +78,8 @@
         $('.js-sideCartGift').toggleClass('active');
       });
 
-      {% unless template == 'product' %}
-      if(showPopup){
+      {% unless template == 'product' or template == 'cart' %}
+      if(showPopup && !$('.js-sideCart').hasClass('visible')){
         giftPopup.show();
       }
       {% endunless %}
