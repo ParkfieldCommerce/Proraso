@@ -2,8 +2,8 @@
   <a href="{{article.url}}">
     <img src="{{article.image | img_url:'master'}}" alt="{{article.image.alt}}">
   </a>
+  <a class="EventListing__link" href="{{article.url}}">
   <p class="EventListing__text">
-    <a class="EventListing__link" href="{{article.url}}">
       {{article.title}}
       {% for tag in article.tags %}
         {% if tag contains '_' %}
@@ -12,6 +12,6 @@
         {% endif %}
       {% endfor %}
       <i class="fa fa-angle-right"></i>
-    </a>
   </p>
+  </a>
 </div>

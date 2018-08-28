@@ -17,6 +17,9 @@
   @include din(3.6rem);
   color: white;
   text-align: left;
+  @include s(){
+    font-size: 3rem;
+  }
 }
 .Newsletter__subheading{
   color: white;
@@ -27,6 +30,7 @@
   margin-bottom: 30px;
   input[type="email"]{
     margin-right: 10px;
+    width: 60%;
   }
   input[type="submit"]{
     border-color: white;

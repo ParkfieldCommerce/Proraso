@@ -7,27 +7,48 @@
       </div>
     </div>
   </div>
-  <div class="AboutSlider__slider js-aboutSlider">
-    {% for block in section.blocks %}
-    <div class="AboutSlider__slide">
-      <img src="{{block.settings.image | img_url:'master'}}" alt="{{block.settings.image.alt}}">
+  <div class="container l">
+    <div class="AboutSlider__slider-container">
+      <div class="AboutSlider__slider__arrow AboutSlider__slider__arrow--left js-aboutArrow--left">
+        {% include 'custom-icon' with icon:'arrow-left' %}
+      </div>
+      <div class="AboutSlider__slider js-aboutSlider">
+        {% for block in section.blocks %}
+        <div class="AboutSlider__slide">
+          <img src="{{block.settings.image | img_url:'master'}}" alt="{{block.settings.image.alt}}">
+        </div>
+        {% endfor %}
+      </div>
+      <div class="AboutSlider__slider__arrow AboutSlider__slider__arrow--right js-aboutArrow--right">
+        {% include 'custom-icon' with icon:'arrow-right' %}
+      </div>
     </div>
-    {% endfor %}
   </div>
 </div>
 
 <script>
   $('.js-aboutSlider').slick({
     slidesToShow: 4,
-    arrows: false,
+    arrows: true,
+    prevArrow:'.js-aboutArrow--left',
+    nextArrow:'.js-aboutArrow--right',
+    autoplay: true,
+    autoplaySpeed: 5000,
     responsive: [
+      {
+        breakpoint: 1280,
+        settings:{
+          arrows: false
+        }
+      },
       {
         breakpoint: 500,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
-          centerMode: true
+          centerMode: true,
+          arrows: false
         }
       }
     ]

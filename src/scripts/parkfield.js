@@ -132,6 +132,7 @@ class Parkfield {
     //Add to Cart Logic
     $('.js-productAdd').click(function(){
       var button = $('.js-productAdd');
+      var cartLink = button.next();
       var quantity = $('.js-quantity').val();
       var variantId = $('.js-variant').val();
       CartJS.addItem(variantId, quantity, 
@@ -139,10 +140,12 @@ class Parkfield {
         "success": function(data, textStatus, jqXHR) {
           button.addClass('Btn--added');
           button.html('<span class="ProductForm__add-text">Added <i class="fas fa-check"></i></span>');
+          cartLink.addClass('active');
           setTimeout(function(){
+            cartLink.removeClass('active');
             button.removeClass('Btn--added');
             button.html('Purchase');
-          }, 3000);
+          }, 5000);
         },
         "error": function(jqXHR, textStatus, errorThrown) {
           console.log(errorThrown);
@@ -227,7 +230,9 @@ class Parkfield {
       //Apply Add Clickhandler
       $('.js-quickview-add').click(function(){
         var button = $(this);
-        var cartLink = button.next();
+        var cartLink = button.siblings('.js-quickviewCart');
+        var productLink = button.siblings('.js-quickviewLink');
+
         var variantId = button.data('variant-id');
         var quantity = $(this).closest('.js-form').find('.js-state').val();
         CartJS.addItem(variantId, quantity, {}, {
@@ -235,11 +240,13 @@ class Parkfield {
           "success": function(data, textStatus, jqXHR) {
             button.addClass('Btn--added');
             button.html('<span class="CollectionProduct__button-text">Added <i class="fas fa-check"></i></span>');
-            cartLink.addClass('active');
+            cartLink.toggleClass('active');
+            productLink.toggleClass('active');
             setTimeout(function(){
               button.removeClass('Btn--added');
               button.html('Buy');
-              cartLink.removeClass('active');
+              cartLink.toggleClass('active');
+              productLink.toggleClass('active');
             }, 5000);
           },
           "error": function(jqXHR, textStatus, errorThrown) {

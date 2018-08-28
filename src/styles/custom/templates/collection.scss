@@ -11,7 +11,7 @@
   @include flex();
 }
 .CollectionFilter{
-  margin-right: 20px;
+  margin-right: 10px;
   &:last-child{
     margin-right: 0;
   }
@@ -21,7 +21,7 @@
 }
 .CollectionPage__sort-select{
   text-align: right;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 .CollectionPage .CollectionProduct{

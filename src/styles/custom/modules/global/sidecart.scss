@@ -35,6 +35,10 @@
   @include align-items(center);
   @include justify-content(center);
   position: relative;
+  @include s(){
+    height: 62px;
+    line-height: 62px;
+  }
 }
 .SideCart__heading{
   margin-bottom: 0;

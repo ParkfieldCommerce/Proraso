@@ -88,18 +88,7 @@
 </div>
 
 {% if relatedCollection %}
-<div class="ProductRelated">
-<div class="container l">
-  <div class="row collapse">
-    <div class="column l12 m12 s12 center">
-      <h2 class="ProductRelated__heading">Related Products</h2>
-    </div>
-  </div>
-  <div class="row">
-    {% include 'product-related' %}
-  </div>
-</div>
-</div>
+  {% include 'product-related' %}
 {% endif %}
 {% schema %}
   {

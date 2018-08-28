@@ -1,6 +1,6 @@
 .AboutSlider__heading{
   &:after{
-    left: 50%;
+    left: 50% !important;
     @include prefix(transform, translateX(-50%));
     max-width: 140px;
   }
@@ -29,6 +29,29 @@
       @include prefix(transform, none);
       max-width: 140px;
     }
+  }
+}
+.AboutSlider__slider-container{
+  position: relative;
+}
+.AboutSlider__slider__arrow{
+  position: absolute;
+  top: 70%;
+  @include prefix(transform, translateY(-50%));
+  svg path{
+    stroke: #c9c9c9;
+  }
+}
+.AboutSlider__slider__arrow--left{
+  left: -50px;
+  @include maxQuery(1280px){
+    display: none;
+  }
+}
+.AboutSlider__slider__arrow--right{
+  right: -50px;
+  @include maxQuery(1280px){
+    display: none;
   }
 }
 .AboutSlider__slide{

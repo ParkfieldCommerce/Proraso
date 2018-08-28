@@ -1,6 +1,12 @@
 .ProductImages__image-slider-container{
   position: relative;
 }
+.ProductImages__slide{
+  text-align: center;
+}
+.ProductImages__image{
+  display: inline-block !important;
+}
 .ProductImages__dots{
   text-align: center;
   .slick-dots li button{

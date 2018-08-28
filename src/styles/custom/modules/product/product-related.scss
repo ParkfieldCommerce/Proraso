@@ -22,3 +22,8 @@
     }
   }
 }
+.ProductRelated__products{
+  @include flex();
+  @include justify-content(center);
+  flex-flow:  row wrap;
+}

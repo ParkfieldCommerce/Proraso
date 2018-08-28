@@ -1,3 +1,14 @@
-{% for relatedProduct in collections[relatedCollection].products limit: 4 %}
-{% include 'collection-product' with product:relatedProduct %}
-{% endfor %}
+<div class="ProductRelated">
+<div class="container l">
+  <div class="row collapse">
+    <div class="column l12 m12 s12 center">
+      <h2 class="ProductRelated__heading">{{'product.related_products' | t }}</h2>
+    </div>
+  </div>
+  <div class="row ProductRelated__products">
+    {% for relatedProduct in collections[relatedCollection].products limit: 4 %}
+    {% include 'collection-product' with product:relatedProduct %}
+    {% endfor %}
+  </div>
+</div>
+</div>

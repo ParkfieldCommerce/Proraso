@@ -130,6 +130,15 @@
   border-color: $accent;
   color: white;
 }
+.ProductForm__cart-link{
+  display: none;
+  border-bottom: 0;
+  margin-bottom: 50px;
+  @include garI(1.8rem);
+}
+.ProductForm__cart-link.active{
+  display: block;
+}
 .ProductForm__shipping-title{
   position: relative;
   margin-top: 30px;

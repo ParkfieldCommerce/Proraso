@@ -55,9 +55,9 @@ button{
   }
 }
 .Btn--added{
-  background-color: $accent2;
-  border-color: $accent2;
-  color: white;
+  background-color: $accent2 !important;
+  border-color: $accent2 !important;
+  color: white !important;
 }
 .Btn--soldout{
   background: transparent !important;

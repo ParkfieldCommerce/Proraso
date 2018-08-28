@@ -125,5 +125,11 @@
     .CollectionProduct__overlay{
       display: none;
     }
+    .Btn{
+      background: transparent;
+      &:hover{
+        background: $accent;
+      }
+    }
   }
 }

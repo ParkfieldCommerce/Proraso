@@ -10,7 +10,7 @@
 {% assign form_success = section.settings.form_success %}
 {% assign form_show_button = section.settings.form_show_button %}
 {% assign noMarginTemplates = 'page.contact, customers/login, customers/register' %}
-<div class="{% unless noMarginTemplates contains template %}margin-top-18x s-margin-top-6x{% endunless %}">
+<div class="{% unless noMarginTemplates contains template %}margin-top-18x s-margin-top-4x{% endunless %}">
 <div class="Newsletter__container container l">
   <div class="Newsletter">
     <img src="{{'lion.png' | asset_url}}" alt="Proraso Lion">
@@ -52,8 +52,16 @@
     <div class="container l center">
       <div class="row">
         <div class="column l5 m12 s12 l-right v-middle">
-          <div class="Footer__copyright Footer__copyright--desktop">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso {% if show_attribution %}| Design & Dev by ParkfieldCommerce{% endif %}</div>
-          <div class="Footer__copyright Footer__copyright--mobile">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso {% if show_attribution %}<br>Design & Dev by ParkfieldCommerce{% endif %}</div>
+          <div class="Footer__copyright Footer__copyright--desktop">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso 
+            {% if show_attribution %}
+              | <a href="https://parkfieldcommerce.com" target="_blank" rel="nofollow">Design & Dev by ParkfieldCommerce</a>
+            {% endif %}
+          </div>
+          <div class="Footer__copyright Footer__copyright--mobile">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso 
+            {% if show_attribution %}
+              <br><a href="https://parkfieldcommerce.com" target="_blank" rel="nofollow">Design & Dev by ParkfieldCommerce</a>
+            {% endif %}
+          </div>
         </div>
         <div class="column l7 m12 s12 l-left v-middle">
           <div class="Footer__payments">

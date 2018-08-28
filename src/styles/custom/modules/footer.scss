@@ -28,6 +28,10 @@
   color: white;
   text-align: left;
   @include garI(1.6rem);
+  a{
+    color: white;
+    @include garI(1.6rem);
+  }
 }
 .Footer__copyright--mobile{
   display: none;

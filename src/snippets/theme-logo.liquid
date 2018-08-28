@@ -1,7 +1,6 @@
 <!-- /snippets/theme-logo.liquid -->
 
 {% assign logo = settings.logo %}
-{% assign logo_width = settings.logo_width | append: 'x' %}
 {% assign h1 = false %}
 
 {% if template == 'index' or template == 'password' %}
@@ -19,7 +18,7 @@
   {% if logo != blank %}
     <a href="/" itemprop="url" title="{{ shop.name }}" class="logo-image block">
       <span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject" class="block">
-        <img src="{{ logo | img_url: logo_width, scale: 2 }}" alt="{{ shop.name }}" title="{{ shop.name }}" itemprop="image" class="block">
+        <img src="{{ logo | img_url: 'master' }}" alt="{{ shop.name }}" title="{{ shop.name }}" itemprop="image" class="block">
       </span>
     </a>
   {% else %}

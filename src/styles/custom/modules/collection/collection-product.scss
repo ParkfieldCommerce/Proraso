@@ -1,16 +1,16 @@
 .CollectionProduct{
   text-align: center;
-  &:hover{
-    .CollectionProduct__overlay{
-      opacity: 1;
-    }
-  }
 }
 .CollectionProduct__image-container{
   background: $bg-gray;
   @include flex();
   @include align-items(flex-end);
   position: relative;
+  &:hover{
+    .CollectionProduct__overlay{
+      opacity: 1;
+    }
+  }
 }
 .CollectionProduct__image-container{
   min-height: 268px;

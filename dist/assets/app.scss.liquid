@@ -186,7 +186,6 @@ $transitionDelay: 300ms;
 $transition: $transitionProperty $transitionSpeed $transitionStyle;
 
 // Misc.
-$logoWidth: {{ settings.logo_width | default: '450' | append: 'px' }};
 $prefixes: webkit moz ms spec;
 
 $font-color: #333;
@@ -1083,9 +1082,9 @@ button{
   }
 }
 .Btn--added{
-  background-color: $accent2;
-  border-color: $accent2;
-  color: white;
+  background-color: $accent2 !important;
+  border-color: $accent2 !important;
+  color: white !important;
 }
 .Btn--soldout{
   background: transparent !important;
@@ -1277,7 +1276,7 @@ input::-webkit-inner-spin-button {
 
 .theme-logo {
   img {
-    width: $logoWidth;
+    width: auto;
   }
 }
 
@@ -1647,10 +1646,10 @@ input::-webkit-inner-spin-button {
 
 @include maxQuery(800px){
   .Header{
-    height: 45px;
+    height: 62px;
   }
   .Header__user-row{
-    height: 45px;
+    height: 62px;
   }
   .Header__decoration,
   .Header__price,
@@ -1832,6 +1831,12 @@ input::-webkit-inner-spin-button {
     .CollectionProduct__overlay{
       display: none;
     }
+    .Btn{
+      background: transparent;
+      &:hover{
+        background: $accent;
+      }
+    }
   }
 }
 .MobileNav{
@@ -1965,6 +1970,9 @@ input::-webkit-inner-spin-button {
   @include din(3.6rem);
   color: white;
   text-align: left;
+  @include s(){
+    font-size: 3rem;
+  }
 }
 .Newsletter__subheading{
   color: white;
@@ -1975,6 +1983,7 @@ input::-webkit-inner-spin-button {
   margin-bottom: 30px;
   input[type="email"]{
     margin-right: 10px;
+    width: 60%;
   }
   input[type="submit"]{
     border-color: white;
@@ -2053,6 +2062,10 @@ input::-webkit-inner-spin-button {
   color: white;
   text-align: left;
   @include garI(1.6rem);
+  a{
+    color: white;
+    @include garI(1.6rem);
+  }
 }
 .Footer__copyright--mobile{
   display: none;
@@ -2183,6 +2196,7 @@ input[type="number"].Quantity__state,
     @include garI(1.8rem);
     position: relative;
     z-index: 2;
+    padding-left: 15px;
   }
   &:after{
     z-index: 1;
@@ -2191,7 +2205,7 @@ input[type="number"].Quantity__state,
     font-weight: 900;
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 15px;
     @include prefix(transform, translateY(-50%));
   }
 }
@@ -2241,6 +2255,9 @@ input[type="number"].Quantity__state,
   padding: 15px 0 15px 40px;
   margin-bottom: 0;
   position: relative;
+  font: inherit;
+  line-height: 1.25;
+  text-transform: uppercase;
   .fa{
     position: absolute;
     top: 50%;
@@ -2287,7 +2304,10 @@ input[type="number"].Quantity__state,
   &:first-of-type{
     margin-left: 0;
   }
-  a{color: white;}
+  a{
+    font-size: 2.2rem;
+    color: white;
+  }
 }
 #SideCart.visible .SideCart.popup-content{
   right: 0;
@@ -2326,6 +2346,10 @@ input[type="number"].Quantity__state,
   @include align-items(center);
   @include justify-content(center);
   position: relative;
+  @include s(){
+    height: 62px;
+    line-height: 62px;
+  }
 }
 .SideCart__heading{
   margin-bottom: 0;
@@ -2881,11 +2905,11 @@ $hero-text: white;
     font-size: 1.6rem;
   }
   .ShopByCategory__collection__image{
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     img{
-      max-width: 50%;
-      max-height: 50%;
+      max-width: 60%;
+      max-height: 60%;
     }
   }
 }
@@ -3178,6 +3202,7 @@ $hero-text: white;
   margin-bottom: 40px;
   font-size: 3.6rem;
   @include s(){
+    margin-bottom: 20px;
     font-size: 2.4rem;
   }
 }
@@ -3196,17 +3221,17 @@ $hero-text: white;
 //Collection
 .CollectionProduct{
   text-align: center;
-  &:hover{
-    .CollectionProduct__overlay{
-      opacity: 1;
-    }
-  }
 }
 .CollectionProduct__image-container{
   background: $bg-gray;
   @include flex();
   @include align-items(flex-end);
   position: relative;
+  &:hover{
+    .CollectionProduct__overlay{
+      opacity: 1;
+    }
+  }
 }
 .CollectionProduct__image-container{
   min-height: 268px;
@@ -3369,14 +3394,21 @@ $hero-text: white;
 .Quickview__actions{
   @include flex();
   @include align-items(center);
+  position: relative;
 }
 .Quickview__add{
   margin: 0;
   width: 160px;
   margin-right: 20px;
 }
-.Quickview__link{
-  text-transform: uppercase;
+.Quickview__link,
+.Quickview__cart-link{
+  display: none;
+}
+
+.Quickview__link.active,
+.Quickview__cart-link.active{
+  display: inline-block;
 }
 .Gift__popup .popup-content{
   background-color: $bg-light;
@@ -3515,6 +3547,12 @@ $hero-text: white;
 //Product
 .ProductImages__image-slider-container{
   position: relative;
+}
+.ProductImages__slide{
+  text-align: center;
+}
+.ProductImages__image{
+  display: inline-block !important;
 }
 .ProductImages__dots{
   text-align: center;
@@ -3659,6 +3697,15 @@ $hero-text: white;
   background-color: $accent;
   border-color: $accent;
   color: white;
+}
+.ProductForm__cart-link{
+  display: none;
+  border-bottom: 0;
+  margin-bottom: 50px;
+  @include garI(1.8rem);
+}
+.ProductForm__cart-link.active{
+  display: block;
 }
 .ProductForm__shipping-title{
   position: relative;
@@ -3901,6 +3948,11 @@ $hero-text: white;
     }
   }
 }
+.ProductRelated__products{
+  @include flex();
+  @include justify-content(center);
+  flex-flow:  row wrap;
+}
 //About
 .AboutIntro{
   position: relative;
@@ -4051,7 +4103,7 @@ $hero-text: white;
 }
 .AboutSlider__heading{
   &:after{
-    left: 50%;
+    left: 50% !important;
     @include prefix(transform, translateX(-50%));
     max-width: 140px;
   }
@@ -4080,6 +4132,29 @@ $hero-text: white;
       @include prefix(transform, none);
       max-width: 140px;
     }
+  }
+}
+.AboutSlider__slider-container{
+  position: relative;
+}
+.AboutSlider__slider__arrow{
+  position: absolute;
+  top: 70%;
+  @include prefix(transform, translateY(-50%));
+  svg path{
+    stroke: #c9c9c9;
+  }
+}
+.AboutSlider__slider__arrow--left{
+  left: -50px;
+  @include maxQuery(1280px){
+    display: none;
+  }
+}
+.AboutSlider__slider__arrow--right{
+  right: -50px;
+  @include maxQuery(1280px){
+    display: none;
   }
 }
 .AboutSlider__slide{
@@ -4234,7 +4309,7 @@ $hero-text: white;
   @include flex();
 }
 .CollectionFilter{
-  margin-right: 20px;
+  margin-right: 10px;
   &:last-child{
     margin-right: 0;
   }
@@ -4244,7 +4319,7 @@ $hero-text: white;
 }
 .CollectionPage__sort-select{
   text-align: right;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 .CollectionPage .CollectionProduct{

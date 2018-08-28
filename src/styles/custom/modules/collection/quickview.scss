@@ -58,12 +58,19 @@
 .Quickview__actions{
   @include flex();
   @include align-items(center);
+  position: relative;
 }
 .Quickview__add{
   margin: 0;
   width: 160px;
   margin-right: 20px;
 }
-.Quickview__link{
-  text-transform: uppercase;
+.Quickview__link,
+.Quickview__cart-link{
+  display: none;
+}
+
+.Quickview__link.active,
+.Quickview__cart-link.active{
+  display: inline-block;
 }
