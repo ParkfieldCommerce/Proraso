@@ -1063,7 +1063,7 @@ button{
   @include din(2rem);
   border-radius: 0;
 }
-.Btn{
+.btn,.Btn{
   width: 180px;
   padding: 0;
   border: 2px solid $border-dark;
@@ -1828,7 +1828,8 @@ input::-webkit-inner-spin-button {
         max-height: 130px;
       }
     }
-    .CollectionProduct__overlay{
+    .CollectionProduct__overlay,
+    .CollectionProduct__overlay-button{
       display: none;
     }
     .Btn{
@@ -2582,9 +2583,15 @@ input[type="number"].Quantity__state,
   padding: 30px;
   padding-bottom: 10px;
   background: white;
+  .form-success{
+    text-align: left;
+  }
   @include s(){
     width: 100%;
     padding-bottom: 30px;
+    .form-success{
+      text-align: center;
+    }
   }
 }
 .NewsletterPopup__heading{
@@ -3237,7 +3244,8 @@ $hero-text: white;
   @include align-items(flex-end);
   position: relative;
   &:hover{
-    .CollectionProduct__overlay{
+    .CollectionProduct__overlay,
+    .CollectionProduct__overlay-button{
       opacity: 1;
     }
   }
@@ -3311,9 +3319,13 @@ $hero-text: white;
   font-size: 2.4rem;
   padding-top: 10px;
   padding-bottom: 10px;
+  opacity: 0;
   &:hover{
     color: white;
     border-color: white;
+  }
+  @include maxQuery(800px){
+    display: none;
   }
 }
 .CollectionProduct__cart-link{
@@ -3623,6 +3635,10 @@ $hero-text: white;
   @include din(2.4rem);
   display: inline-block;
 }
+.ProductForm__stars .jdgm-prev-badge{
+  margin-bottom: 10px;
+  @include garI(1.8rem);
+}
 .ProductForm__prices{
   @include flex();
   @include s(){
@@ -3926,6 +3942,33 @@ $hero-text: white;
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
+    @include s(){
+      width: auto;
+    }
+  }
+  .jdgm-form__rating{
+    display: block;
+    text-align: left;
+  }
+  .jdgm-form-wrapper{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    label{
+      font-size: 1.8rem;
+      display: block !important;
+      text-align: left;
+    }
+    textarea{
+      @include garI(1.8rem);
+    }
+    .jdgm-submit-rev{
+      @include din(1.8rem);
+      padding: 0;
+      line-height: 40px;
+    }
   }
   @include s(){
     .jdgm-rev-widg{
@@ -3933,6 +3976,10 @@ $hero-text: white;
       margin: 0;
     }
   }
+}
+
+.jdgm-preview-badge .jdgm-star{
+  color: $accent !important;
 }
 .ProductRelated__heading{
   margin-bottom: 40px;
@@ -5125,6 +5172,10 @@ $hero-text: white;
 // Shopify captcha challenge
 .shopify-challenge__container {
   text-align: center;
+  .shopify-challenge__button{
+    @include din(1.8rem);
+    margin-top: 20px;
+  }
 }
 
 // Optionally, hide Shopify theme UI

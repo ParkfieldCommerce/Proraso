@@ -36,7 +36,7 @@ button{
   @include din(2rem);
   border-radius: 0;
 }
-.Btn{
+.btn,.Btn{
   width: 180px;
   padding: 0;
   border: 2px solid $border-dark;

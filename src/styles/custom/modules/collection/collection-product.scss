@@ -7,7 +7,8 @@
   @include align-items(flex-end);
   position: relative;
   &:hover{
-    .CollectionProduct__overlay{
+    .CollectionProduct__overlay,
+    .CollectionProduct__overlay-button{
       opacity: 1;
     }
   }
@@ -81,9 +82,13 @@
   font-size: 2.4rem;
   padding-top: 10px;
   padding-bottom: 10px;
+  opacity: 0;
   &:hover{
     color: white;
     border-color: white;
+  }
+  @include maxQuery(800px){
+    display: none;
   }
 }
 .CollectionProduct__cart-link{

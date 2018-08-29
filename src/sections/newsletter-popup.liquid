@@ -1,5 +1,6 @@
+{% if section.settings.enable_popup %}
 <div class="NewsletterPopup popup" id="NewsletterPopup">
-  <div class="overlay"></div>
+  <div class="overlay js-newsletterOverlay"></div>
   <div class="popup-outer">
     <div class="NewsletterPopup__content popup-content">
       <div class="NewsletterPopup__image">
@@ -33,20 +34,33 @@
 <script>
   var newsletterPopup = new Focus('#NewsletterPopup');
   //Check whether to show newsletter or not
-  {% if section.settings.enable_popup %}
   $(document).ready(function(){
     setTimeout(function(){
       var subscribed = Cookies.get('newsletter-subscribed');
       var temp = Cookies.get('newsletter-popup-timeout');
-      if(subscribed == false || subscribed == undefined){
-        if(temp==false || temp == undefined){
-          newsletterPopup.show();
+      var isChallenge = window.location.href.indexOf('challenge') > -1;
+
+      if(subscribed !== 'subscribed'){
+        if(subscribed == false || subscribed == undefined){ //If you're already subscribed, dont show popup
+          if(temp==false || temp == undefined){ //If your not subscribed, and you havent seen the popup yet, or closed it at a previous time
+            if(!isChallenge){//Unless its the challenge page
+              newsletterPopup.show();
+            }
+          }
+        }else{
+          if(!isChallenge){
+            if(subscribed == 'true'){
+              console.log('in here now');
+              Cookies.set('newsletter-subscribed', 'subscribed');
+              newsletterPopup.show();
+            }
+          }
         }
       }
     }, {{section.settings.delay}});
 
     //Close Newsletter Popup
-    $('.js-newsletterPopupClose').click(function(e){
+    $('.js-newsletterPopupClose, .js-newsletterOverlay').click(function(e){
       e.preventDefault();
       newsletterPopup.hide();
       var subscribed = Cookies.get('newsletter-subscribed');
@@ -54,9 +68,15 @@
         Cookies.set('newsletter-popup-timeout', true, { expires: {{section.settings.expiration}} });
       }
     });
+
+    //Handle Form Submission
+    $('.NewsletterPopup form').submit(function(e){
+      Cookies.set('newsletter-subscribed', true);
+      return true;
+    });
   });
-  {% endif %}
 </script>
+{% endif %}
 {% schema %}
 {
   "name": "Newsletter Popup",

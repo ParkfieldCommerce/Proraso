@@ -32,6 +32,33 @@
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
+    @include s(){
+      width: auto;
+    }
+  }
+  .jdgm-form__rating{
+    display: block;
+    text-align: left;
+  }
+  .jdgm-form-wrapper{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    label{
+      font-size: 1.8rem;
+      display: block !important;
+      text-align: left;
+    }
+    textarea{
+      @include garI(1.8rem);
+    }
+    .jdgm-submit-rev{
+      @include din(1.8rem);
+      padding: 0;
+      line-height: 40px;
+    }
   }
   @include s(){
     .jdgm-rev-widg{
@@ -39,4 +66,8 @@
       margin: 0;
     }
   }
+}
+
+.jdgm-preview-badge .jdgm-star{
+  color: $accent !important;
 }

@@ -46,6 +46,10 @@
   @include din(2.4rem);
   display: inline-block;
 }
+.ProductForm__stars .jdgm-prev-badge{
+  margin-bottom: 10px;
+  @include garI(1.8rem);
+}
 .ProductForm__prices{
   @include flex();
   @include s(){

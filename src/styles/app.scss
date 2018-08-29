@@ -62,6 +62,10 @@
 // Shopify captcha challenge
 .shopify-challenge__container {
   text-align: center;
+  .shopify-challenge__button{
+    @include din(1.8rem);
+    margin-top: 20px;
+  }
 }
 
 // Optionally, hide Shopify theme UI
