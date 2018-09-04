@@ -50,7 +50,7 @@
 }
 .ShopByFormula__ingredient{
   flex: 1;
-  text-align: right;
+  text-align: center;
 }
 .ShopByFormula__ingredient__label{
   display: block;
@@ -92,8 +92,14 @@
 .ShopByFormula__slider-container{
   position: relative;
 }
+.ShopByFormula__slider{
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .ShopByFormula__slider__arrow{
   position: absolute;
+  z-index: 2;
   top: 50%;
   @include prefix(transform, translateY(-50%));
   svg path{
@@ -124,10 +130,6 @@
       @include flex();
       @include align-items(flex-end);
       @include justify-content(center);
-      height: 310px;
-    }
-    img{
-      max-height: 230px;
     }
   }
   .CollectionProduct .Btn{
@@ -167,11 +169,7 @@
     .CollectionProduct:hover .CollectionProduct__image-container a{
       @include align-items(flex-end);
     }
-    .CollectionProduct__image-container{
-      a{
-        height: 230px;
-      }
-    }
+    
     .CollectionProduct .Btn{
       width: 150px;
     }

@@ -11,6 +11,7 @@ class Parkfield {
     this.initSideCart();
     this.initQuickAdd();
     this.initQuickView();
+    this.initFooter();
   }
   //Homepage
   initHomepage(){
@@ -23,7 +24,10 @@ class Parkfield {
       arrows: false,
       dots: true,
       appendDots:'.js-heroDots',
-      touch: true
+      touch: true,
+      autoplay: true,
+      autoplaySpeed: 4000,
+      speed: 1000
     });
   }
   initHomepageAbout(){
@@ -266,7 +270,7 @@ class Parkfield {
 
       quantityDecrement.click(function(){
         var currentQuantity = parseInt(quantity.val());
-        if(currentQuantity > 0){
+        if(currentQuantity > 1){
           quantity.val(currentQuantity - 1);
         }
       });
@@ -293,6 +297,10 @@ class Parkfield {
   }
   initHeader(){
     $('.js-headerSearch').click(function(){
+      $(this).parent().toggleClass('active');
+    });
+
+    $('.js-headerSearchOverlay').click(function(){
       $(this).parent().toggleClass('active');
     });
   }
@@ -381,6 +389,17 @@ class Parkfield {
       e.preventDefault();
       $('.js-mobileNavTrigger').removeClass('active');
       cartPopup.hide();
+    });
+  }
+  initFooter(){
+    $('.js-footerNavToggle').click(function(){
+      var column = $(this).closest('.js-footerColumn');
+      if(column.hasClass('active')){
+        $('.js-footerColumn').removeClass('active');
+      }else{
+        $('.js-footerColumn').removeClass('active');
+        column.addClass('active');
+      }
     });
   }
 }

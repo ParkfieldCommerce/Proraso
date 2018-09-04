@@ -32,7 +32,11 @@
         <div class="Footer__columns">
           {% for link in linklists[section.settings.footer_nav].links %}
             <div class="Footer__column js-footerColumn">
-              <h5 class="Footer__nav__heading js-footerNavHeading">{{link.title}}</h5>
+            <button class="js-footerNavToggle" type="button">
+              <h5 class="Footer__nav__heading">
+                {{link.title}}
+              </h5>
+              </button>
               {% if link.levels > 0 %}
               <ul class="Footer__nav__links">
                 {% for childlink in link.links %}
@@ -54,12 +58,12 @@
         <div class="column l5 m12 s12 l-right v-middle">
           <div class="Footer__copyright Footer__copyright--desktop">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso 
             {% if show_attribution %}
-              | <a href="https://parkfieldcommerce.com" target="_blank" rel="nofollow">Design & Dev by ParkfieldCommerce</a>
+              | <a href="https://parkfieldcommerce.com" target="_blank" rel="nofollow">Design & Dev by Parkfield Commerce</a>
             {% endif %}
           </div>
           <div class="Footer__copyright Footer__copyright--mobile">Copyright &copy; {{ 'now' | date: "%Y" }} Proraso 
             {% if show_attribution %}
-              <br><a href="https://parkfieldcommerce.com" target="_blank" rel="nofollow">Design & Dev by ParkfieldCommerce</a>
+              <br><a href="https://parkfieldcommerce.com" target="_blank" rel="nofollow">Design & Dev by Parkfield Commerce</a>
             {% endif %}
           </div>
         </div>
@@ -75,17 +79,6 @@
   </div>
 </footer>
 </div>
-<script>
-  $('.js-footerNavHeading').click(function(){
-    if($(this).parent().hasClass('active')){
-      $('.js-footerColumn').removeClass('active');
-    }else{
-      $('.js-footerColumn').removeClass('active');
-      $(this).parent().addClass('active');
-    }
-
-  });
-</script>
 {% schema %}
   {
     "name": "Footer",

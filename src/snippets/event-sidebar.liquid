@@ -1,7 +1,7 @@
-<!-- /snippets/blog-sidebar.liquid -->
+<!-- /snippets/event-sidebar.liquid -->
 <aside class="Article__sidebar">
-  <h2 class="Article__sidebar__heading">Upcoming Events</h2>
-  {% for event in blog.articles %}
+  <h2 class="Article__sidebar__heading">{{'blog.related_events' | t}}</h2>
+  {% for event in blog.articles limit: 4 %}
   <a href="{{event.url}}" class="Article__event">
     <h3 class="Article__event__heading">
     <span>{{event.title}}</span>

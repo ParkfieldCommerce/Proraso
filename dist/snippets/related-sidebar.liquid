@@ -1,15 +1,10 @@
-<!-- /snippets/event-sidebar.liquid -->
+<!-- /snippets/related-sidebar.liquid -->
 <aside class="Article__sidebar">
-  <h2 class="Article__sidebar__heading">{{'blog.related_events' | t}}</h2>
+  <h2 class="Article__sidebar__heading">{{'blog.related_articles' | t}}</h2>
   {% for event in blog.articles limit: 4 %}
   <a href="{{event.url}}" class="Article__event">
     <h3 class="Article__event__heading">
     <span>{{event.title}}</span>
-    {% for tag in event.tags %}
-      {% if tag contains '_' %}
-      <span>{{tag | split:'_' | last }}</span>
-      {% endif %}
-    {% endfor %}
     </h3>
     <p>{{event.excerpt}}</p>
   </a>

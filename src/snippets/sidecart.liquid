@@ -1,7 +1,7 @@
 <div id="SideCart" class="js-sideCart popup noSelect">
   <div class="overlay js-overlay"></div>
   <div class="SideCart popup-content" data-cart-view>
-    <form class="SideCart__form" action="/cart" method="post" novalidate>
+    <form class="SideCart__form" action="/checkout" method="post" novalidate>
       <div class="SideCart__heading-row">
         <h3 class="s-center SideCart__heading">My Cart <span rv-if="cart.item_count | gt 0">({cart.item_count})</span></h3>
         <span class="SideCart__heading-close js-cartClose">{% include 'custom-icon' with icon:'dark-close' %}</span>

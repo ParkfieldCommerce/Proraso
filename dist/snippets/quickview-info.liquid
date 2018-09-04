@@ -25,7 +25,7 @@
       {% endif %}
     </span>
     <div class="Quickview__description">
-      {{product.description}}
+      {{ product.description | split:'<ol>' | first }}
     </div>
     <div class="Quickview__form js-form">
       <div class="Quickview__quantity Quantity js-quickview-quantity">

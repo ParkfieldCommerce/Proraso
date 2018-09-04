@@ -1,0 +1,165 @@
+<!-- /templates/{{ template }}.liquid -->
+<div class="ArticleTips container l">
+  <div class="row">
+    <div class="column l12 m12 s12">
+      <div class="ArticleTips__banner margin-bottom-9x s-margin-bottom-4x">
+        <img src="{{section.settings.image | img_url:'master'}}">
+        <div class="ArticleTips__banner__content">
+          <h1 class="ArticleTips__banner__heading">{{ section.settings.heading }}</h1>
+          <p class="ArticleTips__banner__body">{{section.settings.body}}</p>
+          {% if section.settings.button_text != blank %}
+          <button type="button" class="ArticleTips__banner__button Text--border-style js-articleTipsButton">{{section.settings.button_text}}</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="column l12 m12 s12 margin-bottom-4x" itemscope itemtype="http://schema.org/Article">
+      <header class="center">
+        <h2>{{ article.title }}</h2>
+      </header>
+    </div>
+    {% for block in section.blocks %}
+    <div class="column l12 m12 s12 margin-bottom-2x">
+      <div class="ArticleTips__tip  ArticleTips__tip--{% cycle 'dark','light' %}">
+        <div class="ArticleTips__tip__heading">
+          <h3>
+          <span class="ArticleTips__tip__num">{{forloop.index}}</span><br>
+          {{block.settings.title}}
+          </h3>
+        </div>
+        <div class="ArticleTips__tip__image">
+          <div class="ArticleTips__tip__image-container">
+            <img src="{{block.settings.image | img_url:'master'}}" alt="{{block.settings.image.alt}}">
+          </div>
+        </div>
+        <div class="ArticleTips__tip__body">
+          <p>{{block.settings.body}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% if section.settings.button_url contains 'youtube' %}
+{% assign hasVideo = true %}
+{% endif %}
+
+{% if hasVideo %}
+  {% assign youtubeHandle = section.settings.button_url | split:'v=' | last %}
+  {% assign youtubeSrc = 'https://www.youtube.com/embed/' | append: youtubeHandle | append:'?rel=0' %}
+
+    <div class="ArticleTips__video popup js-articleVideoPopup">
+      <div class="overlay"></div>
+      <div class="popup-inner">
+        <div class="popup-content left">
+          <iframe
+            frameborder="0"
+            class="ArticleTips__video js-articleVideo"
+            src="{{youtubeSrc}}">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  <script>
+    var videoPopup = new Focus('.js-articleVideoPopup');
+    var youtubeUrl = '';
+
+    $('.js-articleTipsButton').click(function(){
+      $(this).closest('.ArticleTips__video').addClass('active');
+      videoPopup.show();
+      if(youtubeUrl === ''){
+        console.log(youtubeUrl);
+        $('.js-articleVideo')[0].src += "&autoplay=1";
+      }else{
+        console.log(youtubeUrl);
+        $('.js-articleVideo')[0].src = youtubeUrl;
+      }
+    });
+    $('.js-articleVideoPopup .overlay').click(function(){
+      youtubeUrl = $('.js-articleVideo').attr('src');
+      $('.js-articleVideo').attr('src','');
+      videoPopup.hide();
+    });
+  </script>
+{% endif %}
+
+{% unless hasVideo %}
+<script>
+$('.js-articleTipsButton').click(function(){
+  window.location.href = '{{section.settings.button_url}}';
+});
+</script>
+{% endunless %}
+
+{% schema %}
+  {
+    "name": "Page - Tips",
+    "settings":[
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image",
+        "info":"Must be 1440x500"
+      },
+      {
+        "type":"range",
+        "id":"mobile_position",
+        "label":"mobile_position",
+        "min":0,
+        "max":100,
+        "step":5,
+        "unit":"%",
+        "default":20
+      },
+      {
+        "id":"heading",
+        "type":"text",
+        "label":"Heading"
+      },
+      {
+        "id":"body",
+        "type":"textarea",
+        "label":"Body"
+      },
+      {
+        "type":"header",
+        "content":"Button Settings"
+      },
+      {
+        "id":"button_text",
+        "type":"text",
+        "label":"Button Text"
+      },
+      {
+        "id":"button_url",
+        "type":"url",
+        "label":"Button URL"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"step",
+        "name":"step",
+        "settings": [
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+          },
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "id":"body",
+            "type":"textarea",
+            "label":"Body"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

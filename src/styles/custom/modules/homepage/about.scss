@@ -64,7 +64,10 @@
   text-transform: uppercase;
   color: $accent;
   position: absolute;
-  bottom: 0;
+  bottom: -15px;
+  @media screen and (max-height: 768px){
+    bottom: -30px;
+  }
   z-index: 1;
 }
 @include maxQuery(1208px){

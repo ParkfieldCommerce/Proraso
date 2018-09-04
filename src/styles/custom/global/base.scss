@@ -76,6 +76,12 @@ a{
   &:focus{
     color: $accent;
   }
+  @include s(){
+    &:hover,
+    &:focus{
+      color: $font-color;
+    }
+  }
 }
 .Link--underline{
   position: relative;
@@ -124,7 +130,7 @@ label{
 input{
   background: white;
   height: 40px;
-  padding-left: 20px;
+  padding-left: 10px;
   @include garI(1.6rem);
   @include placeholder{
     @include garI(1.6rem);

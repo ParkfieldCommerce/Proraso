@@ -23,11 +23,13 @@
 <div class="CollectionProduct__column {{ column_width }}{% if sold_out %} sold_out{% endif %}{% if on_sale %} on_sale{% endif %}">
   <div class="CollectionProduct">
     <div class="CollectionProduct__image-container">
-      {% if product.featured_image %}
+      {% for image in product.images %}
+        {% if image.alt == 'collection' %}
         <a href="{{ product.url | within: collection }}">
-          <img srcset="{{ product.featured_image | img_url: '512x512', scale: 2 }} 2x" src="{{ product.featured_image | img_url: '512x512' }}" alt="{{ product.featured_image.alt | escape }}">
+          <img srcset="{{ image | img_url: '512x512', scale: 2 }} 2x" src="{{ image | img_url: '512x512' }}" alt="{{ image.alt | escape }}">
         </a>
-      {% endif %}
+        {% endif %}
+      {% endfor %}
       <a href="{{ product.url | within: collection }}">
       <div class="CollectionProduct__overlay">
       </div>
@@ -35,7 +37,7 @@
       {% include 'quickview-info' with product:product %}
       <button type="button" class="CollectionProduct__overlay-button js-quickviewPopupTrigger Text--border-style">{{'product.quickview' | t }}</button>
     </div>
-    {% comment %}{% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false %}{% endcomment %}
+    <!-- {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false %} -->
     <p>
       <a class="CollectionProduct__heading" href="{{ product.url | within: collection }}">{{ product.title }}</a>
       {% unless formula == blank %}

@@ -24,9 +24,10 @@
         </div>
         {% unless section.settings.featured_product == blank %}
         {% assign product = all_products[section.settings.featured_product] %}
+        {% assign productImage = section.settings.featured_product_image %}
         <div class="Nav__featured-product">
           <h5>Featured Product</h5>
-          {% include 'collection-product' with column_width:'none' %}
+          {% include 'nav-collection-product' with column_width:'none' %}
         </div>
         {% endunless %}
       </ul>

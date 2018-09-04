@@ -190,6 +190,8 @@
   },
   "blog": {
     "title": "Blog",
+    "related_articles":"Related Articles",
+    "related_events":"Upcoming Events",
     "article": {
       "published": "Published",
       "author_on_date_html": "Posted by {{ author }} on {{ date }}",

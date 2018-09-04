@@ -54,6 +54,12 @@
 }
 .Quickview__quantity{
   margin-bottom: 20px;
+  .Quantity__state{
+    padding-left: 0;
+  }
+  .Quantity__control{
+    width: 30px;
+  }
 }
 .Quickview__actions{
   @include flex();

@@ -3,6 +3,7 @@
 {% assign categories = categories | split: '' %}
 {% assign lastCategory = '' %}
 {% for tag in collection.all_tags %}
+  {% unless tag contains 'related' %}
   {% if tag contains '_' %}
     {% assign categoryCheck = tag | split:'_' | first %}
     {% unless categories contains categoryCheck %}
@@ -27,7 +28,7 @@
       {{tag | split:'_' | last | capitalize }}
     </option>
   {% endif %}
-
+  {% endunless %}
   {% if forloop.last %}
   </select>
   </div>

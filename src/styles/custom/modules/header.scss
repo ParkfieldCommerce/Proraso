@@ -6,7 +6,9 @@
 }
 .Header__user-row{
   height: 80px;
-  @include flex();
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
   @include align-items(center);
   flex-flow: row wrap;
 }
@@ -60,16 +62,26 @@
   input{
   }
 }
+.Header__search-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: transparent;
+  display: none;
+}
 .Header__search.active{
   .Header__search-trigger{
-    svg path{
-      fill: $accent;
-      stroke: $accent;
-    }
+    opacity: 0;
   }
   form{
-    z-index: 2;
+    z-index: 3;
     opacity: 1;
+  }
+  .Header__search-overlay{
+    display: block;
   }
 }
 .Header__cart{

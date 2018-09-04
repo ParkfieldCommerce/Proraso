@@ -69,13 +69,15 @@
   @include align-items(flex-start);
   position: relative;
   width: 100%;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 .SideCart__remove{
   display: inline-block;
   position: absolute;
-  right: 10px;
+  right: 20px;
   top: 0;
+  width: 40px;
+  text-align: right;
   svg path{
     stroke: black;
   }
@@ -199,6 +201,12 @@
       content: "\f055";
       font-family: "Font Awesome 5 Free";
       font-weight: 900;
+    }
+    @include s(){
+      &:hover,
+      &:focus{
+        color: white;
+      }
     }
   }
   .popup-content{

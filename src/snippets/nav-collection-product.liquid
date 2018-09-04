@@ -23,13 +23,9 @@
 <div class="CollectionProduct__column {{ column_width }}{% if sold_out %} sold_out{% endif %}{% if on_sale %} on_sale{% endif %}">
   <div class="CollectionProduct">
     <div class="CollectionProduct__image-container">
-      {% for image in product.images %}
-        {% if image.alt == 'collection' %}
-        <a href="{{ product.url | within: collection }}">
-          <img srcset="{{ image | img_url: '512x512', scale: 2 }} 2x" src="{{ image | img_url: '512x512' }}" alt="{{ image.alt | escape }}">
-        </a>
-        {% endif %}
-      {% endfor %}
+      <a href="{{ product.url | within: collection }}">
+        <img srcset="{{ productImage | img_url: '512x512', scale: 2 }} 2x" src="{{ productImage | img_url: '512x512' }}" alt="{{ productImage.alt | escape }}">
+      </a>
       <a href="{{ product.url | within: collection }}">
       <div class="CollectionProduct__overlay">
       </div>

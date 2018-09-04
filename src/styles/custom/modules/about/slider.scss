@@ -36,7 +36,7 @@
 }
 .AboutSlider__slider__arrow{
   position: absolute;
-  top: 70%;
+  top: 50%;
   @include prefix(transform, translateY(-50%));
   svg path{
     stroke: #c9c9c9;

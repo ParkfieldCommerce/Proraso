@@ -1,10 +1,12 @@
 <div class="ProductImages__image-slider-container">
   <div id="ProductPhoto" class="ProductImages__slider js-photoSlider">
+    {% unless product.featured_image.alt contains 'collection' %}
     <div class="ProductImages__slide">
       <img class="ProductImages__image" srcset="{{ product.featured_image | img_url: '1024x1024', scale: 2 }} 2x" src="{{ product.featured_image | img_url: '1024x1024' }}"{% if image.alt %} alt="{{ product.featured_image.alt | escape }}"{% endif %}>
     </div>
+    {% endunless %}
     {% for image in product.images %}
-    {% unless product.featured_image.src == image.src or image.alt contains 'youtube' %}
+    {% unless product.featured_image.src == image.src or image.alt contains 'youtube' or image.alt contains 'collection' %}
       <div class="ProductImages__slide">
         <img class="ProductImages__image" srcset="{{ image | img_url: '1024x1024', scale: 2 }} 2x" src="{{ image | img_url: '1024x1024' }}"{% if image.alt %} alt="{{ image.alt | escape }}"{% endif %}>
       </div>

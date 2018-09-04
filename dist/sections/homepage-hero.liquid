@@ -6,7 +6,7 @@
     <div class="Hero__slide">
       <a href="{{block.settings.hero_url}}">
         <div class="Hero__image Hero__image--desktop">
-          <img src="{{block.settings.hero_image | img_url:'master'}}" alt="{{block.settings.hero_image.alt}}">
+          <img class="js-heroImage--{{forloop.index}}" src="{{block.settings.hero_image | img_url:'master'}}" alt="{{block.settings.hero_image.alt}}">
         </div>
         <div class="Hero__image Hero__image--mobile">
           <img src="{{block.settings.hero_image_2 | img_url:'master'}}" alt="{{block.settings.hero_image_2.alt}}">
@@ -29,6 +29,15 @@
   </div>
   <div class="Hero__slider-dots js-heroDots"></div>
 </div>
+<script>
+  if($(window).width() > 1800){
+    {% for block in section.blocks %}
+      {% if block.settings.hero_image_wide %}
+      $('.js-heroSlider .js-heroImage--{{forloop.index}}').attr('src','{{block.settings.hero_image_wide | img_url:'master'}}');
+      {% endif %}
+    {% endfor %}
+  }
+</script>
 {% schema %}
 {
   "name": "Main Hero Slider",
@@ -51,12 +60,17 @@
       {
         "id": "hero_image",
         "type": "image_picker",
-        "label": "Image 1"
+        "label": "Desktop Image"
+      },
+      {
+        "id": "hero_image_wide",
+        "type": "image_picker",
+        "label": "Wide Desktop Image(>1800px)"
       },
       {
         "id": "hero_image_2",
         "type": "image_picker",
-        "label": "Image 2"
+        "label": "Mobile Image"
       },
       {
         "type":"header",

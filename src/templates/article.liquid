@@ -20,19 +20,7 @@
     </article>
 
     <aside class="Article__sidebar-column column l4 m4 s-hide" role="complementary">
-      {% include 'event-sidebar' %}
+      {% include 'related-sidebar' %}
     </aside>
   </div>
-
-  <div class="row margin-top-4x Article__mobile-events">
-    <div class="column l12 m12 s12">
-      <h3 class="center">Upcoming Events</h3>
-    </div>
-    {% for event in blog.articles limit: 2 %}
-        <div class="column s-show s6">
-          {% include 'event-listing' %}
-        </div>
-    {% endfor %}
-  </div>
-
 </div>

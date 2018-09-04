@@ -14,18 +14,10 @@
   }
 }
 .CollectionProduct__image-container{
-  min-height: 268px;
   justify-content: center;
   img{
-    max-height: 250px;
     margin-left: auto;
     margin-right: auto;
-  }
-  @include maxQuery(800px){
-    min-height: 188px;
-    img{
-      max-height: 180px;
-    }
   }
 }
 .CollectionProduct__heading{

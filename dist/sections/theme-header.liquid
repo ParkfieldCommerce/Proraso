@@ -1,6 +1,4 @@
 <!-- /snippets/{{ section.id }}.liquid -->
-{% assign enable_search = section.settings.enable_search %}
-
 <header class="Header" role="banner">
   <div class="container Header__container">
     <div class="Header__user-row row collapse">
@@ -19,6 +17,7 @@
               <button type="submit">{% include 'custom-icon' with icon:'search' %}</button>
               <input type="text" placeholder="Search..." name="q" value="{{ search.terms | escape }}"  />
             </form>
+            <div class="Header__search-overlay js-headerSearchOverlay"></div>
           </span>
           <span class="Header__user Header__icon ">
             {% if customer %}
@@ -51,7 +50,7 @@
     </div>
   </div>
 </header>
-{% assign noHeaderMargin = 'index,blog,customers/register,customers/login,page.about' %}
+{% assign noHeaderMargin = 'index,blog,customers/register,customers/login,page.about,blog.tips' %}
 {% unless noHeaderMargin contains template %}
 <style>
 .Header{
@@ -82,15 +81,14 @@
         "default":"110 Years of Professional Quality"
       },
       {
-        "type": "checkbox",
-        "id": "enable_search",
-        "label": "Enable search",
-        "default": true
-      },
-      {
         "type":"product",
         "id":"featured_product",
         "label":"Featured Product"
+      },
+      {
+        "type":"image_picker",
+        "id":"featured_product_image",
+        "label":"Featured Product Image"
       }
     ]
   }

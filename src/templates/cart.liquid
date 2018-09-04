@@ -15,9 +15,9 @@
       <div class="row">
         <div class="CartPage__product margin-bottom-4x" rv-each-item="cart.items">
           <div class="column l8 m8 s12 CartPage__column1">
-            <a class="CartPage__remove" rv-data-cart-update="0" rv-data-cart-remove="index | plus 1">
+            <button type="button" class="CartPage__remove" rv-data-cart-update="0" rv-data-cart-remove="index | plus 1">
               {% include 'custom-icon' with icon:'close' %}
-            </a>
+            </button>
             <a class="CartPage__image" rv-href="item.url">
               <img rv-src="item.image | product_image_size">
             </a>
