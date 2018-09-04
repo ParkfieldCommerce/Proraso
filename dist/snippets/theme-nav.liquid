@@ -1,8 +1,8 @@
 <!-- /snippets/theme-nav.liquid -->
 {% for link in linklists.main-menu.links %}
   {% assign index = forloop.index %}
-  {% if index == 1 or index == 3 %}
-  <div class="Nav__half Nav__half--{{index}}">
+  {% if index == 1 or index == 4 %}
+  <div class="Nav__half Nav__half--{% if index == 1 %}first{% else %}second{% endif %}">
   {% endif %}
   {% if link.levels > 0 %}
     <li class="Nav__main-link Nav__dropdown dropdown Nav__main-link--{{forloop.index}} {% unless section.settings.featured_product == blank %}Nav__dropdown--hasProduct{% endunless %}" aria-haspopup="true">
@@ -37,7 +37,7 @@
       <a href="{{ link.url }}" class="Nav__link Link--underline nav-link{% if link.active %} active{% endif %}">{{ link.title }}</a>
     </li>
   {% endif %}
-  {% if index == 2 or index == 4 %}
+  {% if index == 3 or index == 6 %}
   </div>
   {% endif %}
 {% endfor %}

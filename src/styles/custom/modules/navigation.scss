@@ -10,18 +10,29 @@
 .Nav__half{
   @include flex();
 }
-.Nav__half--1 .Nav__main-link{
+.Nav__half--first{
+  @include justify-content(flex-start);
   text-align: left;
 }
-.Nav__half--3 .Nav__main-link{
+.Nav__half--second{
+  @include justify-content(flex-end);
   text-align: right;
 }
+.Nav__half--first .Nav__main-link:first-child{
+  width: 100px;
+}
+.Nav__half--second .Nav__main-link:last-child{
+  width: 100px;
+}
 .Nav__main-link{
-  width: 180px;
+  width: 120px;
   display: inline-block;
   text-align: center;
   @include din(2rem);
   padding-bottom: 20px;
+  @include maxQuery(900px){
+    width: 100px;
+  }
 }
 .Nav__main-link--1{
   text-align: left;
