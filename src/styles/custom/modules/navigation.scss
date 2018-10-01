@@ -10,7 +10,13 @@
 .Nav__half{
   @include flex();
   @include justify-content(space-between);
-  width: 260px;
+  width: 400px;
+  @include maxQuery(1100px){
+    width: 300px;
+  }
+  @include maxQuery(850px){
+    width: 250px;
+  }
 }
 .Nav__half--first{
   text-align: left;
@@ -49,7 +55,7 @@
   z-index: 20;
   padding-top: 65px;
   padding-bottom: 40px;
-  width: 1040px;
+  width: 1280px;
   left: 50%;
   max-width: 100%;
   @include prefix(transform, translateX(-50%));
